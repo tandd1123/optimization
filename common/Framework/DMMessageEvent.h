@@ -1,6 +1,5 @@
 #pragma once
-#include "amqpcpp.h"
-#include "ace/Event_Handler.h"
+#include "DMaker.h"
 
 class DMBrokerMessageSvcHandle :public ACE_Event_Handler
 {

@@ -15,8 +15,7 @@
 	|			   |		 |		    |		 |		    |
 	*--------------*		 *----------*		 *----------*
 */
-#include "ace/Thread_Mutex.h"
-#include <vector>
+#include "DMaker.h"
 
 class DMMemoryPage;
 class DMMemoryBlock;

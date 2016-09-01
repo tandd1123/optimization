@@ -1,6 +1,5 @@
 #pragma once
-#include "amqpcpp.h"
-#include "DMBrokerMessageHandle.h"
+#include "DMaker.h"
 
 //rabitmq服务器连接代理，供service的dispatch使用
 class DMBrokerProxy

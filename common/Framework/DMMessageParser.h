@@ -1,6 +1,5 @@
 #pragma once
-#include "DMMessage.h"
-#include "amqpcpp/include/message.h"
+#include "DMaker.h"
 
 class DMMessageParser
 {
