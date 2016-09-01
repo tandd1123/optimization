@@ -1,0 +1,44 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*- 
+
+import os
+
+#print "cd ../message/proto\n"
+#print "start build proto file...\n"
+os.chdir("../message/proto")
+os.system("scons -Q")
+
+#print "cd ../message\n"
+#print "start build proto lib...\n"
+os.chdir("../")
+os.system("scons -Q")
+
+#print "cd ../common/Framework\n"
+#print "start build common lib...\n"
+os.chdir("../common/Framework")
+os.system("scons -Q install")
+
+#print "cd ../common/RabbitMQ\n"
+#print "start build common lib...\n"
+os.chdir("../RabbitMQ")
+os.system("scons -Q install")
+
+#print "cd ../common/Redis\n"
+#print "start build common lib...\n"
+os.chdir("../Redis")
+os.system("scons -Q install")
+
+#print "cd ../common/MySQL\n"
+#print "start build common lib...\n"
+os.chdir("../MySQL")
+os.system("scons -Q install")
+
+#print "cd ../server/geteservice\n"
+#print "start build GateService...\n"
+os.chdir("../../server/gateservice")
+os.system("scons -Q install")
+
+#print "cd ../proxyservice\n"
+#print "start build ProxyService...\n"
+os.chdir("../proxyservice")
+os.system("scons -Q install")

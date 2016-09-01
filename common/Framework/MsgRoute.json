@@ -1,0 +1,33 @@
+{
+    "service_id": 
+        {
+            "appclient":    20,
+            "gateservice":  21,
+            "proxyservice": 22,
+            "loginservice": 23,
+            "infoservice":  24,
+            "chatservice":  25,
+            "webservice":   26
+        },
+        
+    "rabbit_queue":
+        {
+            "gateservice":  ["100"],
+            "proxyservice": ["200"],
+            "loginservice": ["300","301"],
+            "infoservice":  ["400"],
+            "chatservice":  ["500","501","502"],
+            "webservice":   ["600"]
+        },
+        
+    "message_route": 
+        {
+            "system_reserve":[1001,2000],
+            "gateservice":   [2001,3000],
+            "proxyservice":  [3001,4000],
+            "loginservice":  [4001,5000],
+            "infoservice":   [5001,6000],
+            "chatservice":   [6001,7000],
+            "webservice":    [7001,8000]
+        }
+}

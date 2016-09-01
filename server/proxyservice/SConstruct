@@ -1,0 +1,22 @@
+#!/usr/bin/python 
+# -*- coding: UTF-8 -*- 
+
+
+#--------------cpp-------------------
+ENV_CPP = Environment(CC = 'g++')
+
+#compile info
+TARGETNAME = 'proxyservice'
+LIB = Split('DMRabbitMQ DMFramework DMMessage DMRedis DMMySQL ACE pthread jsoncpp protobuf amqpcpp hiredis mysqlpp')
+FILELIST = Glob('*.cpp')
+FILELIST = FILELIST
+HEADFILEPATH = Split('../../3rd ../../common/Framework ../../common/RabbitMQ ../../common/Redis ../../common/MySQL ../../message ../../3rd/amqpcpp ../../3rd/mysqlpp/lib ../../3rd/mysql-connector-c/include')
+LIB_DIR = Split('../../common/Lib ../../message')
+FLAGS = Split('-std=c++11 -Wall -g -D _DEBUG')
+
+#Program target
+TARGETFILE = ENV_CPP.Program(target = TARGETNAME,source = FILELIST,LIBS = LIB,CPPPATH = HEADFILEPATH,LIBPATH = LIB_DIR,CCFLAGS = FLAGS)
+
+#install
+INSTALL = ENV_CPP.Install('../../bin', TARGETFILE)
+ENV_CPP.Alias('install',INSTALL)

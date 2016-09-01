@@ -1,0 +1,14 @@
+#!/usr/bin/python 
+# -*- coding: UTF-8 -*- 
+
+#--------------cpp-------------------
+ENV_CPP = Environment(CC = 'g++')
+
+#compile info
+TARGETNAME = 'DMMessage'
+LIB = Split('protobuf')
+FILELIST = Glob('*.cc')
+FLAGS = Split('-std=c++11 -Wall -g -D _DEBUG')
+
+#Program target
+TARGETFILE = ENV_CPP.StaticLibrary(target = TARGETNAME,source = FILELIST,LIBS = LIB,CCFLAGS = FLAGS)
