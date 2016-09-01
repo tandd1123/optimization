@@ -2,7 +2,7 @@
 
 #include "DMaker.h"
 
-#define SERVICE_MAP_PATH "..//..//common//Framework//MsgRoute.json"
+#define SERVICE_MAP_PATH "..//common//Framework//DMaker.json"
 
 typedef struct msg_range
 {
