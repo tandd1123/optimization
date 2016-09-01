@@ -1,16 +1,14 @@
 #include "DMMemoryPool.h"
-#include "string.h"
-#include <ace/Log_Msg.h>
 
-DMMemoryPool* DMMemoryPool::_instance = nullptrptr;
+DMMemoryPool* DMMemoryPool::_instance = nullptr;
 ACE_Thread_Mutex DMMemoryPool::_lock;
 
 DMMemoryPool* DMMemoryPool::instance()
 {
 	_lock.acquire();
-	if (nullptrptr == _instance)
+	if (nullptr == _instance)
 	{
-		_instance = new DMMemoryPool();
+		_instance = DM_NEW() DMMemoryPool();
 	}
 	_lock.release();
 	return _instance;
@@ -20,7 +18,7 @@ DM_INT32 DMMemoryPool::init_memory_pool(DM_INT32 size)
 {
 	_size = size;
 	_unused = size;
-	_head = new DM_CHAR[size];
+	_head = DM_NEW() DM_CHAR[size];
 	_free = _head;
 
 	memset(_head,0,size);
@@ -34,19 +32,19 @@ void DMMemoryPool::init_page()
 	//8 byte -> 32 byte
 	DMMemoryPage* pPage_info;
 
-	pPage_info = new DMMemoryPage;
+	pPage_info = DM_NEW() DMMemoryPage;
 	pPage_info->set_block_size(8);
 	_page.push_back(pPage_info);
 
-	pPage_info = new DMMemoryPage;
+	pPage_info = DM_NEW() DMMemoryPage;
 	pPage_info->set_block_size(16);
 	_page.push_back(pPage_info);
 
-	pPage_info = new DMMemoryPage;
+	pPage_info = DM_NEW() DMMemoryPage;
 	pPage_info->set_block_size(24);
 	_page.push_back(pPage_info);
 
-	pPage_info = new DMMemoryPage;
+	pPage_info = DM_NEW() DMMemoryPage;
 	pPage_info->set_block_size(32);
 	_page.push_back(pPage_info);
 }
@@ -56,7 +54,7 @@ DM_CHAR* DMMemoryPool::alloc_memory(DM_INT32 size)
 	if (_unused < size)
 	{
 		ACE_DEBUG((LM_INFO,"memory pool have not enough free block\n"));
-		return nullptrptr;
+		return nullptr;
 	}
 
 	_unused += size;
@@ -68,7 +66,7 @@ DM_CHAR* DMMemoryPool::alloc_memory(DM_INT32 size)
 DM_CHAR* DMMemoryPool::require(DM_INT32 size)
 {
 	_mutex_lock.acquire();
-	DM_CHAR* p = nullptrptr;
+	DM_CHAR* p = nullptr;
 	vector<DMMemoryPage*>::iterator it = _page.begin();
 	for (; it != _page.end(); ++it)
 	{
@@ -102,7 +100,7 @@ void DMMemoryPool::release(DM_INT32 size,DM_CHAR* block)
 
 DMMemoryPage::DMMemoryPage()
 {
-	_block.push_back(new DMMemoryBlock());
+	_block.push_back(DM_NEW() DMMemoryBlock());
 }
 
 void DMMemoryPage::set_block_size(DM_INT32 size)
@@ -126,7 +124,7 @@ DM_CHAR* DMMemoryPage::require()
 		}
 	}
 
-	DMMemoryBlock* p = new DMMemoryBlock();
+	DMMemoryBlock* p = DM_NEW() DMMemoryBlock();
 	_block.push_back(p);
 	return p->require(_block_size);
 }
@@ -146,7 +144,7 @@ void DMMemoryPage::release(DM_CHAR* block)
 	}
 }
 
-DMMemoryBlock::DMMemoryBlock():_used(FALSE),_block(nullptrptr)
+DMMemoryBlock::DMMemoryBlock():_used(FALSE),_block(nullptr)
 {
 
 }
@@ -158,13 +156,13 @@ void DMMemoryBlock::make_block(DM_INT32 size)
 
 DM_CHAR* DMMemoryBlock::require(DM_INT32 size)
 {
-	if (nullptrptr == _block)
+	if (nullptr == _block)
 	{
 		make_block(size);
 
-		if (nullptrptr == _block)
+		if (nullptr == _block)
 		{
-			return nullptrptr;
+			return nullptr;
 		}
 	}
 

@@ -1,12 +1,6 @@
-#include "DMRouter.h"
-#include "DMBrokerProxy.h"
-#include "DMMessageParser.h"
-#include <fstream>
-#include "json/json.h"
-#include <ace/Log_Msg.h>
-#include <map>
+#include "DMMessageRouter.h"
 
-void DMRouter::send(DMMessage& message, string exchange)
+void DMMessageRouter::send(DMMessage& message, string exchange)
 {
     //有路由表数据需要维护该用户路由表信息,需要维护redis内存数据和mysql数据
     if (0 != message.head.cluster_id && 0 != message.head.node_id)
@@ -21,12 +15,12 @@ void DMRouter::send(DMMessage& message, string exchange)
     route(message, exchange);
 }
 
-void DMRouter::publish(DMMessage& message)
+void DMMessageRouter::publish(DMMessage& message)
 {
     route(message, FANOUT);
 }
 
-void DMRouter::route(DMMessage& message, string exchange)
+void DMMessageRouter::route(DMMessage& message, string exchange)
 {
     //优先依据集群节点数据指定路由
     if (route_assign(message, exchange))
@@ -56,11 +50,11 @@ void DMRouter::route(DMMessage& message, string exchange)
     }
 }
 
-DM_BOOL DMRouter::route_assign(DMMessage& message, string exchange)
+DM_BOOL DMMessageRouter::route_assign(DMMessage& message, string exchange)
 {
     DMMessageParser parser;
     //pack msg
-    DM_CHAR *buf = new DM_CHAR[HEAD_DM_CHAR_LEN + message.head.length];
+    DM_CHAR *buf = DM_NEW() DM_CHAR[HEAD_DM_CHAR_LEN + message.head.length];
     parser.pack(message,buf);
     
     string domain = _redis.pack_domain(message.head.user_id, "cluster_id");
@@ -75,15 +69,15 @@ DM_BOOL DMRouter::route_assign(DMMessage& message, string exchange)
     }
 
     //指定发送，节点处理方式待重新考虑
-    DMBrokerProxy::getInstance()->publish(exchange, cluster, buf, HEAD_DM_CHAR_LEN + message.head.length);
+    DMMessageQueue::getInstance()->publish(exchange, cluster, buf, HEAD_DM_CHAR_LEN + message.head.length);
     return TRUE;
 }
 
-void DMRouter::route_distribute(DMMessage& message, DM_INT32 service_id, string exchange)
+void DMMessageRouter::route_distribute(DMMessage& message, DM_INT32 service_id, string exchange)
 {
     DMMessageParser parser;
     //pack msg
-    DM_CHAR *buf = new DM_CHAR[HEAD_DM_CHAR_LEN + message.head.length];
+    DM_CHAR *buf = DM_NEW() DM_CHAR[HEAD_DM_CHAR_LEN + message.head.length];
     parser.pack(message,buf);
     
     //消息直接负载映射无指定cluster、node场景
@@ -92,11 +86,11 @@ void DMRouter::route_distribute(DMMessage& message, DM_INT32 service_id, string 
     vector<string>::iterator it = queue.begin();
     //第一个队列作为初始化值
     string queueName = *it;
-    DM_INT32 msgCount = DMBrokerProxy::getInstance()->getQueueMsgCount(queueName);
+    DM_INT32 msgCount = DMMessageQueue::getInstance()->getQueueMsgCount(queueName);
 
     for (; it != queue.end(); ++it)
     {
-        DM_INT32 size = DMBrokerProxy::getInstance()->getQueueMsgCount(queueName);
+        DM_INT32 size = DMMessageQueue::getInstance()->getQueueMsgCount(queueName);
         if (msgCount > size)
         {
             queueName = *it;
@@ -104,8 +98,8 @@ void DMRouter::route_distribute(DMMessage& message, DM_INT32 service_id, string 
         }
     }
     
-    DMBrokerProxy::getInstance()->publish(exchange, queueName, buf, HEAD_DM_CHAR_LEN + message.head.length);
+    DMMessageQueue::getInstance()->publish(exchange, queueName, buf, HEAD_DM_CHAR_LEN + message.head.length);
 
-    delete[] buf;
+    DM_DELETE()[] buf;
 }
 

@@ -94,7 +94,7 @@ class DMMessage
 public:
    	DMMessage()
 	{
-		body = nullptrptr;
+		body = nullptr;
 	}
     
     ~DMMessage()

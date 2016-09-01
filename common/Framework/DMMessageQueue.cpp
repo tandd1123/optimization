@@ -1,4 +1,4 @@
-#include "DMBrokerProxy.h"
+#include "DMMessageQueue.h"
 #include "ace/Reactor.h"
 #include "DMService.h"
 #include <ace/Log_Msg.h>
@@ -6,21 +6,21 @@
 #include <map>
 extern DMService* GetService();
 
-DMBrokerProxy* DMBrokerProxy::_instance = nullptr;
+DMMessageQueue* DMMessageQueue::_instance = nullptr;
 
-DM_INT32 DMBrokerProxy::init(string host,DM_INT32 port, string username, string userpasswd,string serviceName)
+DM_INT32 DMMessageQueue::init(string host,DM_INT32 port, string username, string userpasswd,string serviceName)
 {
 	// create an instance of your own tcp handler
-	_handle = new DMBrokerMessageHandle();
+	_handle = DM_NEW() DMMessageEvent();
 
 	// address of the server
 	AMQP::Address address(host, port,AMQP::Login(username,userpasswd),"/");
 
 	// create a AMQP connection object
-	_connection = new AMQP::TcpConnection(_handle, address);
+	_connection = DM_NEW() AMQP::TcpConnection(_handle, address);
 
 	// and create a channel
-	_channel = new AMQP::TcpChannel(_connection);
+	_channel = DM_NEW() AMQP::TcpChannel(_connection);
 
     //get service id
     map<string, DM_INT32> service_map = DMServiceMap::instance()->service_map;
@@ -85,12 +85,12 @@ DM_INT32 DMBrokerProxy::init(string host,DM_INT32 port, string username, string 
 	return 0;
 }
 
-void DMBrokerProxy::publish(const string &exchange, const string &routingKey, const DM_CHAR *message, size_t size)
+void DMMessageQueue::publish(const string &exchange, const string &routingKey, const DM_CHAR *message, size_t size)
 {
 	_channel->publish(exchange, routingKey, message, size);
 }
 
-DM_INT32 DMBrokerProxy::getQueueMsgCount(string queueName)
+DM_INT32 DMMessageQueue::getQueueMsgCount(string queueName)
 {
     DM_INT32 count = 0;
     AMQP::QueueCallback callback =
@@ -104,39 +104,39 @@ DM_INT32 DMBrokerProxy::getQueueMsgCount(string queueName)
     return count;
 }
 
-void DMBrokerProxy::runEvents()
+void DMMessageQueue::runEvents()
 {
 	ACE_Reactor::instance()->run_event_loop();
 }
 
-void DMBrokerProxy::destroy()
+void DMMessageQueue::destroy()
 {
 	if (_handle)
 	{
-		delete _handle;
-		_handle = nullptrptr;
+		DM_DELETE() _handle;
+		_handle = nullptr;
 	}
 
 	if (_connection)
 	{
-		delete _connection;
-		_connection = nullptrptr;
+		DM_DELETE() _connection;
+		_connection = nullptr;
 	}
 
 	if (_channel)
 	{
-		delete _channel;
-		_channel = nullptrptr;
+		DM_DELETE() _channel;
+		_channel = nullptr;
 	}
 
 	if (_instance)
 	{
-		delete _instance;
-		_instance = nullptrptr;
+		DM_DELETE() _instance;
+		_instance = nullptr;
 	}
 }
 
-DMBrokerProxy::~DMBrokerProxy()
+DMMessageQueue::~DMMessageQueue()
 {
 	destroy();
 }

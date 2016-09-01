@@ -37,3 +37,6 @@ typedef std::make_pair make_pair
 #define FALSE false
 #define True true
 #define False false
+
+#define DM_NEW(NAME)  DMMemoryPool::instance()->require(sizeof(NAME));
+#define DM_DELETE(NAME) DMMemoryPool::instance()->release(sizeof(NAME),&NAME);

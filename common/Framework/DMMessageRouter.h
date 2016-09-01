@@ -8,7 +8,7 @@
 #define DIRECT "direct"
 #define TOPIC "topic"
 
-class DMRouter
+class DMMessageRouter
 {
 public:
     virtual void send(DMMessage& message, string exchange = "direct");

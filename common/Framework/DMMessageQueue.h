@@ -2,14 +2,14 @@
 #include "DMaker.h"
 
 //rabitmq服务器连接代理，供service的dispatch使用
-class DMBrokerProxy
+class DMMessageQueue
 {
 public:
-	static DMBrokerProxy* getInstance()
+	static DMMessageQueue* getInstance()
 	{
 		if (nullptr == _instance)
 		{
-			_instance = new DMBrokerProxy();
+			_instance = DM_NEW() DMMessageQueue();
 		}
 		return _instance;
 	}
@@ -26,16 +26,16 @@ public:
 	//AMQP::Channel& getChannel();
 	//AMQP::Exchange AgetExchange();
 protected:
-	DMBrokerProxy(){};
-	virtual ~DMBrokerProxy();
+	DMMessageQueue(){};
+	virtual ~DMMessageQueue();
 private:
     DM_UINT8 _service_id;
     
-	DMBrokerMessageHandle* _handle;
+	DMMessageEvent* _handle;
     
 	AMQP::TcpChannel* _channel;
     
 	AMQP::TcpConnection* _connection;
     
-	static DMBrokerProxy *_instance;
+	static DMMessageQueue *_instance;
 };

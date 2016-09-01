@@ -1,5 +1,4 @@
 #include "DMMessageParser.h"
-#include <ace/Log_Msg.h>
 
 DMMessageHead DMMessageParser::parse(DM_CHAR * begin)
 {
@@ -42,7 +41,7 @@ DM_INT32 DMMessageParser::parse(DMMessage& out, const AMQP::Message &in)
 	DMGetBitData(msg,&msg_head.flag,104,112);
     
 	const DM_CHAR *body = msg + HEAD_DM_CHAR_LEN;
-	out.body = new DM_CHAR[in.bodySize() - HEAD_DM_CHAR_LEN];
+	out.body = DM_NEW() DM_CHAR[in.bodySize() - HEAD_DM_CHAR_LEN];
 	memcpy(out.body,body,(in.bodySize() - HEAD_DM_CHAR_LEN));
 
 	return 1;

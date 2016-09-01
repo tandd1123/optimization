@@ -1,17 +1,14 @@
 #include "DMServiceMap.h"
-#include <fstream>
-#include "json/json.h"
-#include <ace/Log_Msg.h>
 
-DMServiceMap* DMServiceMap::_instance = nullptrptr;
+DMServiceMap* DMServiceMap::_instance = nullptr;
 ACE_Thread_Mutex DMServiceMap::_mutex_lock;
 
 DMServiceMap* DMServiceMap::instance()
 {
 	_mutex_lock.acquire();
-	if (nullptrptr == _instance)
+	if (nullptr == _instance)
 	{
-		_instance = new DMServiceMap();
+		_instance = DM_NEW() DMServiceMap();
 	}
 	_mutex_lock.release();
 	return _instance;
@@ -29,7 +26,7 @@ void DMServiceMap::load_cfg()
 
     if (!cfg_file.is_open())
     {   
-        ACE_DEBUG((LM_INFO,"open MsgRoute.json config failure!\n"));
+        ACE_DEBUG((LM_INFO,"open DMaker.json config failure!\n"));
         return;
     }
 
