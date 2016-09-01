@@ -6,7 +6,7 @@ class DMBrokerMessageSvcHandle :public ACE_Event_Handler
 public:
 	DMBrokerMessageSvcHandle(AMQP::TcpConnection *connection);
 
-	//virtual DM_INT32 handle_close(ACE_HANDLE, ACE_Reactor_Mask);
+	//virtual DM_UINT handle_close(ACE_HANDLE, ACE_Reactor_Mask);
 
 	//接收到socket上的数据。 需要调用ampq的parse
 	/**
@@ -28,10 +28,10 @@ public:
 	size_t parse(DM_CHAR *buffer, size_t size)
 	*/
 
-	virtual DM_INT32 handle_input(ACE_HANDLE fd);
+	virtual DM_UINT handle_input(ACE_HANDLE fd);
 
 
-	virtual DM_INT32 handle_output(ACE_HANDLE fd = ACE_INVALID_HANDLE);
+	virtual DM_UINT handle_output(ACE_HANDLE fd = ACE_INVALID_HANDLE);
 
 protected:
 private:
@@ -70,7 +70,7 @@ public:
 	virtual void onClosed(AMQP::TcpConnection *connection);
 
 	/**
-	*  Method that is called by the AMQP-CPP library when it wants to DM_INT32eract
+	*  Method that is called by the AMQP-CPP library when it wants to DM_UINTeract
 	*  with the main event loop. The AMQP-CPP library is completely non-blocking,
 	*  and only make "write()" or "read()" system calls when it knows in advance
 	*  that these calls will not block. To register a filedescriptor in the
@@ -78,11 +78,11 @@ public:
 	*  flags telling whether the filedescriptor should be checked for readability
 	*  or writability.
 	*
-	*  @param  connection      The connection that wants to DM_INT32eract with the event loop
+	*  @param  connection      The connection that wants to DM_UINTeract with the event loop
 	*  @param  fd              The filedescriptor that should be checked
 	*  @param  flags           Bitwise or of AMQP::readable and/or AMQP::writable
 	*/
-	virtual void monitor(AMQP::TcpConnection *connection, DM_INT32 fd, DM_INT32 flags);
+	virtual void monitor(AMQP::TcpConnection *connection, DM_UINT fd, DM_UINT flags);
 
 protected:
 	ACE_Event_Handler* _handler;

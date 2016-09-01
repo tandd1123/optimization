@@ -23,7 +23,7 @@ private:
 
     DM_BOOL route_assign(DMMessage& message, string exchange);
 
-    void route_distribute(DMMessage& message, DM_INT32 service_id, string exchange);
+    void route_distribute(DMMessage& message, DM_UINT service_id, string exchange);
 
 };
 

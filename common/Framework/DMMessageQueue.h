@@ -14,11 +14,11 @@ public:
 		return _instance;
 	}
     //依据配置尝试创建所有队列，取消svrid入参
-	DM_INT32 init(string host, DM_INT32 port, string username,string userpasswd,string serviceName);
+	DM_BOOL init(string host, DM_UINT16 port, string username,string userpasswd,string serviceName);
 
 	void publish(const string &exchange, const string &routingKey, const DM_CHAR *message, size_t size);
 
-    DM_INT32 getQueueMsgCount(string queueName);
+    DM_UINT getQueueMsgCount(string queueName);
 
     void runEvents();
 
@@ -29,7 +29,7 @@ protected:
 	DMBrokerProxy(){};
 	virtual ~DMBrokerProxy();
 private:
-    DM_INT32 _service_id;
+    DM_UINT8 _service_id;
     
 	DMBrokerMessageHandle* _handle;
     
