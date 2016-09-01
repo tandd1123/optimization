@@ -11,22 +11,19 @@
 class DMRouter
 {
 public:
-    virtual void send(DMMessage& message, std::string exchange = "direct");
+    virtual void send(DMMessage& message, string exchange = "direct");
 
     virtual void publish(DMMessage& message);
         
 protected:
     
-	virtual void route(DMMessage& message, std::string exchange);
+	virtual void route(DMMessage& message, string exchange);
             
 private:
 
-    bool route_assign(DMMessage& message, std::string exchange);
+    DM_BOOL route_assign(DMMessage& message, string exchange);
 
-    void route_distribute(DMMessage& message, int service_id, std::string exchange);
+    void route_distribute(DMMessage& message, DM_INT32 service_id, string exchange);
 
-private:
-    DMRedis _redis;
-    DMMySQL _mysql;
 };
 

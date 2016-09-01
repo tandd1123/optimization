@@ -7,8 +7,8 @@
 typedef struct msg_range
 {
     msg_range():msg_start(0),msg_end(0){};
-    int msg_start;
-    int msg_end;
+    DM_INT32 msg_start;
+    DM_INT32 msg_end;
 }MsgRange;
 
 class DMServiceMap
@@ -19,13 +19,13 @@ public:
     DMServiceMap();
     
     //<server_name,server_id>
-    std::map<std::string, int> service_map;
+    map<string, DM_INT32> service_map;
  
     //<server_name,msg_range>
-    std::map<int, MsgRange> message_map;  
+    map<DM_INT32, MsgRange> message_map;  
 
     //rabbit_queue
-    std::map<int, std::vector<std::string>> queue_map;
+    map<DM_INT32, vector<string>> queue_map;
 private: 
     void load_cfg();
 

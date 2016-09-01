@@ -6,9 +6,9 @@
 #include <map>
 extern DMService* GetService();
 
-DMBrokerProxy* DMBrokerProxy::_instance = NULL;
+DMBrokerProxy* DMBrokerProxy::_instance = nullptr;
 
-int DMBrokerProxy::init(std::string host,int port, std::string username, std::string userpasswd,std::string serviceName)
+DM_INT32 DMBrokerProxy::init(string host,DM_INT32 port, string username, string userpasswd,string serviceName)
 {
 	// create an instance of your own tcp handler
 	_handle = new DMBrokerMessageHandle();
@@ -23,19 +23,19 @@ int DMBrokerProxy::init(std::string host,int port, std::string username, std::st
 	_channel = new AMQP::TcpChannel(_connection);
 
     //get service id
-    std::map<std::string, int> service_map = DMServiceMap::instance()->service_map;
+    map<string, DM_INT32> service_map = DMServiceMap::instance()->service_map;
     _service_id = service_map[serviceName];
 
 	auto receiveMessageCallback = [=](const AMQP::Message &message,
-		uint64_t deliveryTag,
-		bool redelivered)
+		uDM_INT3264_t deliveryTag,
+		DM_BOOL redelivered)
 	{
 		GetService()->receive(message);
 		_channel->ack(deliveryTag); //ack rabbitmq-server
 	};
 
 	AMQP::QueueCallback callback =
-		[=](const std::string &queue_name, int msgcount, int consumercount)
+		[=](const string &queue_name, DM_INT32 msgcount, DM_INT32 consumercount)
 	{
 	    //exchange、targetqueue、routingkey,生产队列，三种exchange绑定所有队列，路由键即队列名
 		_channel->bindQueue("fanout", queue_name, queue_name);
@@ -45,10 +45,10 @@ int DMBrokerProxy::init(std::string host,int port, std::string username, std::st
 		_channel->bindQueue("topic", queue_name, queue_name);
 
         //消费队列,只消费本server对应的队列
-	    std::map<int, std::vector<std::string>> queue_map = DMServiceMap::instance()->queue_map;
-        std::vector<std::string> consume_queue = queue_map[_service_id];
+	    map<DM_INT32, vector<string>> queue_map = DMServiceMap::instance()->queue_map;
+        vector<string> consume_queue = queue_map[_service_id];
 
-        for (unsigned int i = 0; i < consume_queue.size(); ++i)
+        for (unsigned DM_INT32 i = 0; i < consume_queue.size(); ++i)
         {
             if (consume_queue[i] == queue_name)
             {
@@ -60,13 +60,13 @@ int DMBrokerProxy::init(std::string host,int port, std::string username, std::st
 
 	AMQP::SuccessCallback success = [this, callback]()
 	{
-	    std::map<int, std::vector<std::string>> queue_map = DMServiceMap::instance()->queue_map;
-        std::map<int, std::vector<std::string>>::iterator svr_it = queue_map.begin();
+	    map<DM_INT32, vector<string>> queue_map = DMServiceMap::instance()->queue_map;
+        map<DM_INT32, vector<string>>::iterator svr_it = queue_map.begin();
 
         for (; svr_it != queue_map.end(); ++svr_it)
         {
-            std::vector<std::string> queue = svr_it->second;
-            for (unsigned int i = 0; i < queue.size(); ++i)
+            vector<string> queue = svr_it->second;
+            for (unsigned DM_INT32 i = 0; i < queue.size(); ++i)
             {
                 _channel->declareQueue(queue[i], AMQP::durable).onSuccess(callback);
             }
@@ -85,16 +85,16 @@ int DMBrokerProxy::init(std::string host,int port, std::string username, std::st
 	return 0;
 }
 
-void DMBrokerProxy::publish(const std::string &exchange, const std::string &routingKey, const char *message, size_t size)
+void DMBrokerProxy::publish(const string &exchange, const string &routingKey, const DM_CHAR *message, size_t size)
 {
 	_channel->publish(exchange, routingKey, message, size);
 }
 
-int DMBrokerProxy::getQueueMsgCount(std::string queueName)
+DM_INT32 DMBrokerProxy::getQueueMsgCount(string queueName)
 {
-    int count = 0;
+    DM_INT32 count = 0;
     AMQP::QueueCallback callback =
-            [&](const std::string &queue_name, int msgcount, int consumercount)
+            [&](const string &queue_name, DM_INT32 msgcount, DM_INT32 consumercount)
     {
         count = msgcount;
     };
@@ -114,25 +114,25 @@ void DMBrokerProxy::destroy()
 	if (_handle)
 	{
 		delete _handle;
-		_handle = nullptr;
+		_handle = nullptrptr;
 	}
 
 	if (_connection)
 	{
 		delete _connection;
-		_connection = nullptr;
+		_connection = nullptrptr;
 	}
 
 	if (_channel)
 	{
 		delete _channel;
-		_channel = nullptr;
+		_channel = nullptrptr;
 	}
 
 	if (_instance)
 	{
 		delete _instance;
-		_instance = nullptr;
+		_instance = nullptrptr;
 	}
 }
 

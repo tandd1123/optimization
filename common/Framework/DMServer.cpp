@@ -1,6 +1,6 @@
 #include "DMService.h"
 
-int DMServer::init(const string& config_path);
+DM_INT32 DMServer::init(const string& config_path);
 {
     
 }

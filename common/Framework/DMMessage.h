@@ -18,7 +18,7 @@
                     bit 1:  login
                     bit 2:  FE-service
                     bit 3:  notify
-                    bit 4:  maintain
+                    bit 4:  maDM_INT32ain
                     bit 5:  heartbeat
                     bit 6:  timeout 
                     bit 7:  reserve
@@ -40,7 +40,7 @@ enum msg_flge    //公共flag标记
 	HEARTBEAT_MSG = 0x08,
 	SERVICE_MSG	  = 0x10,
 	NOTIFY_MSG    = 0x20,
-	MAINT_MSG     = 0x40,
+	MADM_INT32_MSG     = 0x40,
 
 	MSG_MASK      = 0xFE,
 };
@@ -48,8 +48,8 @@ enum msg_flge    //公共flag标记
 enum DataSize
 {
     HEAD_BIT_LEN = 128,
-    HEAD_CHAR_LEN = 16,
-    CHAR_BIT_LEN = 8
+    HEAD_DM_CHAR_LEN = 16,
+    DM_CHAR_BIT_LEN = 8
 };
 
 #pragma pack (1)
@@ -62,12 +62,12 @@ public:
 	short user_id;
 	short msg_cmd;
 	short length;
-	char from;
-    char to;
-    char cluster_id;
-    char node_id;
-    char wait_time;
-    char flag;
+	DM_CHAR from;
+    DM_CHAR to;
+    DM_CHAR cluster_id;
+    DM_CHAR node_id;
+    DM_CHAR wait_time;
+    DM_CHAR flag;
     short reserved;
     
     DMMessageHead& operator=(DMMessageHead other)
@@ -94,7 +94,7 @@ class DMMessage
 public:
    	DMMessage()
 	{
-		body = nullptr;
+		body = nullptrptr;
 	}
     
     ~DMMessage()
@@ -122,7 +122,7 @@ public:
     }
     
 	DMMessageHead head;
-	char* body;
+	DM_CHAR* body;
 private:
     short _body_size;
 }; 

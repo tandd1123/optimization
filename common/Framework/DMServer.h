@@ -15,7 +15,7 @@ public:
     //接收器
     typedef ACE_Acceptor<SERVICE_HANDLE, ACE_SOCK_ACCEPTOR> DMAcceptor;
     //初始化进程数量
-	int init(const string& config_path);
+	DM_INT32 init(const string& config_path);
     
 	void run();
 

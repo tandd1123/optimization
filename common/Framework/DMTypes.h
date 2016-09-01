@@ -31,7 +31,7 @@ typedef std::make_pair make_pair
 #define INVALID_INT -1
 #define INVALID_CHAR ''
 
-#define TRUE 1
-#define FALSE 0
-#define True 1
-#define False 0
+#define TRUE true
+#define FALSE false
+#define True true
+#define False false

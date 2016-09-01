@@ -9,7 +9,7 @@ void DMBrokerMessageHandle::onConnected(AMQP::TcpConnection *connection)
 	//  instance, and start publishing or consuming
 }
 
-void DMBrokerMessageHandle::onError(AMQP::TcpConnection *connection, const char *message)
+void DMBrokerMessageHandle::onError(AMQP::TcpConnection *connection, const DM_CHAR *message)
 {
 	// @todo
 	//  add your own implementation, for example by reporting the error
@@ -22,7 +22,7 @@ void DMBrokerMessageHandle::onClosed(AMQP::TcpConnection *connection)
 
 }
 
-void DMBrokerMessageHandle::monitor(AMQP::TcpConnection *connection, int fd, int flags)
+void DMBrokerMessageHandle::monitor(AMQP::TcpConnection *connection, DM_INT32 fd, DM_INT32 flags)
 {
 	// @todo
 	//  add your own implementation, for example by adding the file
@@ -41,14 +41,14 @@ DMBrokerMessageSvcHandle::DMBrokerMessageSvcHandle(AMQP::TcpConnection *connecti
 
 }
 
-int DMBrokerMessageSvcHandle::handle_input(ACE_HANDLE fd)
+DM_INT32 DMBrokerMessageSvcHandle::handle_input(ACE_HANDLE fd)
 {
 	// tell the connection that its filedescriptor is active
 	_connection->process(fd, AMQP::readable);
 	return 0;
 }
 
-int DMBrokerMessageSvcHandle::handle_output(ACE_HANDLE fd /*= ACE_INVALID_HANDLE*/)
+DM_INT32 DMBrokerMessageSvcHandle::handle_output(ACE_HANDLE fd /*= ACE_INVALID_HANDLE*/)
 {
 	// tell the connection that its filedescriptor is active
 	//_connection->process(fd, AMQP::writable);

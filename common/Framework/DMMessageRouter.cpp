@@ -6,12 +6,12 @@
 #include <ace/Log_Msg.h>
 #include <map>
 
-void DMRouter::send(DMMessage& message, std::string exchange)
+void DMRouter::send(DMMessage& message, string exchange)
 {
     //有路由表数据需要维护该用户路由表信息,需要维护redis内存数据和mysql数据
     if (0 != message.head.cluster_id && 0 != message.head.node_id)
     {
-        std::string domain = _redis.pack_domain(message.head.user_id, "cluster_id");
+        string domain = _redis.pack_domain(message.head.user_id, "cluster_id");
         _redis.write_redis_hash("TBL_ROUTE" , domain, message.head.cluster_id);
         
         domain = _redis.pack_domain(message.head.user_id, "node_id");
@@ -26,7 +26,7 @@ void DMRouter::publish(DMMessage& message)
     route(message, FANOUT);
 }
 
-void DMRouter::route(DMMessage& message, std::string exchange)
+void DMRouter::route(DMMessage& message, string exchange)
 {
     //优先依据集群节点数据指定路由
     if (route_assign(message, exchange))
@@ -34,10 +34,10 @@ void DMRouter::route(DMMessage& message, std::string exchange)
         return;
     }
 
-    std::map<int, MsgRange> message_map = DMServiceMap::instance()->message_map;
-    std::map<int, MsgRange>::iterator it = message_map.begin();
+    map<DM_INT32, MsgRange> message_map = DMServiceMap::instance()->message_map;
+    map<DM_INT32, MsgRange>::iterator it = message_map.begin();
 
-    int svr_id = 0;
+    DM_INT32 svr_id = 0;
     for (; it != message_map.end(); ++it)
     {
         MsgRange range = it->second;
@@ -56,18 +56,18 @@ void DMRouter::route(DMMessage& message, std::string exchange)
     }
 }
 
-bool DMRouter::route_assign(DMMessage& message, std::string exchange)
+DM_BOOL DMRouter::route_assign(DMMessage& message, string exchange)
 {
     DMMessageParser parser;
     //pack msg
-    char *buf = new char[HEAD_CHAR_LEN + message.head.length];
+    DM_CHAR *buf = new DM_CHAR[HEAD_DM_CHAR_LEN + message.head.length];
     parser.pack(message,buf);
     
-    std::string domain = _redis.pack_domain(message.head.user_id, "cluster_id");
-    std::string cluster = _redis.read_redis_hash("TBL_ROUTE",domain);
+    string domain = _redis.pack_domain(message.head.user_id, "cluster_id");
+    string cluster = _redis.read_redis_hash("TBL_ROUTE",domain);
     
     domain = _redis.pack_domain(message.head.user_id, "node_id");
-    std::string node = _redis.read_redis_hash("TBL_ROUTE",domain);
+    string node = _redis.read_redis_hash("TBL_ROUTE",domain);
 
     if (cluster == "nil" || node == "nil")
     {
@@ -75,28 +75,28 @@ bool DMRouter::route_assign(DMMessage& message, std::string exchange)
     }
 
     //指定发送，节点处理方式待重新考虑
-    DMBrokerProxy::getInstance()->publish(exchange, cluster, buf, HEAD_CHAR_LEN + message.head.length);
-    return true;
+    DMBrokerProxy::getInstance()->publish(exchange, cluster, buf, HEAD_DM_CHAR_LEN + message.head.length);
+    return TRUE;
 }
 
-void DMRouter::route_distribute(DMMessage& message, int service_id, std::string exchange)
+void DMRouter::route_distribute(DMMessage& message, DM_INT32 service_id, string exchange)
 {
     DMMessageParser parser;
     //pack msg
-    char *buf = new char[HEAD_CHAR_LEN + message.head.length];
+    DM_CHAR *buf = new DM_CHAR[HEAD_DM_CHAR_LEN + message.head.length];
     parser.pack(message,buf);
     
     //消息直接负载映射无指定cluster、node场景
-    std::map<int, std::vector<std::string>> queue_map = DMServiceMap::instance()->queue_map;
-    std::vector<std::string> queue = queue_map[service_id];
-    std::vector<std::string>::iterator it = queue.begin();
+    map<DM_INT32, vector<string>> queue_map = DMServiceMap::instance()->queue_map;
+    vector<string> queue = queue_map[service_id];
+    vector<string>::iterator it = queue.begin();
     //第一个队列作为初始化值
-    std::string queueName = *it;
-    int msgCount = DMBrokerProxy::getInstance()->getQueueMsgCount(queueName);
+    string queueName = *it;
+    DM_INT32 msgCount = DMBrokerProxy::getInstance()->getQueueMsgCount(queueName);
 
     for (; it != queue.end(); ++it)
     {
-        int size = DMBrokerProxy::getInstance()->getQueueMsgCount(queueName);
+        DM_INT32 size = DMBrokerProxy::getInstance()->getQueueMsgCount(queueName);
         if (msgCount > size)
         {
             queueName = *it;
@@ -104,7 +104,7 @@ void DMRouter::route_distribute(DMMessage& message, int service_id, std::string 
         }
     }
     
-    DMBrokerProxy::getInstance()->publish(exchange, queueName, buf, HEAD_CHAR_LEN + message.head.length);
+    DMBrokerProxy::getInstance()->publish(exchange, queueName, buf, HEAD_DM_CHAR_LEN + message.head.length);
 
     delete[] buf;
 }

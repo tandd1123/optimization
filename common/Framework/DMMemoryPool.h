@@ -4,7 +4,7 @@
 *-------------------*
 |					|
 |					|        *----------*		 *----------*
-|	  memorypool	|------->|memorypage|------->|memorypage|-------> ... + sizeof(int) = 4 byte
+|	  memorypool	|------->|memorypage|------->|memorypage|-------> ... + sizeof(DM_INT32) = 4 byte
 |					|		 |----------|		 |----------|
 |					|		 |		    |		 |		    |
 *-------------------*		 |		    |		 |		    |
@@ -26,23 +26,23 @@ class DMMemoryPool
 public:
 	static DMMemoryPool* instance();
 
-	int init_memory_pool(int size);
+	DM_INT32 init_memory_pool(DM_INT32 size);
 
-	char* require(int size);
+	DM_CHAR* require(DM_INT32 size);
 
-	void release(int size,char* block);
+	void release(DM_INT32 size,DM_CHAR* block);
 
 private:
 	void init_page();
 
-	char* alloc_memory(int size);
+	DM_CHAR* alloc_memory(DM_INT32 size);
 
 private:
-	int _size;
-	int _unused;
-	char* _head;
-	char* _free;
-	std::vector<DMMemoryPage*> _page;
+	DM_INT32 _size;
+	DM_INT32 _unused;
+	DM_CHAR* _head;
+	DM_CHAR* _free;
+	vector<DMMemoryPage*> _page;
 	static DMMemoryPool* _instance;
 	static ACE_Thread_Mutex _lock;
 	ACE_Thread_Mutex _mutex_lock;
@@ -53,17 +53,17 @@ class DMMemoryPage
 public:
 	DMMemoryPage();
 
-	void set_block_size(int size);
+	void set_block_size(DM_INT32 size);
 
-	int get_block_size();
+	DM_INT32 get_block_size();
 
-	char* require();
+	DM_CHAR* require();
 
-	void release(char* block);
+	void release(DM_CHAR* block);
 
 private:
-	int _block_size;
-	std::vector<DMMemoryBlock*> _block;
+	DM_INT32 _block_size;
+	vector<DMMemoryBlock*> _block;
 };
 
 class DMMemoryBlock
@@ -71,16 +71,16 @@ class DMMemoryBlock
 public:
 	DMMemoryBlock();
 
-	char* require(int size);
+	DM_CHAR* require(DM_INT32 size);
 
-	bool release(char* block);
+	DM_BOOL release(DM_CHAR* block);
 
-	bool get_block_state();
+	DM_BOOL get_block_state();
 
 private:
-	void make_block(int size);
+	void make_block(DM_INT32 size);
 	
 private:
-	bool _used;
-	char* _block;
+	DM_BOOL _used;
+	DM_CHAR* _block;
 };

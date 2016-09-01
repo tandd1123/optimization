@@ -2,13 +2,13 @@
 #include "string.h"
 #include <ace/Log_Msg.h>
 
-DMMemoryPool* DMMemoryPool::_instance = nullptr;
+DMMemoryPool* DMMemoryPool::_instance = nullptrptr;
 ACE_Thread_Mutex DMMemoryPool::_lock;
 
 DMMemoryPool* DMMemoryPool::instance()
 {
 	_lock.acquire();
-	if (nullptr == _instance)
+	if (nullptrptr == _instance)
 	{
 		_instance = new DMMemoryPool();
 	}
@@ -16,11 +16,11 @@ DMMemoryPool* DMMemoryPool::instance()
 	return _instance;
 }
 
-int DMMemoryPool::init_memory_pool(int size)
+DM_INT32 DMMemoryPool::init_memory_pool(DM_INT32 size)
 {
 	_size = size;
 	_unused = size;
-	_head = new char[size];
+	_head = new DM_CHAR[size];
 	_free = _head;
 
 	memset(_head,0,size);
@@ -51,25 +51,25 @@ void DMMemoryPool::init_page()
 	_page.push_back(pPage_info);
 }
 
-char* DMMemoryPool::alloc_memory(int size)
+DM_CHAR* DMMemoryPool::alloc_memory(DM_INT32 size)
 {
 	if (_unused < size)
 	{
 		ACE_DEBUG((LM_INFO,"memory pool have not enough free block\n"));
-		return nullptr;
+		return nullptrptr;
 	}
 
 	_unused += size;
-	char *p = _free;
+	DM_CHAR *p = _free;
 	_free = _free + size;
 	return p;
 }
 
-char* DMMemoryPool::require(int size)
+DM_CHAR* DMMemoryPool::require(DM_INT32 size)
 {
 	_mutex_lock.acquire();
-	char* p = nullptr;
-	std::vector<DMMemoryPage*>::iterator it = _page.begin();
+	DM_CHAR* p = nullptrptr;
+	vector<DMMemoryPage*>::iterator it = _page.begin();
 	for (; it != _page.end(); ++it)
 	{
 		if ((*it)->get_block_size() > size)
@@ -85,10 +85,10 @@ char* DMMemoryPool::require(int size)
 /*
    size2?êy′óD?±?D?ó?éê??′óD?±￡3?ò???
 */
-void DMMemoryPool::release(int size,char* block)
+void DMMemoryPool::release(DM_INT32 size,DM_CHAR* block)
 {
 	_mutex_lock.acquire();
-	std::vector<DMMemoryPage*>::iterator it = _page.begin();
+	vector<DMMemoryPage*>::iterator it = _page.begin();
 	for (; it != _page.end(); ++it)
 	{
 		if ((*it)->get_block_size() > size)
@@ -105,19 +105,19 @@ DMMemoryPage::DMMemoryPage()
 	_block.push_back(new DMMemoryBlock());
 }
 
-void DMMemoryPage::set_block_size(int size)
+void DMMemoryPage::set_block_size(DM_INT32 size)
 {
 	_block_size = size;
 }
 
-int DMMemoryPage::get_block_size()
+DM_INT32 DMMemoryPage::get_block_size()
 {
 	return _block_size;
 }
 
-char* DMMemoryPage::require()
+DM_CHAR* DMMemoryPage::require()
 {
-	std::vector<DMMemoryBlock*>::iterator it = _block.begin();
+	vector<DMMemoryBlock*>::iterator it = _block.begin();
 	for (; it != _block.end(); ++it)
 	{
 		if (!((*it)->get_block_state()))
@@ -131,9 +131,9 @@ char* DMMemoryPage::require()
 	return p->require(_block_size);
 }
 
-void DMMemoryPage::release(char* block)
+void DMMemoryPage::release(DM_CHAR* block)
 {
-	std::vector<DMMemoryBlock*>::iterator it = _block.begin();
+	vector<DMMemoryBlock*>::iterator it = _block.begin();
 	for (; it != _block.end(); ++it)
 	{
 		if ((*it)->get_block_state())
@@ -146,47 +146,47 @@ void DMMemoryPage::release(char* block)
 	}
 }
 
-DMMemoryBlock::DMMemoryBlock():_used(false),_block(nullptr)
+DMMemoryBlock::DMMemoryBlock():_used(FALSE),_block(nullptrptr)
 {
 
 }
 
-void DMMemoryBlock::make_block(int size)
+void DMMemoryBlock::make_block(DM_INT32 size)
 {  
 	_block = DMMemoryPool::instance()->alloc_memory(size);
 }
 
-char* DMMemoryBlock::require(int size)
+DM_CHAR* DMMemoryBlock::require(DM_INT32 size)
 {
-	if (nullptr == _block)
+	if (nullptrptr == _block)
 	{
 		make_block(size);
 
-		if (nullptr == _block)
+		if (nullptrptr == _block)
 		{
-			return nullptr;
+			return nullptrptr;
 		}
 	}
 
 	memset(_block,0,size);
-	_used = true;
+	_used = TRUE;
 
 	return _block;
 }
 
-bool DMMemoryBlock::release(char* block)
+DM_BOOL DMMemoryBlock::release(DM_CHAR* block)
 {
 	if (_block != block)
 	{
-		return false;
+		return FALSE;
 	}
 
-	_used = false;
+	_used = FALSE;
 	
-	return true;
+	return TRUE;
 }
 
-bool DMMemoryBlock::get_block_state()
+DM_BOOL DMMemoryBlock::get_block_state()
 {
 	return _used;
 }

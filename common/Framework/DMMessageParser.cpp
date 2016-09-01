@@ -1,7 +1,7 @@
 #include "DMMessageParser.h"
 #include <ace/Log_Msg.h>
 
-DMMessageHead DMMessageParser::parse(char * begin)
+DMMessageHead DMMessageParser::parse(DM_CHAR * begin)
 {
 	DMMessageHead msg_head;
 
@@ -19,16 +19,16 @@ DMMessageHead DMMessageParser::parse(char * begin)
 	return msg_head;
 }
 
-int DMMessageParser::parse(DMMessage& out, const AMQP::Message &in)
+DM_INT32 DMMessageParser::parse(DMMessage& out, const AMQP::Message &in)
 {
 	DMMessageHead msg_head;
     
-	if (in.bodySize() < HEAD_CHAR_LEN)
+	if (in.bodySize() < HEAD_DM_CHAR_LEN)
 	{
 		return 0;
 	}
 
-	const char* msg = in.body();
+	const DM_CHAR* msg = in.body();
 
 	DMGetBitData(msg,&msg_head.msg_id,0,16);
 	DMGetBitData(msg,&msg_head.user_id,16,32);
@@ -41,24 +41,24 @@ int DMMessageParser::parse(DMMessage& out, const AMQP::Message &in)
 	DMGetBitData(msg,&msg_head.wait_time,96,104);
 	DMGetBitData(msg,&msg_head.flag,104,112);
     
-	const char *body = msg + HEAD_CHAR_LEN;
-	out.body = new char[in.bodySize() - HEAD_CHAR_LEN];
-	memcpy(out.body,body,(in.bodySize() - HEAD_CHAR_LEN));
+	const DM_CHAR *body = msg + HEAD_DM_CHAR_LEN;
+	out.body = new DM_CHAR[in.bodySize() - HEAD_DM_CHAR_LEN];
+	memcpy(out.body,body,(in.bodySize() - HEAD_DM_CHAR_LEN));
 
 	return 1;
 }
 
 template <typename T>
-void DMMessageParser::DMGetBitData(char *src,T *dsc,int bit_s,int bit_e)
+void DMMessageParser::DMGetBitData(DM_CHAR *src,T *dsc,DM_INT32 bit_s,DM_INT32 bit_e)
 {
-	char *head_info = src;  //头地址
+	DM_CHAR *head_info = src;  //头地址
 	short bit_info = 0x0;   //结果数据
 
-	for (int i = 0; i < HEAD_CHAR_LEN; ++i)  //16 * 8 = 128
+	for (DM_INT32 i = 0; i < HEAD_DM_CHAR_LEN; ++i)  //16 * 8 = 128
 	{     
 		bit_info = bit_info | (*(head_info++) & 0xFF);    //只取8位防止高位为1编译器转32位做取反操作
         
-        if (bit_s == (CHAR_BIT_LEN * i))
+        if (bit_s == (DM_CHAR_BIT_LEN * i))
         { 
     		break;
         }   
@@ -66,25 +66,25 @@ void DMMessageParser::DMGetBitData(char *src,T *dsc,int bit_s,int bit_e)
         bit_info = 0x0;
 	}
 
-    if (CHAR_BIT_LEN != (bit_e - bit_s))    //取16位
+    if (DM_CHAR_BIT_LEN != (bit_e - bit_s))    //取16位
     {
-        bit_info = bit_info | ((*head_info & 0xFF) << CHAR_BIT_LEN);
+        bit_info = bit_info | ((*head_info & 0xFF) << DM_CHAR_BIT_LEN);
     }
         
 	*dsc =  *dsc | bit_info;
 }
 
 template <typename T>
-void DMMessageParser::DMGetBitData(const char *src, T *dsc, int bit_s, int bit_e)
+void DMMessageParser::DMGetBitData(const DM_CHAR *src, T *dsc, DM_INT32 bit_s, DM_INT32 bit_e)
 {
-	const char *head_info = src;
+	const DM_CHAR *head_info = src;
 	short bit_info = 0x0;
 
-	for (int i = 0; i < HEAD_CHAR_LEN; ++i)
+	for (DM_INT32 i = 0; i < HEAD_DM_CHAR_LEN; ++i)
 	{     
 		bit_info = bit_info | (*(head_info++) & 0xFF);
         
-        if (bit_s == (CHAR_BIT_LEN * i))
+        if (bit_s == (DM_CHAR_BIT_LEN * i))
         { 
     		break;
         }   
@@ -92,15 +92,15 @@ void DMMessageParser::DMGetBitData(const char *src, T *dsc, int bit_s, int bit_e
         bit_info = 0x0;
 	}
 
-    if (CHAR_BIT_LEN != (bit_e - bit_s))
+    if (DM_CHAR_BIT_LEN != (bit_e - bit_s))
     {
-        bit_info = bit_info | ((*head_info & 0xFF) << CHAR_BIT_LEN);
+        bit_info = bit_info | ((*head_info & 0xFF) << DM_CHAR_BIT_LEN);
     }
         
 	*dsc =  *dsc | bit_info;
 }
 
-int DMMessageParser::pack(DMMessage & mesg, char * buf)
+DM_INT32 DMMessageParser::pack(DMMessage & mesg, DM_CHAR * buf)
 {
 	DMMessageHead head;
 
