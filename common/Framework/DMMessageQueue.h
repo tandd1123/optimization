@@ -14,6 +14,9 @@ public:
 		return _instance;
 	}
     //依据配置尝试创建所有队列，取消svrid入参
+
+    void register_dispatcher(DMDispatcher* pDispatcher){_dispatcher = pDispatcher};
+    
 	DM_BOOL init(string host, DM_UINT16 port, string username,string userpasswd,string serviceName);
 
 	void publish(const string &exchange, const string &routingKey, const DM_CHAR *message, size_t size);
@@ -23,15 +26,17 @@ public:
     void runEvents();
 
 	void destroy();
-	//AMQP::Channel& getChannel();
-	//AMQP::Exchange AgetExchange();
+
 protected:
 	DMMessageQueue(){};
 	virtual ~DMMessageQueue();
+    
 private:
     DM_UINT8 _service_id;
     
 	DMMessageEvent* _handle;
+
+    DMDispatcher* _dispatcher;
     
 	AMQP::TcpChannel* _channel;
     

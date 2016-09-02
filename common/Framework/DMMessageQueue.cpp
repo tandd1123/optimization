@@ -4,7 +4,6 @@
 #include <ace/Log_Msg.h>
 #include <DMServiceMap.h>
 #include <map>
-extern DMService* GetService();
 
 DMMessageQueue* DMMessageQueue::_instance = nullptr;
 
@@ -30,7 +29,7 @@ DM_INT32 DMMessageQueue::init(string host,DM_INT32 port, string username, string
 		uDM_INT3264_t deliveryTag,
 		DM_BOOL redelivered)
 	{
-		GetService()->receive(message);
+		_dispatcher->receive_app_msg(message);
 		_channel->ack(deliveryTag); //ack rabbitmq-server
 	};
 

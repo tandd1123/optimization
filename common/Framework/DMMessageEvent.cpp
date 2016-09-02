@@ -22,11 +22,6 @@ void DMMessageEvent::monitor(AMQP::TcpConnection *connection, DM_INT32 fd, DM_IN
 
 }
 
-DMMessageEvent::DMMessageEvent(AMQP::TcpConnection *connection):_connection(connection)
-{
-
-}
-
 DM_INT32 DMMessageEvent::handle_input(ACE_HANDLE fd)
 {
 	_connection->process(fd, AMQP::readable);

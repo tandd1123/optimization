@@ -12,20 +12,15 @@ template <typename SERVICE_HANDLE>
 class DMServer
 {
 public:
-    //接收器
-    typedef ACE_Acceptor<SERVICE_HANDLE, ACE_SOCK_ACCEPTOR> DMAcceptor;
-    //初始化进程数量
+    //初始化进程数量,应用类只暴露基本接口，其他基类继承
 	DM_BOOL init(const string& config_path);
     
 	void run();
 
-	void register_service(DMService* pService);
-    
-	void register_message_factory(DMMessageFactory* pMessageFactory);
 private:
     //IO层，底层统一处理，不对外提供
     DMAcceptor _acceptor;
-    //dispatch层，底层定义，对外提供消息工厂的注册
+    //dispatch层，底层定义，对外提供消息的注册
 	DMDispatcher _dispatcher;
     //业务层，策略实现
 	DMService* _service;

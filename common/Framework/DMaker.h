@@ -11,13 +11,14 @@
 #include "DMMessageEvent.h"
 #include "DMMessageFactory.h"
 #include "DMMessageParser.h"
-#include "DMServiceMap"
+#include "DMServiceMap.h"
+#include "DMServiceImpl.h"
 
 //ACE include
 #include "ace/Acceptor.h"
 #include "ace/SOCK_Acceptor.h"
 #include "ace/Reactor.h"
-#include "ace/Log_Msg.h¡°
+#include "ace/Log_Msg.h"
 #include "ace/Dev_Poll_Reactor.h"
 #include "ace/INET_Addr.h"
 #include "ace/Thread_Mutex.h"
