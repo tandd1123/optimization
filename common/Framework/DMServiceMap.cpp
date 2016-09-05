@@ -8,7 +8,7 @@ DMServiceMap* DMServiceMap::instance()
 	_mutex_lock.acquire();
 	if (nullptr == _instance)
 	{
-		_instance = DM_NEW() DMServiceMap();
+		_instance = DM_NEW(DMServiceMap());
 	}
 	_mutex_lock.release();
 	return _instance;
@@ -41,7 +41,7 @@ void DMServiceMap::load_cfg()
         for (; it != members.end(); ++it)
         {
             string service_name = *it;
-            DM_INT32 svr_id = service_id[service_name].asDM_INT32();
+            DM_INT32 svr_id = service_id[service_name].asInt();
             service_map.insert(make_pair(service_name,svr_id));
         }
 
@@ -65,8 +65,8 @@ void DMServiceMap::load_cfg()
         {
             DM_INT32 svr_id = svr_it->second;
             MsgRange msg_range;
-            msg_range.msg_start = message_route[svr_it->first][0].asDM_INT32();
-            msg_range.msg_end = message_route[svr_it->first][1].asDM_INT32();
+            msg_range.msg_start = message_route[svr_it->first][0].asInt();
+            msg_range.msg_end = message_route[svr_it->first][1].asInt();
             message_map.insert(make_pair(svr_id,msg_range));
         }
     }

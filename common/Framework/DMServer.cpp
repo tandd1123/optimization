@@ -6,12 +6,12 @@ DMServer::DMServer()
     _dispatcher.register_service(_service);
 }
 
-DM_BOOL DMServer::init(const string& config_path);
+DM_BOOL DMServer::init(const string& config_path)
 {
     _acceptor.open();
 }
 
-void DMServer::run();
+void DMServer::run()
 {
     
 }

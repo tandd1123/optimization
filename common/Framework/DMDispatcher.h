@@ -10,6 +10,7 @@ private:
     int handle_input(const AMQP::Message &message);
     int handle_input(ACE_HANDLE fd);
     DMService* _service;
+    DMMessageQueue* _msg_queue;
 };
 
 typedef ACE_Acceptor<DMDispatcher, ACE_SOCK_ACCEPTOR> DMAcceptor;

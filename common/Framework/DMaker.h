@@ -13,6 +13,9 @@
 #include "DMMessageParser.h"
 #include "DMServiceMap.h"
 #include "DMServiceImpl.h"
+#include "DMSessionManager.h"
+#include "DMSession.h"
+#include "DMJsonConfig.h"
 
 //ACE include
 #include "ace/Acceptor.h"
