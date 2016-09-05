@@ -23,8 +23,8 @@ typedef unsigned char DM_UCHAR;
 
 using namespace std;
 
-#define INVALID_INT -1
-#define INVALID_CHAR ''
+#define INVALID_INT 0
+#define INVALID_CHAR '\0'
 
 #define TRUE true
 #define FALSE false
