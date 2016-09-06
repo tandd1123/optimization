@@ -1,3 +1,19 @@
+//=============================================================================
+/* 
+*  File: DMMessageParser.h
+*
+*  Author: bing
+*
+*  Date: 2016-08-15
+*
+*  Version: v2.0
+*
+*  Github/Mail: https://github.com/binchen-china    <563853086@qq.com>
+*
+*  Note:
+*/
+//=============================================================================
+
 #pragma once
 #include "DMaker.h"
 

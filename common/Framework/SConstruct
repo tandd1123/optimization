@@ -1,3 +1,19 @@
+#=============================================================================
+#
+#  File: SConstruct
+#
+#  Author: bing
+#
+#  Date: 2016-09-01
+#
+#  Version: v2.0
+#
+#  Github/Mail: https://github.com/binchen-china    <563853086@qq.com>
+#
+#  Note: build project file
+#
+#=============================================================================
+
 env = Environment()
 
 TARGETNAME = 'DMFramework'
