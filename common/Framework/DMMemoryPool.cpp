@@ -49,7 +49,8 @@ void DMMemoryPool::init_page()
 	_page.push_back(pPage_info);
 }
 
-DM_CHAR* DMMemoryPool::alloc_memory(DM_INT32 size)
+template <typename T>
+T* DMMemoryPool::alloc_memory(T*, DM_INT32 size)
 {
 	if (_unused < size)
 	{
@@ -60,7 +61,9 @@ DM_CHAR* DMMemoryPool::alloc_memory(DM_INT32 size)
 	_unused += size;
 	DM_CHAR *p = _free;
 	_free = _free + size;
-	return p;
+    
+    T* template_T = reinterpret_cast<T*>(p);
+	return T;
 }
 
 DM_CHAR* DMMemoryPool::require(DM_INT32 size)

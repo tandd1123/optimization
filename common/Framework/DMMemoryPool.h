@@ -28,7 +28,8 @@ public:
 
 	DM_UINT init_memory_pool(DM_UINT size);
 
-	DM_CHAR* require(DM_UINT size);
+    template<typename T>
+	T* require(T*,DM_UINT size);
 
 	void release(DM_UINT size,DM_CHAR* block);
 

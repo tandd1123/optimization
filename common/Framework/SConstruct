@@ -2,7 +2,7 @@ env = Environment()
 
 TARGETNAME = 'DMFramework'
 
-FILELIST = Glob('*.cpp') 
+FILELIST = Glob('DMServer.cpp') 
 
 HEADFILEPATH = Split('../../3rd ../../3rd/amqpcpp ../../3rd/mysqlpp/lib ../../3rd/mysql-connector-c/include ../RabbitMQ ../Redis ../MySQL')
 

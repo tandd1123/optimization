@@ -1,4 +1,4 @@
-#pragma once
+//#pragma once
 
 //DM include
 #include "DMTypes.h"
@@ -6,7 +6,7 @@
 #include "DMService.h"
 #include "DMDispatcher.h"
 #include "DMMessage.h"
-#include "DMMessageQueue.h"
+/*#include "DMMessageQueue.h"
 #include "DMMessageRouter.h"
 #include "DMMessageEvent.h"
 #include "DMMessageFactory.h"
@@ -15,7 +15,8 @@
 #include "DMServiceImpl.h"
 #include "DMSessionManager.h"
 #include "DMSession.h"
-#include "DMJsonConfig.h"
+#include "DMJsonConfig.h"*/
+#include "DMMemoryPool.h"
 
 //ACE include
 #include "ace/Acceptor.h"
@@ -40,3 +41,8 @@
 
 //other include
 #include <fstream>
+#include <string>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>

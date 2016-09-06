@@ -9,13 +9,13 @@ public:
 	{
 		if (nullptr == _instance)
 		{
-			_instance = DM_NEW() DMMessageQueue();
+			_instance = DM_NEW(*_instance, sizeof(DMMessageQueue));
 		}
 		return _instance;
 	}
     //依据配置尝试创建所有队列，取消svrid入参
 
-    void register_dispatcher(DMDispatcher* pDispatcher){_dispatcher = pDispatcher};
+    //void register_dispatcher(DMDispatcher* pDispatcher){_dispatcher = pDispatcher};
     
 	DM_BOOL init(string host, DM_UINT16 port, string username,string userpasswd,string serviceName);
 

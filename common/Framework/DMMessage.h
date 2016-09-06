@@ -52,7 +52,7 @@ enum DataSize
     DM_CHAR_BIT_LEN = 8
 };
 
-#pragma pack (1)
+
 class DMMessageHead
 {
 public:
@@ -87,7 +87,6 @@ public:
         return *this;
     }
 };
-#pragma pack ()
 
 class DMMessage
 {
@@ -105,7 +104,7 @@ public:
     void require_body_size(DM_UINT16 size)
     {
         _body_size = size;
-        body = DMMemoryPool::instance()->require(size);
+        body = DMMemoryPool::instance()->require(body,size);
     }
     
     void release_body_size()
