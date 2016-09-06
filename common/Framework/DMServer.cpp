@@ -1,4 +1,4 @@
-#include "DMService.h"
+#include "DMServer.h"
 
 DM_BOOL DMServer::init(const string& config_path)
 {
@@ -6,7 +6,7 @@ DM_BOOL DMServer::init(const string& config_path)
     return true;
 }
 
-void DMServer::run()
+void DMServer::run(DMService* pService)
 {
     
 }
