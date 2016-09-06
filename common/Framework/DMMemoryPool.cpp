@@ -8,17 +8,17 @@ DMMemoryPool* DMMemoryPool::instance()
 	_lock.acquire();
 	if (nullptr == _instance)
 	{
-		_instance = DM_NEW() DMMemoryPool();
+		_instance = new DMMemoryPool();
 	}
 	_lock.release();
 	return _instance;
 }
 
-DM_INT32 DMMemoryPool::init_memory_pool(DM_INT32 size)
+DM_UINT DMMemoryPool::init_memory_pool(DM_UINT size)
 {
 	_size = size;
 	_unused = size;
-	_head = DM_NEW() DM_CHAR[size];
+	_head = new DM_CHAR[size];
 	_free = _head;
 
 	memset(_head,0,size);
@@ -32,25 +32,24 @@ void DMMemoryPool::init_page()
 	//8 byte -> 32 byte
 	DMMemoryPage* pPage_info;
 
-	pPage_info = DM_NEW() DMMemoryPage;
+	pPage_info = new DMMemoryPage;
 	pPage_info->set_block_size(8);
 	_page.push_back(pPage_info);
 
-	pPage_info = DM_NEW() DMMemoryPage;
+	pPage_info = new DMMemoryPage;
 	pPage_info->set_block_size(16);
 	_page.push_back(pPage_info);
 
-	pPage_info = DM_NEW() DMMemoryPage;
+	pPage_info = new DMMemoryPage;
 	pPage_info->set_block_size(24);
 	_page.push_back(pPage_info);
 
-	pPage_info = DM_NEW() DMMemoryPage;
+	pPage_info = new DMMemoryPage;
 	pPage_info->set_block_size(32);
 	_page.push_back(pPage_info);
 }
 
-template <typename T>
-T* DMMemoryPool::alloc_memory(T*, DM_INT32 size)
+DM_CHAR* DMMemoryPool::alloc_memory(DM_UINT size)
 {
 	if (_unused < size)
 	{
@@ -61,32 +60,14 @@ T* DMMemoryPool::alloc_memory(T*, DM_INT32 size)
 	_unused += size;
 	DM_CHAR *p = _free;
 	_free = _free + size;
-    
-    T* template_T = reinterpret_cast<T*>(p);
-	return T;
-}
-
-DM_CHAR* DMMemoryPool::require(DM_INT32 size)
-{
-	_mutex_lock.acquire();
-	DM_CHAR* p = nullptr;
-	vector<DMMemoryPage*>::iterator it = _page.begin();
-	for (; it != _page.end(); ++it)
-	{
-		if ((*it)->get_block_size() > size)
-		{	
-			p =(*it)->require();
-			break;
-		}
-	}
-	_mutex_lock.release();
+      
 	return p;
 }
 
 /*
    size2?êy′óD?±?D?ó?éê??′óD?±￡3?ò???
 */
-void DMMemoryPool::release(DM_INT32 size,DM_CHAR* block)
+void DMMemoryPool::release(DM_CHAR* block, DM_UINT size)
 {
 	_mutex_lock.acquire();
 	vector<DMMemoryPage*>::iterator it = _page.begin();
@@ -103,15 +84,15 @@ void DMMemoryPool::release(DM_INT32 size,DM_CHAR* block)
 
 DMMemoryPage::DMMemoryPage()
 {
-	_block.push_back(DM_NEW() DMMemoryBlock());
+	_block.push_back(new DMMemoryBlock());
 }
 
-void DMMemoryPage::set_block_size(DM_INT32 size)
+void DMMemoryPage::set_block_size(DM_UINT size)
 {
 	_block_size = size;
 }
 
-DM_INT32 DMMemoryPage::get_block_size()
+DM_UINT DMMemoryPage::get_block_size()
 {
 	return _block_size;
 }
@@ -127,7 +108,7 @@ DM_CHAR* DMMemoryPage::require()
 		}
 	}
 
-	DMMemoryBlock* p = DM_NEW() DMMemoryBlock();
+	DMMemoryBlock* p = new DMMemoryBlock();
 	_block.push_back(p);
 	return p->require(_block_size);
 }
@@ -152,12 +133,12 @@ DMMemoryBlock::DMMemoryBlock():_used(FALSE),_block(nullptr)
 
 }
 
-void DMMemoryBlock::make_block(DM_INT32 size)
+void DMMemoryBlock::make_block(DM_UINT size)
 {  
 	_block = DMMemoryPool::instance()->alloc_memory(size);
 }
 
-DM_CHAR* DMMemoryBlock::require(DM_INT32 size)
+DM_CHAR* DMMemoryBlock::require(DM_UINT size)
 {
 	if (nullptr == _block)
 	{

@@ -16,8 +16,10 @@
 
 #pragma once
 #include "DMaker.h"
+#include "DMMultiProcess.h"
 
 class DMServerImpl : public DMMultiProcess
 {
-    
+private:
+public:
 };

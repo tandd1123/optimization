@@ -16,6 +16,9 @@
 
 #pragma once
 #include "DMaker.h"
+#include "DMServerImpl.h"
+#include "DMDispatcher.h"
+#include "DMService.h"
 
 class DMServer : public DMServerImpl
 {

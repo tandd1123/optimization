@@ -18,13 +18,15 @@ env = Environment()
 
 TARGETNAME = 'DMFramework'
 
-FILELIST = Glob('DMServer.cpp') 
+FILELIST = Split('main.cpp DMServer.cpp DMMultiProcess.cpp DMMemoryPool.cpp') 
 
 HEADFILEPATH = Split('../../3rd ../../3rd/amqpcpp ../../3rd/mysqlpp/lib ../../3rd/mysql-connector-c/include ../RabbitMQ ../Redis ../MySQL')
 
+LIB = Split('ACE pthread')
+
 FLAGS = Split('-std=c++11 -Wall')
 
-TARGETFILE = StaticLibrary(target = TARGETNAME,source = FILELIST,CPPPATH = HEADFILEPATH,CCFLAGS = FLAGS)
+TARGETFILE = Program(target = TARGETNAME,source = FILELIST,CPPPATH = HEADFILEPATH,LIBS = LIB,CCFLAGS = FLAGS)
 
 #install
 INSTALL = env.Install('../Lib', TARGETFILE)

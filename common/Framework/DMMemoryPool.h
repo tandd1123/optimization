@@ -47,7 +47,7 @@ public:
     template<typename T>
 	T* require(T*,DM_UINT size);
 
-	void release(DM_UINT size,DM_CHAR* block);
+	void release(DM_CHAR* block, DM_UINT size);
 
 private:
 	void init_page();
@@ -101,3 +101,5 @@ private:
 	DM_BOOL _used;
 	DM_CHAR* _block;
 };
+
+#include "DMMemoryPool.inl"

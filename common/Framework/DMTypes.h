@@ -47,5 +47,5 @@ using namespace std;
 #define True true
 #define False false
 
-#define DM_NEW(NAME)  DMMemoryPool::instance()->require(NAME,sizeof(NAME))
-#define DM_DELETE(NAME) DMMemoryPool::instance()->release(sizeof(NAME),&NAME)
+#define DM_NEW(TYPE,LENGTH)  DMMemoryPool::instance()->require(&TYPE,LENGTH)
+#define DM_DELETE(POINT,LENGTH) DMMemoryPool::instance()->release(POINT,LENGTH)

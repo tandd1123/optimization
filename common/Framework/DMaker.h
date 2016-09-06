@@ -18,21 +18,9 @@
 
 //DM include
 #include "DMTypes.h"
-#include "DMServer.h"
-#include "DMService.h"
-#include "DMDispatcher.h"
-#include "DMMessage.h"
-/*#include "DMMessageQueue.h"
-#include "DMMessageRouter.h"
-#include "DMMessageEvent.h"
-#include "DMMessageFactory.h"
-#include "DMMessageParser.h"
-#include "DMServiceMap.h"
-#include "DMServiceImpl.h"
-#include "DMSessionManager.h"
-#include "DMSession.h"
-#include "DMJsonConfig.h"*/
+#include "DMJsonConfig.h"
 #include "DMMemoryPool.h"
+#include "DMMultiProcess.h"
 
 //ACE include
 #include "ace/Acceptor.h"
@@ -47,6 +35,9 @@
 #include "ace/Svc_Handler.h"
 #include "ace/SOCK_Stream.h"
 #include "ace/Event_Handler.h"
+#include "ace/Process_Manager.h"
+#include "ace/Process.h"
+#include "ace/OS_NS_unistd.h"
 
 //AMQP include
 #include "amqpcpp.h"
@@ -57,6 +48,7 @@
 
 //other include
 #include <fstream>
+#include <stdio.h> 
 #include <string>
 #include <vector>
 #include <list>
