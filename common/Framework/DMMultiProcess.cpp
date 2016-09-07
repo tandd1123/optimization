@@ -2,18 +2,43 @@
 
 DMMultiProcess::DMMultiProcess()
 {
-    _process_manager = ACE_Process_Manager::instance();
+    
 }
 
-void DMMultiProcess::create_process(DM_INT process_num)
+void DMMultiProcess::set_process_options()
 {
+    if (_argc == 1)
+    {
+        _options.command_line("%s %d",_argv[0],_process_num - 1);
+    }
+    else if (atoi(_argv[1]) == 1)
+    {
+        return;
+    }
+    else
+    {
+       // _process_num = atoi(_argv[1]);
+       // _options.command_line("%s %d",_argv[0],_process_num - 1);
+    }
+}
+
+void DMMultiProcess::create_process(DM_INT process_num, int argc, char *argv[])
+{   
     _process_num = process_num;
-    ACE_Process_Options options;
-    options.avoid_zombies (1);
-    //options.process_name("test");
-    options.command_line (ACE_TEXT ("./DMFramework"));
-    _pids = DM_NEW(_process_num, _process_num * sizeof(DM_INT));
-    _process_manager->spawn_n(_process_num, options, _pids);
+    _argc = argc;
+    _argv = argv;
+    
+    set_process_options();
+    _child_process = DM_NEW(_child_process, _process_num * sizeof(_child_process));
+    DM_LOG(DM_DEBUG,"hello %d", __DM_LOG__, _process_num);
+    DM_LOG(DM_INFO,"hello %d", __DM_LOG__, _process_num);
+    DM_LOG(DM_WARNING,"hello %d", __DM_LOG__, _process_num);
+    DM_LOG(DM_ERROR,"hello %d", __DM_LOG__, _process_num);
+    DM_TRACE();
+    /*for (DM_INT i = 0; i < _process_num; ++i)
+    {
+        _child_process[i].spawn(_options);
+    }*/
 }
 
 DM_BOOL DMMultiProcess::is_master_process()
@@ -31,5 +56,8 @@ DM_BOOL DMMultiProcess::is_master_process()
 
 void DMMultiProcess::wait_all_process()
 {
-    _process_manager->wait();
+    /*for (DM_INT i = 0; i < _process_num; ++i)
+    {
+        _child_process[i].wait();
+    }*/
 }

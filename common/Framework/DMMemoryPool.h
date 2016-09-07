@@ -103,3 +103,6 @@ private:
 };
 
 #include "DMMemoryPool.inl"
+
+#define DM_NEW(TYPE,LENGTH)  DMMemoryPool::instance()->require(TYPE,LENGTH)
+#define DM_DELETE(POINT,LENGTH) DMMemoryPool::instance()->release(POINT,LENGTH)

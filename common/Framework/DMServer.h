@@ -24,7 +24,7 @@ class DMServer : public DMServerImpl
 {
 public:
 
-	DM_BOOL init(const std::string& config_path);
+	DM_BOOL init(const std::string& config_path, int argc, char *argv[]);
     
 	void run(DMService* pService);
 

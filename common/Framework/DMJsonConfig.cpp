@@ -1,27 +1,28 @@
+#include "ace/Log_Msg.h"
 #include "DMJsonConfig.h"
 
-DM_BOOL DMJsonConfig::load_config_file(string& file_path)
+DM_BOOL DMJsonConfig::load_config_file(string file_path)
 {
-    _cfg_file.open(SERVICE_MAP_PATH, std::ios::binary);
+    _cfg_file.open(file_path.c_str(), std::ios::binary);
 
     if (!_cfg_file.is_open())
     {   
-        ACE_DEBUG((LM_INFO,"open DMaker.json config failure!\n"));
+        //ACE_DEBUG((LM_INFO,"open %s config failure!\n"),file_path.c_str()));
         return false;
     }
-    if (!_json_reader.parse(cfg_file,_json_root))
+    if (!_json_reader.parse(_cfg_file,_json_root))
     {
         return false;
     }
     return true;
 }
 
-string DMJsonConfig::GetItemInt(const string& element,const string& attribute) const
+string DMJsonConfig::GetItemString(string element, string attribute)
 {
-    return _json_root[element][attribute].asString;
+    return _json_root[element][attribute].asString(); 
 }
     
-string DMJsonConfig::GetItemString(const string& element,const string& attribute) const
+DM_INT DMJsonConfig::GetItemInt(string element, string attribute)
 {
-    return _json_root[element][attribute].asInt;
+    return _json_root[element][attribute].asInt();
 }

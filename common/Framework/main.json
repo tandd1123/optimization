@@ -1,0 +1,7 @@
+{
+    "service_info":
+    {
+        "service_name" : "test",
+        "log_level" : "INFO"
+    }
+}

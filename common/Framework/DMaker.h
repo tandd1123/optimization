@@ -21,6 +21,7 @@
 #include "DMJsonConfig.h"
 #include "DMMemoryPool.h"
 #include "DMMultiProcess.h"
+#include "DMLogManager.h"
 
 //ACE include
 #include "ace/Acceptor.h"
@@ -38,6 +39,7 @@
 #include "ace/Process_Manager.h"
 #include "ace/Process.h"
 #include "ace/OS_NS_unistd.h"
+#include "ace/Singleton.h"
 
 //AMQP include
 #include "amqpcpp.h"

@@ -16,16 +16,17 @@
 
 #pragma once
 #include "DMaker.h"
+#include "ace/Singleton.h"
 
 class DMJsonConfig
 {
 public:
 
-    DM_BOOL load_config_file(string& file_path);
+    DM_BOOL load_config_file(string file_path);
     
-    string GetItemInt(const string& element,const string& attribute) const;
+    string GetItemString(string element, string attribute);
     
-    string GetItemString(const string& element,const string& attribute) const;
+    DM_INT GetItemInt(string element, string attribute);
     
 private:
 
@@ -34,3 +35,5 @@ private:
     Json::Reader _json_reader;
     Json::Value _json_root;
 };
+
+typedef ACE_Singleton<DMJsonConfig, ACE_Thread_Mutex> DMJsonCfg;
