@@ -15,10 +15,11 @@
 //=============================================================================
 
 template <typename T>
-T* DMMemoryPool::require(T*, DM_UINT size)
+T** DMMemoryPool::require(T** src, DM_UINT size)
 {
 	_mutex_lock.acquire();
-	DM_CHAR* p = nullptr;
+	DM_CHAR** p = nullptr;
+    
 	vector<DMMemoryPage*>::iterator it = _page.begin();
 	for (; it != _page.end(); ++it)
 	{
@@ -28,7 +29,25 @@ T* DMMemoryPool::require(T*, DM_UINT size)
 			break;
 		}
 	}
+        
 	_mutex_lock.release();
-    T* template_T = reinterpret_cast<T*>(p);
-	return template_T;
+    *src = reinterpret_cast<T*>(*p);
+	return src;
+}
+
+template<typename T>
+void DMMemoryPool::release(T** block, DM_UINT size)
+{
+	_mutex_lock.acquire();
+    DM_CHAR** p = reinterpret_cast<DM_CHAR**>(block);
+	vector<DMMemoryPage*>::iterator it = _page.begin();
+	for (; it != _page.end(); ++it)
+	{
+		if ((*it)->get_block_size() > size)
+		{
+			(*it)->release(p);
+			break;
+		}
+	}
+	_mutex_lock.release();
 }

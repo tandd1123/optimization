@@ -31,7 +31,7 @@ public:
     void wait_all_process();
     
 protected:
-    ACE_Process* _child_process;
+    vector<ACE_Process*> _child_process;
     ACE_Process_Options _options;
     DM_INT _process_num;
     pid_t* _pids;

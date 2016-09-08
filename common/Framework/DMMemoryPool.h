@@ -47,20 +47,21 @@ public:
 	DM_UINT init_memory_pool(DM_UINT size);
 
     template<typename T>
-	T* require(T*,DM_UINT size);
-
-	void release(DM_CHAR* block, DM_UINT size);
+	T** require(T** src,DM_UINT size);
+    
+    template<typename T>
+	void release(T** block, DM_UINT size);
 
 private:
 	void init_page();
 
-	DM_CHAR* alloc_memory(DM_UINT size);
+	DM_CHAR** alloc_memory(DM_UINT size);
 
 private:
 	DM_UINT _size;
 	DM_UINT _unused;
-	DM_CHAR* _head;
-	DM_CHAR* _free;
+	DM_CHAR** _head;
+	DM_CHAR** _free;
 	vector<DMMemoryPage*> _page;
 	static DMMemoryPool* _instance;
 	static ACE_Thread_Mutex _lock;
@@ -76,9 +77,9 @@ public:
 
 	DM_UINT get_block_size();
 
-	DM_CHAR* require();
+	DM_CHAR** require();
 
-	void release(DM_CHAR* block);
+	void release(DM_CHAR** block);
 
 private:
 	DM_UINT _block_size;
@@ -90,9 +91,9 @@ class DMMemoryBlock
 public:
 	DMMemoryBlock();
 
-	DM_CHAR* require(DM_UINT size);
+	DM_CHAR** require(DM_UINT size);
 
-	DM_BOOL release(DM_CHAR* block);
+	DM_BOOL release(DM_CHAR** block);
 
 	DM_BOOL get_block_state();
 
@@ -101,10 +102,10 @@ private:
 	
 private:
 	DM_BOOL _used;
-	DM_CHAR* _block;
+	DM_CHAR** _block;
 };
 
 #include "DMMemoryPool.inl"
 
-#define DM_NEW(TYPE,LENGTH)  DMMemoryPool::instance()->require(TYPE,LENGTH)
-#define DM_DELETE(POINT,LENGTH) DMMemoryPool::instance()->release(POINT,LENGTH)
+#define DM_NEW(SRC,LENGTH)  DMMemoryPool::instance()->require(&SRC,LENGTH)
+#define DM_DELETE(SRC,LENGTH) DMMemoryPool::instance()->release(&SRC,LENGTH)

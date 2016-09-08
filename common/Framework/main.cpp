@@ -1,13 +1,14 @@
 #include "DMaker.h"
 #include "DMMultiProcess.h"
 
-int main(int argc, char *argv[])
+int DM_MAIN(int argc, ACE_TCHAR *argv[])
 {
     DMJsonCfg::instance()->load_config_file("main.json");
-    //DMLogMgr::instance()->init();
+
     DMMultiProcess _process;
     _process.create_process(1,argc,argv);
-    ACE_DEBUG((LM_INFO,"PID=%d,argc=%s\n",getpid(),argv[0]));
+    DM_TRACE("PID=%d,argc=%s\n",getpid(),argv[0]);
     _process.wait_all_process();
+    ACE_Reactor::instance()->run_reactor_event_loop();
     return 0;
 }

@@ -1,14 +1,7 @@
-[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][61]:_unused=1,size=16
-[DM_ERROR][DMMemoryPool.cpp][alloc_memory][64]:memory pool have not enough free block
-[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][62]:_unused=1,size=16
-[DM_ERROR][DMMemoryPool.cpp][alloc_memory][65]:memory pool have not enough free block
-[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][62]:_unused=1,size=16
-[DM_ERROR][DMMemoryPool.cpp][alloc_memory][65]:memory pool have not enough free block
-[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][62]:_unused=1,size=16
-[DM_ERROR][DMMemoryPool.cpp][alloc_memory][65]:memory pool have not enough free block
-[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][62]:_unused=1,size=16
-[DM_ERROR][DMMemoryPool.cpp][alloc_memory][65]:memory pool have not enough free block
-[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][62]:_unused=1,size=16
-[DM_ERROR][DMMemoryPool.cpp][alloc_memory][65]:memory pool have not enough free block
-[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][62]:_unused=1,size=16
-[DM_ERROR][DMMemoryPool.cpp][alloc_memory][65]:memory pool have not enough free block
+[DM_INFO][DMMemoryPool.cpp][init_memory_pool][26]:OK
+[DM_INFO][DMMemoryPool.cpp][init_memory_pool][27]:before
+[DM_INFO][DMMemoryPool.cpp][init_memory_pool][25]:OK
+[DM_INFO][DMMemoryPool.cpp][init_memory_pool][26]:before
+[DM_INFO][DMMemoryPool.cpp][init_memory_pool][25]:OK
+[DM_INFO][DMMemoryPool.cpp][init_memory_pool][26]:before
+[DM_INFO][DMMemoryPool.cpp][init_memory_pool][29]:OK

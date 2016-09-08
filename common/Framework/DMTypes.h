@@ -46,3 +46,5 @@ using namespace std;
 #define FALSE false
 #define True true
 #define False false
+
+#define DM_MAIN ACE_TMAIN

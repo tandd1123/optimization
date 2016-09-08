@@ -61,10 +61,10 @@ void DMLogManager::print_log(const DM_CHAR* fmt, ...)
 {
     va_list ap;
     va_start(ap, fmt);
-               
-    string log_info = fmt;     
-    ACE_OS::vfprintf(stdout, fmt, ap);  
-
+    string log_info = fmt;
+    log_info.append("\n");
+    ACE_OS::vfprintf(stdout, log_info.c_str(), ap);  
+    
     va_end (ap);
 }
 
@@ -73,9 +73,10 @@ void DMLogManager::trace_log(string file, string func, DM_INT line, const DM_CHA
     va_list ap;
     va_start(ap, fmt);
                
-    ACE_OS::printf("[DM_TRACE][%s][%s][%d]:",file.c_str(), func.c_str(), line);               
-    string log_info = fmt;     
-    ACE_OS::vfprintf(stdout, fmt, ap);  
+    ACE_OS::printf("[DM_TRACE][%s][%s][%d]:",file.c_str(), func.c_str(), line);    
+    string log_info = fmt;
+    log_info.append("\n");    
+    ACE_OS::vfprintf(stdout, log_info.c_str(), ap);  
 
     va_end (ap);
 }
@@ -93,8 +94,10 @@ void DMLogManager::write_log(DM_INT log_level, string file, string func, DM_INT 
         {
             if (DM_DEBUG & _log_mask)
             {               
-                ACE_OS::fprintf(_log_file, "[DM_DEBUG][%s][%s][%d]:",file.c_str(), func.c_str(), line);                 
-                ACE_OS::vfprintf(_log_file, fmt, ap);  
+                ACE_OS::fprintf(_log_file, "[DM_DEBUG][%s][%s][%d]:",file.c_str(), func.c_str(), line);   
+                string log_info = fmt;
+                log_info.append("\n");                  
+                ACE_OS::vfprintf(_log_file, log_info.c_str(), ap);  
             }            
             break;
         }
@@ -102,8 +105,10 @@ void DMLogManager::write_log(DM_INT log_level, string file, string func, DM_INT 
         {
             if (DM_INFO & _log_mask)
             {
-                ACE_OS::fprintf(_log_file, "[DM_INFO][%s][%s][%d]:",file.c_str(), func.c_str(), line);                  
-                ACE_OS::vfprintf(_log_file, fmt, ap);  
+                ACE_OS::fprintf(_log_file, "[DM_INFO][%s][%s][%d]:",file.c_str(), func.c_str(), line);     
+                string log_info = fmt;
+                log_info.append("\n");                  
+                ACE_OS::vfprintf(_log_file, log_info.c_str(), ap);  
             }
             break;
         }
@@ -111,8 +116,10 @@ void DMLogManager::write_log(DM_INT log_level, string file, string func, DM_INT 
         {
             if (DM_WARNING & _log_mask)
             {
-                ACE_OS::fprintf(_log_file, "[DM_WARNING][%s][%s][%d]:",file.c_str(), func.c_str(), line);                 
-                ACE_OS::vfprintf(_log_file, fmt, ap);  
+                ACE_OS::fprintf(_log_file, "[DM_WARNING][%s][%s][%d]:",file.c_str(), func.c_str(), line);       
+                string log_info = fmt;
+                log_info.append("\n");                  
+                ACE_OS::vfprintf(_log_file, log_info.c_str(), ap);  
             }
             break;
         }
@@ -120,8 +127,10 @@ void DMLogManager::write_log(DM_INT log_level, string file, string func, DM_INT 
         {
             if (DM_ERROR & _log_mask)
             {
-                ACE_OS::fprintf(_log_file, "[DM_ERROR][%s][%s][%d]:",file.c_str(), func.c_str(), line);                 
-                ACE_OS::vfprintf(_log_file, fmt, ap);       
+                ACE_OS::fprintf(_log_file, "[DM_ERROR][%s][%s][%d]:",file.c_str(), func.c_str(), line);  
+                string log_info = fmt;
+                log_info.append("\n");                  
+                ACE_OS::vfprintf(_log_file, log_info.c_str(), ap);       
             }
             break;
         }

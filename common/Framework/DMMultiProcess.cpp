@@ -1,8 +1,8 @@
 #include "DMMultiProcess.h"
 
-DMMultiProcess::DMMultiProcess()
+DMMultiProcess::DMMultiProcess():_process_num(0),_pids(nullptr)
 {
-    
+
 }
 
 void DMMultiProcess::set_process_options()
@@ -29,11 +29,14 @@ void DMMultiProcess::create_process(DM_INT process_num, int argc, char *argv[])
     _argv = argv;
     
     set_process_options();
-    _child_process = DM_NEW(_child_process, _process_num * sizeof(_child_process));
 
     for (DM_INT i = 0; i < _process_num; ++i)
     {
-        _child_process[i].spawn(_options);
+       /* ACE_Process* process;
+        DM_NEW(process ,sizeof(ACE_Process));
+        DM_TRACE("process = %d\n",process);
+        process->spawn(_options);
+        _child_process.push_back(process);  */    
     }
 }
 

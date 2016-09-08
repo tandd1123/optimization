@@ -1,5 +1,5 @@
 #include "DMMemoryPool.h"
-
+#include "malloc.h"
 DMMemoryPool* DMMemoryPool::_instance = nullptr;
 ACE_Thread_Mutex DMMemoryPool::_lock;
 
@@ -22,14 +22,17 @@ DMMemoryPool::DMMemoryPool():_size(0),_unused(0),_head(nullptr),_free(nullptr)
 
 DM_UINT DMMemoryPool::init_memory_pool(DM_UINT size)
 {
+    _head = reinterpret_cast<DM_CHAR**>(new DM_CHAR);
+    _free = reinterpret_cast<DM_CHAR**>(new DM_CHAR);
 	_size = size;
 	_unused = size;
-	_head = new DM_CHAR[size];
-	_free = _head;
    
-	memset(_head,0,size);
+    *_head = reinterpret_cast<DM_CHAR*>(new DM_CHAR[size]);
+    *_free = *_head;
+
+	memset(*_head,0,size);
 	init_page();
-   
+    DM_TRACE("init memory");
 	return 0;
 }
 
@@ -55,9 +58,8 @@ void DMMemoryPool::init_page()
 	_page.push_back(pPage_info);
 }
 
-DM_CHAR* DMMemoryPool::alloc_memory(DM_UINT size)
+DM_CHAR** DMMemoryPool::alloc_memory(DM_UINT size)
 {
-    DM_TRACE("_unused=%d,size=%d\n",_unused,size);
 	if (_unused < size)
 	{
 		DM_LOG(DM_ERROR,"memory pool have not enough free block\n");
@@ -65,28 +67,9 @@ DM_CHAR* DMMemoryPool::alloc_memory(DM_UINT size)
 	}
 
 	_unused += size;
-	DM_CHAR *p = _free;
-	_free = _free + size;
-      
-	return p;
-}
-
-/*
-   size2?êy′óD?±?D?ó?éê??′óD?±￡3?ò???
-*/
-void DMMemoryPool::release(DM_CHAR* block, DM_UINT size)
-{
-	_mutex_lock.acquire();
-	vector<DMMemoryPage*>::iterator it = _page.begin();
-	for (; it != _page.end(); ++it)
-	{
-		if ((*it)->get_block_size() > size)
-		{
-			(*it)->release(block);
-			break;
-		}
-	}
-	_mutex_lock.release();
+	*_free = *_free + size;
+ 
+	return _free;
 }
 
 DMMemoryPage::DMMemoryPage():_block_size(0)
@@ -104,7 +87,7 @@ DM_UINT DMMemoryPage::get_block_size()
 	return _block_size;
 }
 
-DM_CHAR* DMMemoryPage::require()
+DM_CHAR** DMMemoryPage::require()
 {
 	vector<DMMemoryBlock*>::iterator it = _block.begin();
 	for (; it != _block.end(); ++it)
@@ -120,7 +103,7 @@ DM_CHAR* DMMemoryPage::require()
 	return p->require(_block_size);
 }
 
-void DMMemoryPage::release(DM_CHAR* block)
+void DMMemoryPage::release(DM_CHAR** block)
 {
 	vector<DMMemoryBlock*>::iterator it = _block.begin();
 	for (; it != _block.end(); ++it)
@@ -145,7 +128,7 @@ void DMMemoryBlock::make_block(DM_UINT size)
 	_block = DMMemoryPool::instance()->alloc_memory(size);
 }
 
-DM_CHAR* DMMemoryBlock::require(DM_UINT size)
+DM_CHAR** DMMemoryBlock::require(DM_UINT size)
 {
 	if (nullptr == _block)
 	{
@@ -153,19 +136,20 @@ DM_CHAR* DMMemoryBlock::require(DM_UINT size)
 
 		if (nullptr == _block)
 		{
+            DM_LOG(DM_ERROR,"make new block failure!\n");
 			return nullptr;
 		}
 	}
 
-	memset(_block,0,size);
+	memset(*_block,0,size);
 	_used = TRUE;
-
+   
 	return _block;
 }
 
-DM_BOOL DMMemoryBlock::release(DM_CHAR* block)
+DM_BOOL DMMemoryBlock::release(DM_CHAR** block)
 {
-	if (_block != block)
+	if (*_block != *block)
 	{
 		return FALSE;
 	}
