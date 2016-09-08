@@ -2,6 +2,7 @@
     "service_info":
     {
         "service_name" : "test",
-        "log_level" : "INFO"
+        "log_level" : "DEBUG",
+        "memory_pool_size" : 4096
     }
 }

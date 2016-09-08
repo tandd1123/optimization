@@ -41,7 +41,9 @@ class DMMemoryPool
 	friend class DMMemoryBlock;
 public:
 	static DMMemoryPool* instance();
-
+    
+    DMMemoryPool();
+    
 	DM_UINT init_memory_pool(DM_UINT size);
 
     template<typename T>
@@ -56,7 +58,7 @@ private:
 
 private:
 	DM_UINT _size;
-	DM_BOOL _unused;
+	DM_UINT _unused;
 	DM_CHAR* _head;
 	DM_CHAR* _free;
 	vector<DMMemoryPage*> _page;

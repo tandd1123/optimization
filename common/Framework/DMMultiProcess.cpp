@@ -30,15 +30,11 @@ void DMMultiProcess::create_process(DM_INT process_num, int argc, char *argv[])
     
     set_process_options();
     _child_process = DM_NEW(_child_process, _process_num * sizeof(_child_process));
-    DM_LOG(DM_DEBUG,"hello %d", __DM_LOG__, _process_num);
-    DM_LOG(DM_INFO,"hello %d", __DM_LOG__, _process_num);
-    DM_LOG(DM_WARNING,"hello %d", __DM_LOG__, _process_num);
-    DM_LOG(DM_ERROR,"hello %d", __DM_LOG__, _process_num);
-    DM_TRACE();
-    /*for (DM_INT i = 0; i < _process_num; ++i)
+
+    for (DM_INT i = 0; i < _process_num; ++i)
     {
         _child_process[i].spawn(_options);
-    }*/
+    }
 }
 
 DM_BOOL DMMultiProcess::is_master_process()

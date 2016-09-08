@@ -14,16 +14,22 @@ DMMemoryPool* DMMemoryPool::instance()
 	return _instance;
 }
 
+DMMemoryPool::DMMemoryPool():_size(0),_unused(0),_head(nullptr),_free(nullptr)
+{
+    DM_INT mem_size = DMJsonCfg::instance()->GetItemInt("service_info", "memory_pool_size");
+    init_memory_pool(mem_size);
+}
+
 DM_UINT DMMemoryPool::init_memory_pool(DM_UINT size)
 {
 	_size = size;
 	_unused = size;
 	_head = new DM_CHAR[size];
 	_free = _head;
-
+   
 	memset(_head,0,size);
 	init_page();
-
+   
 	return 0;
 }
 
@@ -51,9 +57,10 @@ void DMMemoryPool::init_page()
 
 DM_CHAR* DMMemoryPool::alloc_memory(DM_UINT size)
 {
+    DM_TRACE("_unused=%d,size=%d\n",_unused,size);
 	if (_unused < size)
 	{
-		ACE_DEBUG((LM_INFO,"memory pool have not enough free block\n"));
+		DM_LOG(DM_ERROR,"memory pool have not enough free block\n");
 		return nullptr;
 	}
 
@@ -82,7 +89,7 @@ void DMMemoryPool::release(DM_CHAR* block, DM_UINT size)
 	_mutex_lock.release();
 }
 
-DMMemoryPage::DMMemoryPage()
+DMMemoryPage::DMMemoryPage():_block_size(0)
 {
 	_block.push_back(new DMMemoryBlock());
 }

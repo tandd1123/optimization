@@ -1,6 +1,14 @@
-[DM_INFO][DMMultiProcess.cpp][create_process][34]:hello 1
-[DM_WARNING][DMMultiProcess.cpp][create_process][35]:hello 1
-[DM_ERROR][DMMultiProcess.cpp][create_process][36]:hello 1
-[DM_INFO][DMMultiProcess.cpp][create_process][34]:hello 1
-[DM_WARNING][DMMultiProcess.cpp][create_process][35]:hello 1
-[DM_ERROR][DMMultiProcess.cpp][create_process][36]:hello 1
+[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][61]:_unused=1,size=16
+[DM_ERROR][DMMemoryPool.cpp][alloc_memory][64]:memory pool have not enough free block
+[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][62]:_unused=1,size=16
+[DM_ERROR][DMMemoryPool.cpp][alloc_memory][65]:memory pool have not enough free block
+[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][62]:_unused=1,size=16
+[DM_ERROR][DMMemoryPool.cpp][alloc_memory][65]:memory pool have not enough free block
+[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][62]:_unused=1,size=16
+[DM_ERROR][DMMemoryPool.cpp][alloc_memory][65]:memory pool have not enough free block
+[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][62]:_unused=1,size=16
+[DM_ERROR][DMMemoryPool.cpp][alloc_memory][65]:memory pool have not enough free block
+[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][62]:_unused=1,size=16
+[DM_ERROR][DMMemoryPool.cpp][alloc_memory][65]:memory pool have not enough free block
+[DM_DEBUG][DMMemoryPool.cpp][alloc_memory][62]:_unused=1,size=16
+[DM_ERROR][DMMemoryPool.cpp][alloc_memory][65]:memory pool have not enough free block

@@ -7,7 +7,6 @@ DM_BOOL DMJsonConfig::load_config_file(string file_path)
 
     if (!_cfg_file.is_open())
     {   
-        //ACE_DEBUG((LM_INFO,"open %s config failure!\n"),file_path.c_str()));
         return false;
     }
     if (!_json_reader.parse(_cfg_file,_json_root))
