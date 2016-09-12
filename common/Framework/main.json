@@ -1,8 +1,13 @@
 {
     "service_info":
     {
-        "service_name" : "test",
+        "service_name" : "test"
+    },
+    
+    "service_config":
+    { 
         "log_level" : "DEBUG",
-        "memory_pool_size" : 4096
+        "memory_pool_size" : 4096,
+        "process_num" : 4
     }
 }

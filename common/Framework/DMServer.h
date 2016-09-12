@@ -20,13 +20,13 @@
 #include "DMDispatcher.h"
 #include "DMService.h"
 
-class DMServer : public DMServerImpl
+class DMServer : private DMServerImpl
 {
 public:
 
 	DM_BOOL init(const std::string& config_path, int argc, char *argv[]);
     
-	void run(DMService* pService);
+	virtual void run(DMService* pService);
 
 private:
 

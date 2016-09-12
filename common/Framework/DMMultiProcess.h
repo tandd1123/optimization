@@ -24,7 +24,7 @@ public:
 
     DM_INT set_process_options(ACE_Process_Options& options);
     
-    DM_INT create_process(DM_INT process_num, int argc, char *argv[]);
+    DM_INT create_process(DM_INT process_num, DM_INT argc, DM_CHAR *argv[]);
 
     void wait_all_process();
     

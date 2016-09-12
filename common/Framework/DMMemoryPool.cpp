@@ -16,7 +16,7 @@ DMMemoryPool* DMMemoryPool::instance()
 
 DMMemoryPool::DMMemoryPool():_size(0),_unused(0),_head(nullptr),_free(nullptr)
 {
-    DM_INT mem_size = DMJsonCfg::instance()->GetItemInt("service_info", "memory_pool_size");
+    DM_INT mem_size = DMJsonCfg::instance()->GetItemInt("service_config", "memory_pool_size");
     init_memory_pool(mem_size);
 }
 

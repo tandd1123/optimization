@@ -19,7 +19,7 @@ void DMLogManager::init()
 void DMLogManager::get_log_config()
 {
     _log_name = DMJsonCfg::instance()->GetItemString("service_info", "service_name");
-    _log_level = DMJsonCfg::instance()->GetItemString("service_info", "log_level");
+    _log_level = DMJsonCfg::instance()->GetItemString("service_config", "log_level");
     _log_name.append(".log");
 }
 
