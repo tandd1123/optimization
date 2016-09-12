@@ -9,6 +9,6 @@ DM_BOOL DMServer::init(const string& config_path, int argc, char *argv[])
 
 void DMServer::run(DMService* pService)
 {
-    
+    //run_event_loop();
 }
 

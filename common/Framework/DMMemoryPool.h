@@ -79,7 +79,7 @@ public:
 
 	DM_CHAR** require();
 
-	void release(DM_CHAR** block);
+	DM_BOOL release(DM_CHAR** block);
 
 private:
 	DM_UINT _block_size;

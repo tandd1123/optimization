@@ -20,6 +20,7 @@
 
 class DMServerImpl : public DMMultiProcess
 {
-private:
 public:
+   
+private:
 };

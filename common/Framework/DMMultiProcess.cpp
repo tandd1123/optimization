@@ -2,61 +2,50 @@
 
 DMMultiProcess::DMMultiProcess():_process_num(0),_pids(nullptr)
 {
-
+    _process_manager = ACE_Process_Manager::instance();
 }
 
-void DMMultiProcess::set_process_options()
+DM_INT DMMultiProcess::set_process_options(ACE_Process_Options& options)
 {
-    if (_argc == 1)
+    if (_argc == 1) //parent
     {
-        _options.command_line("%s %d",_argv[0],_process_num - 1);
-    }
-    else if (atoi(_argv[1]) == 1)
-    {
-        return;
+        options.command_line("%s %d",_argv[0], _process_num);
+        return 0;
     }
     else
     {
-       // _process_num = atoi(_argv[1]);
-       // _options.command_line("%s %d",_argv[0],_process_num - 1);
+        DM_INT process_tag = ACE_OS::atoi(_argv[1]) - 1;
+        if (0 == process_tag)
+        {
+            return -1;//the last
+        }
+        options.command_line("%s %d",_argv[0], process_tag);
     }
+    return 1;
 }
 
-void DMMultiProcess::create_process(DM_INT process_num, int argc, char *argv[])
-{   
-    _process_num = process_num;
+DM_INT DMMultiProcess::create_process(DM_INT process_num, int argc, char *argv[])
+{     
     _argc = argc;
     _argv = argv;
+    ACE_Process_Options options;
+    _process_num = process_num;
+
+    if (0 == set_process_options(options))
+    {
+        _process_manager->spawn(options);
+        return 1;
+    }
+    else if (-1 == set_process_options(options))
+    {
+        return -1;
+    }
     
-    set_process_options();
-
-    for (DM_INT i = 0; i < _process_num; ++i)
-    {
-       /* ACE_Process* process;
-        DM_NEW(process ,sizeof(ACE_Process));
-        DM_TRACE("process = %d\n",process);
-        process->spawn(_options);
-        _child_process.push_back(process);  */    
-    }
-}
-
-DM_BOOL DMMultiProcess::is_master_process()
-{
-    pid_t pid = getpid();
-    for (DM_INT i = 0; i < _process_num; ++i)
-    {
-        if (_pids[i] == pid)
-        {
-            return false;
-        }
-    }
-    return true;
+    _process_manager->spawn(options);  
+    return 0;
 }
 
 void DMMultiProcess::wait_all_process()
 {
-    /*for (DM_INT i = 0; i < _process_num; ++i)
-    {
-        _child_process[i].wait();
-    }*/
+    _process_manager->wait(); 
 }

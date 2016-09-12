@@ -32,7 +32,7 @@ DM_UINT DMMemoryPool::init_memory_pool(DM_UINT size)
 
 	memset(*_head,0,size);
 	init_page();
-    DM_TRACE("init memory");
+    
 	return 0;
 }
 
@@ -103,19 +103,17 @@ DM_CHAR** DMMemoryPage::require()
 	return p->require(_block_size);
 }
 
-void DMMemoryPage::release(DM_CHAR** block)
+DM_BOOL DMMemoryPage::release(DM_CHAR** block)
 {
 	vector<DMMemoryBlock*>::iterator it = _block.begin();
 	for (; it != _block.end(); ++it)
 	{
 		if ((*it)->get_block_state())
 		{
-			if ((*it)->release(block))
-			{
-				break;
-			}
+			return (*it)->release(block);
 		}
 	}
+    return FALSE;
 }
 
 DMMemoryBlock::DMMemoryBlock():_used(FALSE),_block(nullptr)

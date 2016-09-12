@@ -22,21 +22,19 @@ class DMMultiProcess
 public:
     DMMultiProcess();
 
-    void set_process_options();
+    DM_INT set_process_options(ACE_Process_Options& options);
     
-    void create_process(DM_INT process_num, int argc, char *argv[]);
-    
-    DM_BOOL is_master_process();
-    
+    DM_INT create_process(DM_INT process_num, int argc, char *argv[]);
+
     void wait_all_process();
     
 protected:
     vector<ACE_Process*> _child_process;
-    ACE_Process_Options _options;
     DM_INT _process_num;
     pid_t* _pids;
     
 private:
+    ACE_Process_Manager* _process_manager;
     int _argc;
     char** _argv;
 };
