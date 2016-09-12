@@ -17,6 +17,7 @@
 #pragma once
 #include "DMaker.h"
 #include "DMServerImpl.h"
+#include "DMAcceptor.h"
 #include "DMDispatcher.h"
 #include "DMService.h"
 
@@ -30,10 +31,10 @@ public:
 
 private:
 
-    //DMAcceptor _acceptor;
+    DMAcceptor _acceptor;
     
-	//DMDispatcher _dispatcher;
+	DMDispatcher _dispatcher;
     
-	//DMService* _service;
+	DMService* _service;
 };
 

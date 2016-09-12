@@ -1,13 +1,16 @@
 {
     "service_info":
     {
-        "service_name" : "test"
+        "service_name" : "test",
+        "service_ip" : "127.0.0.1",
+        "service_port" : 5555
     },
     
     "service_config":
     { 
         "log_level" : "DEBUG",
         "memory_pool_size" : 4096,
-        "process_num" : 4
+        "process_num" : 4,
+        "FD_NUM" : 2048
     }
 }
