@@ -26,14 +26,14 @@ public:
 
 	DM_BOOL init(const std::string& config_path, int argc, char *argv[]);
     
-	virtual void run(DMService* pService);
+	void run(/*DMService* pService*/);
 
 private:
 
-    DMAcceptor _acceptor;
+    //DMAcceptor _acceptor;
     
-	DMDispatcher _dispatcher;
+	//DMDispatcher _dispatcher;
     
-	DMService* _service;
+	//DMService* _service;
 };
 

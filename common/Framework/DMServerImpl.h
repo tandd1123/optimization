@@ -21,13 +21,11 @@
 class DMServerImpl : private DMMultiProcess
 {
 public:
-    void init_process(DM_INT process_num, DM_INT argc, DM_CHAR *argv[]);
+    void init_process(DM_INT argc, DM_CHAR *argv[]);
     
-    virtual void run()=0;
+    void run_event_loop();
     
 private:
 
     void run_master_process();
-    
-    void run_subprogram_process();
 };
