@@ -18,7 +18,7 @@
 
 #include "DMaker.h"
 
-#define SERVICE_MAP_PATH "..//common//Framework//DMaker.json"
+#define SERVICE_MAP_PATH "DMaker.json"
 
 typedef struct msg_range
 {
@@ -35,13 +35,13 @@ public:
     DMServiceMap();
     
     //<server_name,server_id>
-    map<string, DM_UINT> service_map;
+    map<string, DM_INT> service_map;
  
     //<server_name,msg_range>
-    map<DM_UINT, MsgRange> message_map;  
+    map<DM_INT, MsgRange> message_map;  
 
     //rabbit_queue
-    map<DM_UINT, vector<string>> queue_map;
+    map<DM_INT, vector<string>> queue_map;
 private: 
     void load_cfg();
 

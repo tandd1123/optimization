@@ -8,7 +8,7 @@ DMServiceMap* DMServiceMap::instance()
 	_mutex_lock.acquire();
 	if (nullptr == _instance)
 	{
-		_instance = DM_NEW(DMServiceMap());
+		_instance = new DMServiceMap();
 	}
 	_mutex_lock.release();
 	return _instance;

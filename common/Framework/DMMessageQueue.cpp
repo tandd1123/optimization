@@ -1,35 +1,39 @@
+#include "DMDispatcher.h"
 #include "DMMessageQueue.h"
-#include "ace/Reactor.h"
-#include "DMService.h"
-#include <ace/Log_Msg.h>
-#include <DMServiceMap.h>
-#include <map>
+#include "DMServiceMap.h"
 
 DMMessageQueue* DMMessageQueue::_instance = nullptr;
 
-DM_INT32 DMMessageQueue::init(string host,DM_INT32 port, string username, string userpasswd,string serviceName)
+DM_INT32 DMMessageQueue::init()
 {
+    //load config
+    string host = DMJsonCfg::instance()->GetItemString("message_queue", "queue_ip");
+    DM_UINT16 port = DMJsonCfg::instance()->GetItemInt("message_queue", "queue_port");
+    string username = DMJsonCfg::instance()->GetItemString("message_queue", "queue_user");
+    string userpasswd = DMJsonCfg::instance()->GetItemString("message_queue", "queue_passwd");
+    string serviceName = DMJsonCfg::instance()->GetItemString("service_info", "service_name");
+
 	// create an instance of your own tcp handler
-	_handle = DM_NEW() DMMessageEvent();
+	_handle = new DMMessageEvent();
 
 	// address of the server
 	AMQP::Address address(host, port,AMQP::Login(username,userpasswd),"/");
 
 	// create a AMQP connection object
-	_connection = DM_NEW() AMQP::TcpConnection(_handle, address);
+	_connection = new AMQP::TcpConnection(_handle, address);
 
 	// and create a channel
-	_channel = DM_NEW() AMQP::TcpChannel(_connection);
+	_channel = new AMQP::TcpChannel(_connection);
 
     //get service id
     map<string, DM_INT32> service_map = DMServiceMap::instance()->service_map;
     _service_id = service_map[serviceName];
 
 	auto receiveMessageCallback = [=](const AMQP::Message &message,
-		uDM_INT3264_t deliveryTag,
+		DM_INT32 deliveryTag,
 		DM_BOOL redelivered)
 	{
-		_dispatcher->receive_app_msg(message);
+		_dispatcher->handle_input(message);
 		_channel->ack(deliveryTag); //ack rabbitmq-server
 	};
 
@@ -47,7 +51,7 @@ DM_INT32 DMMessageQueue::init(string host,DM_INT32 port, string username, string
 	    map<DM_INT32, vector<string>> queue_map = DMServiceMap::instance()->queue_map;
         vector<string> consume_queue = queue_map[_service_id];
 
-        for (unsigned DM_INT32 i = 0; i < consume_queue.size(); ++i)
+        for (DM_UINT32 i = 0; i < consume_queue.size(); ++i)
         {
             if (consume_queue[i] == queue_name)
             {
@@ -65,7 +69,7 @@ DM_INT32 DMMessageQueue::init(string host,DM_INT32 port, string username, string
         for (; svr_it != queue_map.end(); ++svr_it)
         {
             vector<string> queue = svr_it->second;
-            for (unsigned DM_INT32 i = 0; i < queue.size(); ++i)
+            for (DM_UINT32 i = 0; i < queue.size(); ++i)
             {
                 _channel->declareQueue(queue[i], AMQP::durable).onSuccess(callback);
             }
@@ -112,25 +116,25 @@ void DMMessageQueue::destroy()
 {
 	if (_handle)
 	{
-		DM_DELETE() _handle;
+		delete _handle;
 		_handle = nullptr;
 	}
 
 	if (_connection)
 	{
-		DM_DELETE() _connection;
+		delete _connection;
 		_connection = nullptr;
 	}
 
 	if (_channel)
 	{
-		DM_DELETE() _channel;
+		delete _channel;
 		_channel = nullptr;
 	}
 
 	if (_instance)
 	{
-		DM_DELETE() _instance;
+		delete _instance;
 		_instance = nullptr;
 	}
 }

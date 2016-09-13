@@ -17,16 +17,22 @@
 #pragma once
 #include "DMaker.h"
 #include "DMService.h"
+#include "DMMessageQueue.h"
 
 class DMDispatcher : public ACE_Svc_Handler <ACE_SOCK_STREAM, ACE_MT_SYNCH>
 {
 public:
     DMDispatcher();
-    void register_service(DMService* pService);
-private:
     
+    void init(DMService* pService);
+
     int handle_input(const AMQP::Message &message);
+    
     int handle_input(ACE_HANDLE fd);
+    
+private:   
+
     DMService* _service;
-    //DMMessageQueue* _msg_queue;
+    
+    DMMessageQueue* _msg_queue;
 };

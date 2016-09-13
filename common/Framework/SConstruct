@@ -18,11 +18,11 @@ env = Environment()
 
 TARGETNAME = 'DMFramework'
 
-FILELIST = Split('main.cpp DMServer.cpp DMMultiProcess.cpp DMMemoryPool.cpp DMLogManager.cpp DMJsonConfig.cpp DMServerImpl.cpp DMDispatcher.cpp DMAcceptor.cpp') 
+FILELIST = Split('main.cpp DMServer.cpp DMMultiProcess.cpp DMMemoryPool.cpp DMLogManager.cpp DMJsonConfig.cpp DMServerImpl.cpp DMDispatcher.cpp DMAcceptor.cpp DMMessageQueue.cpp DMMessageEvent.cpp DMServiceMap.cpp') 
 
 HEADFILEPATH = Split('../../3rd ../../3rd/amqpcpp ../../3rd/mysqlpp/lib ../../3rd/mysql-connector-c/include ../RabbitMQ ../Redis ../MySQL')
 
-LIB = Split('ACE pthread jsoncpp')
+LIB = Split('ACE pthread jsoncpp amqpcpp')
 
 FLAGS = Split('-std=c++11 -Wall')
 

@@ -17,7 +17,7 @@
 #pragma once
 #include "DMaker.h"
 
-class DMMessageEvent : public AMQP::TcpHandler : public ACE_Event_Handler
+class DMMessageEvent : public AMQP::TcpHandler, public ACE_Event_Handler
 {
 public:
     
@@ -30,14 +30,11 @@ public:
 	virtual void onClosed(AMQP::TcpConnection *connection);
 
 	
-	virtual void monitor(AMQP::TcpConnection *connection, DM_UINT fd, DM_UINT flags);
+	virtual void monitor(AMQP::TcpConnection *connection, DM_INT fd, DM_INT flags);
 
 
-	virtual DM_UINT handle_input(ACE_HANDLE fd);
-
-
-	virtual DM_UINT handle_output(ACE_HANDLE fd = ACE_INVALID_HANDLE);
-    
+	virtual DM_INT handle_input(ACE_HANDLE fd);
+ 
 protected:
     
 	ACE_Event_Handler* _handler;
