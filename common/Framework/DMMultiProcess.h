@@ -10,7 +10,7 @@
 *
 *  Github/Mail: https://github.com/binchen-china    <563853086@qq.com>
 *
-*  Note: set master process as a daemon  
+*  Note: master process need make port for other process  
 */
 //=============================================================================
 
