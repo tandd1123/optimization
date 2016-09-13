@@ -25,12 +25,15 @@ public:
     DMDispatcher();
     
     void init(DMService* pService);
+    
+    virtual int open(void *acceptor_or_connector = 0);
 
-    int handle_input(const AMQP::Message &message);
-    
-    int handle_input(ACE_HANDLE fd);
-    
-private:   
+    DM_INT handle_input(const AMQP::Message &message);
+private:  
+
+    DM_INT handle_input(ACE_HANDLE fd);
+       
+private:
 
     DMService* _service;
     

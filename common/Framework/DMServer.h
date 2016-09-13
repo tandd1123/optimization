@@ -31,7 +31,7 @@ public:
 
 private:
 
-    DMAcceptor _acceptor;
+    DMAcceptor* _acceptor;
     
 	DMDispatcher _dispatcher;
     
