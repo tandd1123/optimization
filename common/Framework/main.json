@@ -3,7 +3,7 @@
     {
         "service_name" : "gateservice",
         "service_ip" : "127.0.0.1",
-        "service_port" : 5555
+        "service_port" : 6668
     },
     
     "service_config":

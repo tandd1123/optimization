@@ -10,7 +10,7 @@ DM_BOOL DMServer::init(const string& config_path, DM_INT argc, DM_CHAR *argv[])
     
     //init acceptor
     _acceptor = DMAcceptor::instance();
-    _acceptor->init();
+    _acceptor->init(argc, argv);
     
     //init dispatcher
     _dispatcher.init(_service);
