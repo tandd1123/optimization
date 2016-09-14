@@ -16,6 +16,7 @@
 
 #pragma once
 #include "DMaker.h"
+#include "DMSession.h"
 
 class DMSessionManager
 {

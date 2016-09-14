@@ -1,4 +1,4 @@
-#include "ProxySessionMgr.h"
+#include "DMSessionManager.h"
 #include <ace/Log_Msg.h>
 
 int DMSessionManager::add_session(ACE_HANDLE handle, short uid, DMSession* pSession)
