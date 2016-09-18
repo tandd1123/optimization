@@ -33,6 +33,7 @@
 #include "ace/Dev_Poll_Reactor.h"
 #include "ace/INET_Addr.h"
 #include "ace/Thread_Mutex.h"
+#include "ace/Task.h"
 #include "ace/Task_T.h"
 #include "ace/Synch_Traits.h"
 #include "ace/Svc_Handler.h"

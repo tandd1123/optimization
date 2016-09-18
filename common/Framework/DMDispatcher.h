@@ -18,6 +18,7 @@
 #include "DMaker.h"
 #include "DMService.h"
 #include "DMMessageQueue.h"
+#include "DMMessageRouter.h"
 
 class DMDispatcher : public ACE_Svc_Handler <ACE_SOCK_STREAM, ACE_MT_SYNCH>
 {
@@ -38,4 +39,6 @@ private:
     DMService* _service;
     
     DMMessageQueue* _msg_queue;
+    
+    DMMessageRouter _router;
 };

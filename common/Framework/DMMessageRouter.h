@@ -34,6 +34,8 @@ public:
     virtual void publish(DMMessage& message);
     
     virtual DM_BOOL receive(ACE_HANDLE fd, DMMessage& message);
+
+    virtual DM_BOOL receive(DMMessage& message, const AMQP::Message& mq_message);
    
 protected:
     

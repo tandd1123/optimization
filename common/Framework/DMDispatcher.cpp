@@ -17,6 +17,21 @@ void DMDispatcher::init(DMService* pService)
 DM_INT DMDispatcher::handle_input(ACE_HANDLE fd)
 {
     DM_TRACE("recive app message");
+    DMMessage client_message;
+    if (_router.receive(fd, client_message))
+    {
+        return -1;
+    }
+
+    //底层消息
+    if (client_message.head.msg_cmd < SYSTEM_MSG)
+    {
+    
+    }
+    else
+    {
+        //上层消息
+    }
     
     return -1;
 }
@@ -24,6 +39,23 @@ DM_INT DMDispatcher::handle_input(ACE_HANDLE fd)
 DM_INT DMDispatcher::handle_input(const AMQP::Message &message)
 {
     DM_TRACE("recive mq message");
+    DMMessage server_message;
+    
+    if (_router.receive(server_message, message))
+    {
+        return -1;
+    }
+    
+    //底层消息
+    if (server_message.head.msg_cmd < SYSTEM_MSG)
+    {
+    
+    }
+    else
+    {
+        //上层消息
+    }
+    
     return 0;
 }
 

@@ -46,6 +46,16 @@ DM_BOOL DMMessageRouter::receive(ACE_HANDLE fd, DMMessage& message)
 	return true;
 }
 
+DM_BOOL DMMessageRouter::receive(DMMessage& message, const AMQP::Message& mq_message)
+{
+	DMMessageParser parser;
+	DMMessageHead head_info;
+	//parse head
+	parser.parse(message, mq_message);
+    
+    return true;
+}
+
 void DMMessageRouter::route(DMMessage& message, string exchange)
 {
     map<DM_INT32, MsgRange> message_map = DMServiceMap::instance()->message_map;

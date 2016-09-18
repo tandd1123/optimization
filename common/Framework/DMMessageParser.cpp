@@ -32,6 +32,8 @@ DM_BOOL DMMessageParser::parse(DMMessage& out, const AMQP::Message &in)
 	out.body = new DM_CHAR[in.bodySize() - HEAD_CHAR_LEN];
 	memcpy(out.body,body,(in.bodySize() - HEAD_CHAR_LEN));
 
+    out.head = msg_head;
+
 	return TRUE;
 }
 
