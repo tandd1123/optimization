@@ -42,3 +42,4 @@ private:
     
     static DMAcceptor *_instance;
 };
+

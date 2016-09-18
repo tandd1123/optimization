@@ -30,3 +30,4 @@ void DMServerImpl::run_event_loop()
     ACE_Thread_Manager::instance()->spawn(run_event, ACE_Reactor::instance());
 	ACE_Thread_Manager::instance()->wait();
 }
+

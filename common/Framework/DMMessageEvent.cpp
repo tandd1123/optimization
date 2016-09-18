@@ -27,3 +27,4 @@ DM_INT32 DMMessageEvent::handle_input(ACE_HANDLE fd)
 	_connection->process(fd, AMQP::readable);
 	return 0;
 }
+

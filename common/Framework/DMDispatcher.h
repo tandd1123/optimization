@@ -30,6 +30,8 @@ public:
     virtual int open(void *acceptor_or_connector = 0);
 
     DM_INT handle_input(const AMQP::Message &message);
+
+    DMService* get_service(){return _service;};
 private:  
 
     DM_INT handle_input(ACE_HANDLE fd);
@@ -44,3 +46,4 @@ private:
     
     DMMessageRouter _router;
 };
+

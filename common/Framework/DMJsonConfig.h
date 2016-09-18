@@ -37,3 +37,4 @@ private:
 };
 
 typedef ACE_Singleton<DMJsonConfig, ACE_Thread_Mutex> DMJsonCfg;
+

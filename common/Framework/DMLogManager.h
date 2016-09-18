@@ -64,3 +64,4 @@ typedef ACE_Singleton<DMLogManager, ACE_Thread_Mutex> DMLogMgr;
 #define DM_TRACE(LOG_FMT,args...) DMLogMgr::instance()->trace_log(__FILE__,__FUNCTION__,__LINE__,LOG_FMT,##args)
 //write logs into log file
 #define DM_LOG(LOG_LEVEL,LOG_FMT,args...) DMLogMgr::instance()->write_log(LOG_LEVEL,__FILE__,__FUNCTION__,__LINE__,LOG_FMT,##args)
+

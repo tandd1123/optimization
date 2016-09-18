@@ -31,3 +31,4 @@ TARGETFILE = Program(target = TARGETNAME,source = FILELIST,CPPPATH = HEADFILEPAT
 #install
 INSTALL = env.Install('../Lib', TARGETFILE)
 env.Alias('install',INSTALL)
+

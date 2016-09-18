@@ -143,3 +143,4 @@ DMMessageQueue::~DMMessageQueue()
 {
 	destroy();
 }
+

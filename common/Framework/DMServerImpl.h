@@ -29,3 +29,4 @@ private:
 
     void run_master_process();
 };
+

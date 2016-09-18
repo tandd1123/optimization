@@ -109,3 +109,4 @@ private:
 
 #define DM_NEW(SRC,LENGTH)  DMMemoryPool::instance()->require(&SRC,LENGTH)
 #define DM_DELETE(SRC,LENGTH) DMMemoryPool::instance()->release(&SRC,LENGTH)
+

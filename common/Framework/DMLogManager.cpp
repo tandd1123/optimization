@@ -139,3 +139,4 @@ void DMLogManager::write_log(DM_INT log_level, string file, string func, DM_INT 
     close_log_file();
     va_end (ap);
 }
+

@@ -34,3 +34,4 @@ private:
 
     template<typename T> void DMGetBitData(const DM_CHAR *src, T *dsc, DM_UINT8 bit_s, DM_UINT8 bit_e);
 };
+

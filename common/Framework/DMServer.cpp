@@ -13,7 +13,10 @@ DM_BOOL DMServer::init(const string& config_path, DM_INT argc, DM_CHAR *argv[])
     _acceptor->init(argc, argv);
     
     //init dispatcher
-    _dispatcher.init(_service);
+    _dispatcher.init();
+
+    //init service
+    _service.init();
     
     return true;
 }
@@ -22,3 +25,4 @@ void DMServer::run(DMService* pService)
 {        
     run_event_loop();
 }
+

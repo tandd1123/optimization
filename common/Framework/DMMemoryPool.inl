@@ -67,3 +67,4 @@ void DMMemoryPool::release(T** block, DM_UINT size)
     
 	_mutex_lock.release();
 }
+

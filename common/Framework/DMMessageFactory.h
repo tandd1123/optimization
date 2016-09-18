@@ -19,5 +19,8 @@
 
 class DMMessageFactory : public DMMultiTask
 {
-
+public:
+    void init();
+    
 };
+

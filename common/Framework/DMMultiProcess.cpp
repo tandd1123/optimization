@@ -49,3 +49,4 @@ void DMMultiProcess::wait_all_process()
 {
     _process_manager->wait(); 
 }
+

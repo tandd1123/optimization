@@ -100,3 +100,4 @@ DM_BOOL DMMessageParser::pack(DMMessage & mesg, DM_CHAR * buf)
 
 	return TRUE;
 }
+

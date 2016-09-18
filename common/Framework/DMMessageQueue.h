@@ -35,8 +35,10 @@ public:
     //依据配置尝试创建所有队列，取消svrid入参
 
     void register_dispatcher(DMDispatcher* pDispatcher){_dispatcher = pDispatcher;}
-    
-	DM_INT32 init();
+
+    DMDispatcher* get_dispatcher(){return _dispatcher;};
+
+    DM_INT32 init();
 
 	void publish(const string &exchange, const string &routingKey, const DM_CHAR *message, size_t size);
 
@@ -63,3 +65,4 @@ private:
     
 	static DMMessageQueue *_instance;
 };
+

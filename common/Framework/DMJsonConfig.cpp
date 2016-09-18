@@ -25,3 +25,4 @@ DM_INT DMJsonConfig::GetItemInt(string element, string attribute)
 {
     return _json_root[element][attribute].asInt();
 }
+

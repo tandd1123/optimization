@@ -24,3 +24,4 @@ class DMService : public DMServiceImpl
 	//virtual void handle(const AMQP::Message &message);
 
 };
+

@@ -48,3 +48,4 @@ private:
 };
 
 typedef ACE_Singleton<DMSessionManager, ACE_Thread_Mutex> DMSessionMgr; 
+
