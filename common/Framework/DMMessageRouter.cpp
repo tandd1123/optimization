@@ -49,7 +49,6 @@ DM_BOOL DMMessageRouter::receive(ACE_HANDLE fd, DMMessage& message)
 DM_BOOL DMMessageRouter::receive(DMMessage& message, const AMQP::Message& mq_message)
 {
 	DMMessageParser parser;
-	DMMessageHead head_info;
 	//parse head
 	parser.parse(message, mq_message);
     
