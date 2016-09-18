@@ -18,7 +18,7 @@ env = Environment()
 
 TARGETNAME = 'DMFramework'
 
-FILELIST = Split('main.cpp DMServer.cpp DMMultiProcess.cpp DMMemoryPool.cpp DMLogManager.cpp DMJsonConfig.cpp DMServerImpl.cpp DMDispatcher.cpp DMAcceptor.cpp DMMessageQueue.cpp DMMessageEvent.cpp DMServiceMap.cpp DMSessionManager.cpp DMMessageParser.cpp') 
+FILELIST = Split('main.cpp DMServer.cpp DMMultiProcess.cpp DMMemoryPool.cpp DMLogManager.cpp DMJsonConfig.cpp DMServerImpl.cpp DMDispatcher.cpp DMAcceptor.cpp DMMessageQueue.cpp DMMessageEvent.cpp DMServiceMap.cpp DMSessionManager.cpp DMMessageParser.cpp DMMessageRouter.cpp') 
 
 HEADFILEPATH = Split('../../3rd ../../3rd/amqpcpp ../../3rd/mysqlpp/lib ../../3rd/mysql-connector-c/include ../RabbitMQ ../Redis ../MySQL')
 

@@ -16,6 +16,9 @@
 
 #pragma once
 #include "DMaker.h"
+#include "DMMessage.h"
+#include "DMMessageParser.h"
+#include "DMMessageQueue.h"
 
 //消息路由器。将服务器消息路由到消息服务器
 //对于普通服务，直接使用就可。 对于proxyServer，需要重载，添加路由到客户端的能力。
@@ -37,9 +40,7 @@ protected:
             
 private:
 
-    DM_BOOL route_assign(DMMessage& message, string exchange);
-
-    void route_distribute(DMMessage& message, DM_UINT service_id, string exchange);
+    void route_distribute(DMMessage& message, DM_INT32 service_id, string exchange);
 
 };
 

@@ -22,6 +22,7 @@
 #include "DMMemoryPool.h"
 #include "DMMultiProcess.h"
 #include "DMLogManager.h"
+#include "DMServiceMap.h"
 
 //ACE include
 #include "ace/Acceptor.h"

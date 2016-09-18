@@ -31,7 +31,8 @@ enum msg_type   //公共维护消息 1000-1999
 {
     ADD_PROXY_MSG = 1001,
     RMV_PROXY_MSG = 1002,
-    STOP_SERVER   = 1003    
+    STOP_SERVER   = 1003,
+    HEARTBEAT_MSG = 1004
 };
 
 enum DataSize
