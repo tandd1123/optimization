@@ -17,6 +17,7 @@ void DMDispatcher::init(DMService* pService)
 DM_INT DMDispatcher::handle_input(ACE_HANDLE fd)
 {
     DM_TRACE("recive app message");
+    
     return -1;
 }
 

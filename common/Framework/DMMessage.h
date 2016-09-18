@@ -16,6 +16,7 @@
 
 #pragma once
 #include "DMaker.h"
+#include "DMMemoryPool.h"
 
 /*-------------------------------------------------------------------------------
             msg head:
@@ -38,8 +39,8 @@ enum msg_type   //公共维护消息 1000-1999
 enum DataSize
 {
     HEAD_BIT_LEN = 128,
-    HEAD_DM_CHAR_LEN = 16,
-    DM_CHAR_BIT_LEN = 8
+    HEAD_CHAR_LEN = 16,
+    CHAR_BIT_LEN = 8
 };
 
 

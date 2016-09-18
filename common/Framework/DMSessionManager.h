@@ -47,4 +47,4 @@ private:
 	std::map<ACE_HANDLE, DMSession*> _sessions;   //fd session
 };
 
-typedef ACE_Singleton<DMSessionManager, ACE_Thread_Mutex> ProxySessionMgr; 
+typedef ACE_Singleton<DMSessionManager, ACE_Thread_Mutex> DMSessionMgr; 

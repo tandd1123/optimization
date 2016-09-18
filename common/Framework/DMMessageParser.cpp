@@ -16,7 +16,7 @@ DM_BOOL DMMessageParser::parse(DMMessage& out, const AMQP::Message &in)
 {
 	DMMessageHead msg_head;
     
-	if (in.bodySize() < HEAD_DM_CHAR_LEN)
+	if (in.bodySize() < HEAD_CHAR_LEN)
 	{
 		return FALSE;
 	}
@@ -28,9 +28,9 @@ DM_BOOL DMMessageParser::parse(DMMessage& out, const AMQP::Message &in)
 	DMGetBitData(msg,&msg_head.msg_cmd,64,96);
 	DMGetBitData(msg,&msg_head.reserved,96,128);
     
-	const DM_CHAR *body = msg + HEAD_DM_CHAR_LEN;
-	out.body = new DM_CHAR[in.bodySize() - HEAD_DM_CHAR_LEN];
-	memcpy(out.body,body,(in.bodySize() - HEAD_DM_CHAR_LEN));
+	const DM_CHAR *body = msg + HEAD_CHAR_LEN;
+	out.body = new DM_CHAR[in.bodySize() - HEAD_CHAR_LEN];
+	memcpy(out.body,body,(in.bodySize() - HEAD_CHAR_LEN));
 
 	return TRUE;
 }
@@ -41,11 +41,11 @@ void DMMessageParser::DMGetBitData(DM_CHAR *src,T *dsc,DM_UINT8 bit_s,DM_UINT8 b
 	DM_CHAR *head_info = src;  //头地址
 	short bit_info = 0x0;   //结果数据
 
-	for (DM_INT32 i = 0; i < HEAD_DM_CHAR_LEN; ++i)  //16 * 8 = 128
+	for (DM_INT32 i = 0; i < HEAD_CHAR_LEN; ++i)  //16 * 8 = 128
 	{     
 		bit_info = bit_info | (*(head_info++) & 0xFF);    //只取8位防止高位为1编译器转32位做取反操作
         
-        if (bit_s == (DM_CHAR_BIT_LEN * i))
+        if (bit_s == (CHAR_BIT_LEN * i))
         { 
     		break;
         }   
@@ -53,9 +53,9 @@ void DMMessageParser::DMGetBitData(DM_CHAR *src,T *dsc,DM_UINT8 bit_s,DM_UINT8 b
         bit_info = 0x0;
 	}
 
-    if (DM_CHAR_BIT_LEN != (bit_e - bit_s))    //取16位
+    if (CHAR_BIT_LEN != (bit_e - bit_s))    //取16位
     {
-        bit_info = bit_info | ((*head_info & 0xFF) << DM_CHAR_BIT_LEN);
+        bit_info = bit_info | ((*head_info & 0xFF) << CHAR_BIT_LEN);
     }
         
 	*dsc =  *dsc | bit_info;
@@ -67,11 +67,11 @@ void DMMessageParser::DMGetBitData(const DM_CHAR *src, T *dsc, DM_UINT8 bit_s, D
 	const DM_CHAR *head_info = src;
 	short bit_info = 0x0;
 
-	for (DM_INT32 i = 0; i < HEAD_DM_CHAR_LEN; ++i)
+	for (DM_INT32 i = 0; i < HEAD_CHAR_LEN; ++i)
 	{     
 		bit_info = bit_info | (*(head_info++) & 0xFF);
         
-        if (bit_s == (DM_CHAR_BIT_LEN * i))
+        if (bit_s == (CHAR_BIT_LEN * i))
         { 
     		break;
         }   
@@ -79,9 +79,9 @@ void DMMessageParser::DMGetBitData(const DM_CHAR *src, T *dsc, DM_UINT8 bit_s, D
         bit_info = 0x0;
 	}
 
-    if (DM_CHAR_BIT_LEN != (bit_e - bit_s))
+    if (CHAR_BIT_LEN != (bit_e - bit_s))
     {
-        bit_info = bit_info | ((*head_info & 0xFF) << DM_CHAR_BIT_LEN);
+        bit_info = bit_info | ((*head_info & 0xFF) << CHAR_BIT_LEN);
     }
         
 	*dsc =  *dsc | bit_info;

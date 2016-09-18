@@ -16,7 +16,6 @@
 
 #pragma once
 #include "DMaker.h"
-#include "DMMessage.h"
 #include "DMMessageParser.h"
 #include "DMMessageQueue.h"
 
@@ -33,14 +32,20 @@ public:
     virtual void send(DMMessage& message, string exchange = "direct");
 
     virtual void publish(DMMessage& message);
-        
+    
+    virtual DM_BOOL receive(ACE_HANDLE fd, DMMessage& message);
+   
 protected:
     
 	virtual void route(DMMessage& message, string exchange);
-            
+    
 private:
 
     void route_distribute(DMMessage& message, DM_INT32 service_id, string exchange);
+    
+    void user_connect(ACE_HANDLE fd, short uid);
+    
+    void user_disconnect(ACE_HANDLE fd);
 
 };
 
