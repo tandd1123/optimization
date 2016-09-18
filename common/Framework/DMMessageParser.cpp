@@ -4,51 +4,39 @@ DMMessageHead DMMessageParser::parse(DM_CHAR * begin)
 {
 	DMMessageHead msg_head;
 
-	DMGetBitData(begin,&msg_head.msg_id,0,16);
-	DMGetBitData(begin,&msg_head.user_id,16,32);
-	DMGetBitData(begin,&msg_head.msg_cmd,32,48);
-	DMGetBitData(begin,&msg_head.length,48,64);
-	DMGetBitData(begin,&msg_head.from,64,72);
-	DMGetBitData(begin,&msg_head.to,72,80);
-	DMGetBitData(begin,&msg_head.cluster_id,80,88);
-	DMGetBitData(begin,&msg_head.node_id,88,96);
-	DMGetBitData(begin,&msg_head.wait_time,96,104);
-	DMGetBitData(begin,&msg_head.flag,104,112);
+	DMGetBitData(begin,&msg_head.msg_id,0,32);
+	DMGetBitData(begin,&msg_head.length,32,64);
+	DMGetBitData(begin,&msg_head.msg_cmd,64,96);
+	DMGetBitData(begin,&msg_head.reserved,96,128);
 
 	return msg_head;
 }
 
-DM_INT32 DMMessageParser::parse(DMMessage& out, const AMQP::Message &in)
+DM_BOOL DMMessageParser::parse(DMMessage& out, const AMQP::Message &in)
 {
 	DMMessageHead msg_head;
     
 	if (in.bodySize() < HEAD_DM_CHAR_LEN)
 	{
-		return 0;
+		return FALSE;
 	}
 
 	const DM_CHAR* msg = in.body();
 
-	DMGetBitData(msg,&msg_head.msg_id,0,16);
-	DMGetBitData(msg,&msg_head.user_id,16,32);
-	DMGetBitData(msg,&msg_head.msg_cmd,32,48);
-	DMGetBitData(msg,&msg_head.length,48,64);
-	DMGetBitData(msg,&msg_head.from,64,72);
-	DMGetBitData(msg,&msg_head.to,72,80);
-	DMGetBitData(msg,&msg_head.cluster_id,80,88);
-	DMGetBitData(msg,&msg_head.node_id,88,96);
-	DMGetBitData(msg,&msg_head.wait_time,96,104);
-	DMGetBitData(msg,&msg_head.flag,104,112);
+	DMGetBitData(msg,&msg_head.msg_id,0,32);
+	DMGetBitData(msg,&msg_head.length,32,64);
+	DMGetBitData(msg,&msg_head.msg_cmd,64,96);
+	DMGetBitData(msg,&msg_head.reserved,96,128);
     
 	const DM_CHAR *body = msg + HEAD_DM_CHAR_LEN;
-	out.body = DM_NEW() DM_CHAR[in.bodySize() - HEAD_DM_CHAR_LEN];
+	out.body = new DM_CHAR[in.bodySize() - HEAD_DM_CHAR_LEN];
 	memcpy(out.body,body,(in.bodySize() - HEAD_DM_CHAR_LEN));
 
-	return 1;
+	return TRUE;
 }
 
 template <typename T>
-void DMMessageParser::DMGetBitData(DM_CHAR *src,T *dsc,DM_INT32 bit_s,DM_INT32 bit_e)
+void DMMessageParser::DMGetBitData(DM_CHAR *src,T *dsc,DM_UINT8 bit_s,DM_UINT8 bit_e)
 {
 	DM_CHAR *head_info = src;  //头地址
 	short bit_info = 0x0;   //结果数据
@@ -74,7 +62,7 @@ void DMMessageParser::DMGetBitData(DM_CHAR *src,T *dsc,DM_INT32 bit_s,DM_INT32 b
 }
 
 template <typename T>
-void DMMessageParser::DMGetBitData(const DM_CHAR *src, T *dsc, DM_INT32 bit_s, DM_INT32 bit_e)
+void DMMessageParser::DMGetBitData(const DM_CHAR *src, T *dsc, DM_UINT8 bit_s, DM_UINT8 bit_e)
 {
 	const DM_CHAR *head_info = src;
 	short bit_info = 0x0;
@@ -99,7 +87,7 @@ void DMMessageParser::DMGetBitData(const DM_CHAR *src, T *dsc, DM_INT32 bit_s, D
 	*dsc =  *dsc | bit_info;
 }
 
-DM_INT32 DMMessageParser::pack(DMMessage & mesg, DM_CHAR * buf)
+DM_BOOL DMMessageParser::pack(DMMessage & mesg, DM_CHAR * buf)
 {
 	DMMessageHead head;
 
@@ -108,5 +96,5 @@ DM_INT32 DMMessageParser::pack(DMMessage & mesg, DM_CHAR * buf)
 	memcpy(buf,&head,sizeof(head));
 	memcpy(buf + sizeof(head),mesg.body,head.length);
 
-	return 0;
+	return TRUE;
 }

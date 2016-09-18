@@ -16,6 +16,7 @@
 
 #pragma once
 #include "DMaker.h"
+#include "DMMessage.h"
 
 class DMMessageParser
 {

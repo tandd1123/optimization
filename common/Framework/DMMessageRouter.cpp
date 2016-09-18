@@ -54,7 +54,7 @@ DM_BOOL DMMessageRouter::route_assign(DMMessage& message, string exchange)
 {
     DMMessageParser parser;
     //pack msg
-    DM_CHAR *buf = DM_NEW() DM_CHAR[HEAD_DM_CHAR_LEN + message.head.length];
+    DM_CHAR *buf = new DM_CHAR[HEAD_DM_CHAR_LEN + message.head.length];
     parser.pack(message,buf);
     
     string domain = _redis.pack_domain(message.head.user_id, "cluster_id");
@@ -77,7 +77,7 @@ void DMMessageRouter::route_distribute(DMMessage& message, DM_INT32 service_id, 
 {
     DMMessageParser parser;
     //pack msg
-    DM_CHAR *buf = DM_NEW() DM_CHAR[HEAD_DM_CHAR_LEN + message.head.length];
+    DM_CHAR *buf = new DM_CHAR[HEAD_DM_CHAR_LEN + message.head.length];
     parser.pack(message,buf);
     
     //消息直接负载映射无指定cluster、node场景
@@ -100,6 +100,6 @@ void DMMessageRouter::route_distribute(DMMessage& message, DM_INT32 service_id, 
     
     DMMessageQueue::getInstance()->publish(exchange, queueName, buf, HEAD_DM_CHAR_LEN + message.head.length);
 
-    DM_DELETE()[] buf;
+    delete[] buf;
 }
 
