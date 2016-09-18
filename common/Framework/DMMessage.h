@@ -102,3 +102,4 @@ public:
 private:
     DM_UINT16 _body_size;
 }; 
+

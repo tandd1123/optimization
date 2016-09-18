@@ -1,5 +1,6 @@
 #include "DMMemoryPool.h"
 #include "malloc.h"
+
 DMMemoryPool* DMMemoryPool::_instance = nullptr;
 ACE_Thread_Mutex DMMemoryPool::_lock;
 

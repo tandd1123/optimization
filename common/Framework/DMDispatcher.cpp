@@ -22,16 +22,13 @@ DM_INT DMDispatcher::handle_input(ACE_HANDLE fd)
     {
         return -1;
     }
-
-    //底层消息
-    if (client_message.head.msg_cmd < SYSTEM_MSG)
-    {
     
-    }
-    else
-    {
-        //上层消息
-    }
+    ACE_Data_Block *Data_Block = new ACE_Data_Block; //线程做释放
+
+    DM_CHAR *p = reinterpret_cast <DM_CHAR*>(&client_message);
+    Data_Block->base(p,sizeof(DMMessage));
+    ACE_Message_Block* msg = new ACE_Message_Block(Data_Block);    
+    _service->putq(msg);    //put
     
     return -1;
 }
@@ -46,15 +43,12 @@ DM_INT DMDispatcher::handle_input(const AMQP::Message &message)
         return -1;
     }
     
-    //底层消息
-    if (server_message.head.msg_cmd < SYSTEM_MSG)
-    {
-    
-    }
-    else
-    {
-        //上层消息
-    }
+    ACE_Data_Block *Data_Block = new ACE_Data_Block; //线程做释放
+
+    DM_CHAR *p = reinterpret_cast <DM_CHAR*>(&server_message);
+    Data_Block->base(p,sizeof(DMMessage));
+    ACE_Message_Block* msg = new ACE_Message_Block(Data_Block);    
+    _service->putq(msg);    //put
     
     return 0;
 }

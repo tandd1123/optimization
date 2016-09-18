@@ -15,8 +15,9 @@
 //=============================================================================
 #pragma once
 #include "DMaker.h"
+#include "DMMultiTask.h"
 
-class DMMessageFactory
+class DMMessageFactory : public DMMultiTask
 {
 
 };

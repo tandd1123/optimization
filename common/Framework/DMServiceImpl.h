@@ -17,8 +17,9 @@
 #pragma once
 
 #include "DMaker.h"
+#include "DMMessageFactory.h"
 //底层封装消息接收和消息发送
-class DMServiceImpl : public ACE_Task<ACE_MT_SYNCH>
+class DMServiceImpl : public DMMessageFactory
 {
 public:
     
