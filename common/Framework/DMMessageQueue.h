@@ -36,8 +36,6 @@ public:
 
     void register_dispatcher(DMDispatcher* pDispatcher){_dispatcher = pDispatcher;}
 
-    DMDispatcher* get_dispatcher(){return _dispatcher;};
-
     DM_INT32 init();
 
 	void publish(const string &exchange, const string &routingKey, const DM_CHAR *message, size_t size);

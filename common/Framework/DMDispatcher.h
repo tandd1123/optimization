@@ -16,7 +16,7 @@
 
 #pragma once
 #include "DMaker.h"
-#include "DMService.h"
+#include "DMMultiTask.h"
 #include "DMMessageQueue.h"
 #include "DMMessageRouter.h"
 
@@ -25,13 +25,12 @@ class DMDispatcher : public ACE_Svc_Handler <ACE_SOCK_STREAM, ACE_MT_SYNCH>
 public:
     DMDispatcher();
     
-    void init(DMService* pService);
+    void init();
     
     virtual int open(void *acceptor_or_connector = 0);
 
     DM_INT handle_input(const AMQP::Message &message);
 
-    DMService* get_service(){return _service;};
 private:  
 
     DM_INT handle_input(ACE_HANDLE fd);
@@ -40,8 +39,6 @@ private:
        
 private:
 
-    DMService* _service;
-    
     DMMessageQueue* _msg_queue;
     
     DMMessageRouter _router;

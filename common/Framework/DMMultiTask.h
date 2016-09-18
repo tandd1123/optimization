@@ -43,5 +43,5 @@ private:
     DM_INT _task_num;        
 };
 
-
+typedef ACE_Singleton<DMMultiTask, ACE_Thread_Mutex> DMTask; 
 

@@ -17,7 +17,7 @@
 #include "DMaker.h"
 #include "DMMultiTask.h"
 
-class DMMessageFactory : public DMMultiTask
+class DMMessageFactory
 {
 public:
     void init();

@@ -16,7 +16,7 @@ DM_BOOL DMServer::init(const string& config_path, DM_INT argc, DM_CHAR *argv[])
     _dispatcher.init();
 
     //init service
-    _service.init();
+    _service->init();
     
     return true;
 }

@@ -28,7 +28,7 @@ DM_INT DMDispatcher::handle_input(ACE_HANDLE fd)
     Data_Block->base(p,sizeof(DMMessage));
     ACE_Message_Block* msg = new ACE_Message_Block(Data_Block); 
 
-    //_msg_queue->get_dispatcher()->get_service()->putq(msg);    //put
+    DMTask::instance()->putq(msg);
     
     return -1;
 }
@@ -40,15 +40,16 @@ DM_INT DMDispatcher::handle_input(const AMQP::Message &message)
     
     if (_router.receive(server_message, message))
     {
-        return -1;
+        //return -1;
     }
     
     ACE_Data_Block *Data_Block = new ACE_Data_Block; //线程做释放
 
     DM_CHAR *p = reinterpret_cast <DM_CHAR*>(&server_message);
     Data_Block->base(p,sizeof(DMMessage));
-    ACE_Message_Block* msg = new ACE_Message_Block(Data_Block);    
-    //_service->putq(msg);    //put
+    ACE_Message_Block* msg = new ACE_Message_Block(Data_Block); 
+    
+    DMTask::instance()->putq(msg);
     
     return 0;
 }
