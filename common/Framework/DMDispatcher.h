@@ -33,6 +33,8 @@ public:
 private:  
 
     DM_INT handle_input(ACE_HANDLE fd);
+
+    bool recv_client_data(DMMessage &msg);
        
 private:
 
