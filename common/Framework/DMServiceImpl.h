@@ -29,6 +29,8 @@ public:
     void register_message_factory(DMMessageFactory* msg_factory);
 
     void register_cmd(DM_INT message_cmd, MESSAGE_CALLBACK_HANDLE func);
+
+    static void message_task_callback(DMMessage& msg);
     
 private:
     DMMessageFactory* _factory;
