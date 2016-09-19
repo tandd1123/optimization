@@ -27,7 +27,7 @@ DM_BOOL DMServer::init(const string& config_path, DM_INT argc, DM_CHAR *argv[])
     return true;
 }
 
-void DMServer::run(DMService* pService)
+void DMServer::run()
 {        
     run_event_loop();
 }
