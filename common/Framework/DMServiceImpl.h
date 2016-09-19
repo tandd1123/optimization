@@ -21,6 +21,12 @@
 #include "DMMessage.h"
 
 //底层封装消息接收和消息发送
+enum send_dest
+{
+    DM_APP,
+    DM_MQ
+};
+
 class DMServiceImpl
 {
 public:    
@@ -29,6 +35,8 @@ public:
     void register_message_factory(DMMessageFactory* msg_factory);
 
     void register_cmd(DM_INT message_cmd, MESSAGE_CALLBACK_HANDLE func);
+
+    void send_message(DM_INT uid, DMMessage& msg, DM_INT dest);
 
     static void message_task_callback(DMMessage& msg);
     

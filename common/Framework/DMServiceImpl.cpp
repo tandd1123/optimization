@@ -19,6 +19,18 @@ void DMServiceImpl::register_cmd(DM_INT message_cmd, MESSAGE_CALLBACK_HANDLE fun
     _cmd_map[message_cmd] = func;
 }
 
+void DMServiceImpl::send_message(DM_INT uid, DMMessage& msg, DM_INT dest)
+{
+    if (DM_APP == dest)//session
+    {
+    
+    }
+    else if (DM_MQ == dest)//route
+    {
+    
+    }
+}
+
 void DMServiceImpl::message_task_callback(DMMessage& msg)
 {
     DM_TRACE("service recivie message!");

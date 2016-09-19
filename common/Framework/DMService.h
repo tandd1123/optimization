@@ -19,9 +19,15 @@
 #include "DMaker.h"
 #include "DMServiceImpl.h"
 //底层封装消息接收和消息发送
+
+enum message_cmd
+{
+    //系统消息   
+};
+
 class DMService : public DMServiceImpl
 {
-	//virtual void handle(const AMQP::Message &message);
+	//注册系统消息
 
 };
 
