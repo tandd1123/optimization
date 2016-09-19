@@ -20,6 +20,7 @@
 #include "DMTypes.h"
 #include "DMJsonConfig.h"
 #include "DMMultiProcess.h"
+#include "DMMultiTask.h"
 #include "DMLogManager.h"
 #include "DMServiceMap.h"
 #include "DMSessionManager.h"

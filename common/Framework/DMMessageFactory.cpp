@@ -2,6 +2,6 @@
 
 void DMMessageFactory::init()
 {
-    DMTask::instance()->init();
+   
 }
 

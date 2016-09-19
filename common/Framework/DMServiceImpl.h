@@ -19,11 +19,18 @@
 #include "DMaker.h"
 #include "DMMessageFactory.h"
 //底层封装消息接收和消息发送
-class DMServiceImpl : public DMMessageFactory
+class DMServiceImpl
 {
 public:
+    DMServiceImpl();
     
-private:
+    void init();
     
+    void register_message_factory(DMMessageFactory* msg_factory);
+    
+private:   
+    DMMessageFactory* _msg_factory;
+    
+    DMMultiTask* _task;
 };
 

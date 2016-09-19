@@ -3,7 +3,8 @@
 
 DMDispatcher::DMDispatcher()
 {
-    _msg_queue = DMMessageQueue::instance();
+    _msg_queue = DMMessageQueue::instance();    
+    _tcp_state = DMJsonCfg::instance()->GetItemInt("service_info", "service_tcp");
 }
 
 void DMDispatcher::init()
@@ -30,7 +31,7 @@ DM_INT DMDispatcher::handle_input(ACE_HANDLE fd)
 
     DMTask::instance()->putq(msg);
     
-    return -1;
+    return _tcp_state;
 }
 
 DM_INT DMDispatcher::handle_input(const AMQP::Message &message)
@@ -51,7 +52,7 @@ DM_INT DMDispatcher::handle_input(const AMQP::Message &message)
     
     DMTask::instance()->putq(msg);
     
-    return -1;
+    return 0;
 }
 
 DM_INT DMDispatcher::open(void *acceptor_or_connector)

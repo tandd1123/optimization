@@ -20,11 +20,13 @@ DM_BOOL DMMessageRouter::receive(ACE_HANDLE fd, DMMessage& message)
         user_disconnect(fd);
         return false;
     }   
-	
+        
 	DMMessageParser parser;
 	DMMessageHead head_info;
 	//parse head
 	head_info = parser.parse(head);
+    
+	user_connect(fd, head_info.msg_uid);
 
     //some message maybe have no message body
     do

@@ -21,7 +21,7 @@
 /*-------------------------------------------------------------------------------
             msg head:
             --------------------------------------------------
-            |       message id       |      body length      |
+            |       message uid      |      body length      |
             --------------------------------------------------
             |       message cmd      |        reserved       |
             --------------------------------------------------
@@ -48,15 +48,15 @@ enum DataSize
 class DMMessageHead
 {
 public:
-	DMMessageHead():msg_id(0),length(0),msg_cmd(0),reserved(0){};
-	DM_UINT32 msg_id;
+	DMMessageHead():msg_uid(0),length(0),msg_cmd(0),reserved(0){};
+	DM_UINT32 msg_uid;
 	DM_UINT32 length;
 	DM_UINT32 msg_cmd;
 	DM_UINT32 reserved;
     
     DMMessageHead& operator=(DMMessageHead other)
     {
-        this->msg_id = other.msg_id;
+        this->msg_uid = other.msg_uid;
         this->length = other.length;
         this->msg_cmd = other.msg_cmd;
         this->reserved = other.reserved;

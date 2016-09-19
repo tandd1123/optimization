@@ -16,7 +16,6 @@
 
 #pragma once
 #include "DMaker.h"
-#include "DMMultiTask.h"
 #include "DMMessageQueue.h"
 #include "DMMessageRouter.h"
 
@@ -42,5 +41,7 @@ private:
     DMMessageQueue* _msg_queue;
     
     DMMessageRouter _router;
+
+    DM_INT _tcp_state;
 };
 
