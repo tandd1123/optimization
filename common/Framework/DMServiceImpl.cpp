@@ -1,6 +1,8 @@
 #include "DMServiceImpl.h"
 #include "DMMultiTask.h"
 
+map<DM_INT, MESSAGE_CALLBACK_HANDLE>  DMServiceImpl::_cmd_map;
+
 void DMServiceImpl::init()
 {
     DMTask::instance()->init();
@@ -20,5 +22,10 @@ void DMServiceImpl::register_cmd(DM_INT message_cmd, MESSAGE_CALLBACK_HANDLE fun
 void DMServiceImpl::message_task_callback(DMMessage& msg)
 {
     DM_TRACE("service recivie message!");
+    map<DM_INT, MESSAGE_CALLBACK_HANDLE>::iterator it = _cmd_map.find(msg.head.msg_cmd);
+    if (it != _cmd_map.end())
+    {
+        (it->second)(msg);
+    }
 }
 

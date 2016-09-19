@@ -34,6 +34,7 @@ public:
     
 private:
     DMMessageFactory* _factory;
-    map<DM_INT, MESSAGE_CALLBACK_HANDLE> _cmd_map;
+    
+    static map<DM_INT, MESSAGE_CALLBACK_HANDLE> _cmd_map;
 };
 
