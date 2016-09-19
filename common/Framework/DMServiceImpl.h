@@ -18,19 +18,20 @@
 
 #include "DMaker.h"
 #include "DMMessageFactory.h"
+#include "DMMessage.h"
+
 //底层封装消息接收和消息发送
 class DMServiceImpl
 {
-public:
-    DMServiceImpl();
-    
+public:    
     void init();
     
     void register_message_factory(DMMessageFactory* msg_factory);
+
+    void register_cmd(DM_INT message_cmd, MESSAGE_CALLBACK_HANDLE func);
     
-private:   
-    DMMessageFactory* _msg_factory;
-    
-    DMMultiTask* _task;
+private:
+    DMMessageFactory* _factory;
+    map<DM_INT, MESSAGE_CALLBACK_HANDLE> _cmd_map;
 };
 

@@ -2,8 +2,10 @@
 
 int DM_MAIN(int argc, ACE_TCHAR *argv[])
 {
-    DMServer server;
     DMService service;
+    DMMessageFactory factory;
+    DMServer server(&service, &factory);
+    
     server.init("main.json",argc,argv);
     server.run(&service);
     return 0;

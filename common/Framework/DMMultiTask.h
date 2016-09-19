@@ -16,20 +16,7 @@
 
 #pragma once
 #include "DMaker.h"
-
-typedef struct MsgData
-{
-    DM_INT msg_cmd;
-    DM_INT data_length;
-    char* data;
-    
-    MsgData()
-    {
-        msg_cmd = 0;
-        data_length = 0;
-        data = nullptr;
-    }
-}MsgBlock;
+#include "DMMessage.h"
  
 class DMMultiTask : public ACE_Task<ACE_MT_SYNCH>
 {
@@ -39,8 +26,13 @@ public:
     
     virtual DM_INT svc(void);
 
+    void register_message_callback(MESSAGE_CALLBACK_HANDLE func);
+
 private:
-    DM_INT _task_num;        
+    
+    DM_INT _task_num;   
+    
+    MESSAGE_CALLBACK_HANDLE _func_callback;
 };
 
 typedef ACE_Singleton<DMMultiTask, ACE_Thread_Mutex> DMTask; 

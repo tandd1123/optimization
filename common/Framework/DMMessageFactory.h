@@ -16,11 +16,15 @@
 #pragma once
 #include "DMaker.h"
 #include "DMMultiTask.h"
+#include "DMMessage.h"
+
+//消息指定编解码类
 
 class DMMessageFactory
 {
 public:
-    void init();
-    
+  
+private:
+
 };
 

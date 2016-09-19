@@ -24,6 +24,7 @@
 class DMServer : private DMServerImpl
 {
 public:
+    DMServer(DMService* service, DMMessageFactory* factory);
 
 	DM_BOOL init(const std::string& config_path, int argc, char *argv[]);
     

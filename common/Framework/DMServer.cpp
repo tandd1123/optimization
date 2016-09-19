@@ -1,5 +1,11 @@
 #include "DMServer.h"
 
+DMServer::DMServer(DMService* service,DMMessageFactory* factory)
+{
+    _service = service;
+    _service->register_message_factory(factory);
+}
+
 DM_BOOL DMServer::init(const string& config_path, DM_INT argc, DM_CHAR *argv[])
 {
     //load config file

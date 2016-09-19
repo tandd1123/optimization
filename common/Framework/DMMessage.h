@@ -106,3 +106,5 @@ private:
     DM_UINT16 _body_size;
 }; 
 
+typedef void (*MESSAGE_CALLBACK_HANDLE)(DMMessage&);
+

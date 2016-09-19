@@ -12,9 +12,16 @@ int DMMultiTask::svc(void)
     while(True)
     {
         getq(msg_block);            //空闲线程阻塞
-        DM_TRACE("recevie msg:%s,time:%d\n",msg_block->rd_ptr(),(int)ACE_OS::time());
+        
+        ACE_Data_Block *Data_Block = msg_block->data_block();
+        DMMessage *pData = reinterpret_cast <DMMessage*>(Data_Block->base());
+        _func_callback(*pData);
         msg_block->release();        //release
-        ACE_OS::sleep(1);    //延时1s模拟业务处理耗时
     }
+}
+
+void DMMultiTask::register_message_callback(MESSAGE_CALLBACK_HANDLE func)
+{
+    _func_callback = func;
 }
 

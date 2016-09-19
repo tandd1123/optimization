@@ -1,5 +1,6 @@
 #include "DMDispatcher.h"
 #include "DMAcceptor.h"
+#include "DMMultiTask.h"
 
 DMDispatcher::DMDispatcher()
 {
