@@ -18,6 +18,7 @@ DMMemoryPool* DMMemoryPool::instance()
 DMMemoryPool::DMMemoryPool():_size(0),_unused(0),_head(nullptr),_free(nullptr)
 {
     DM_INT mem_size = DMJsonCfg::instance()->GetItemInt("service_config", "memory_pool_size");
+    _max_block_size = DMJsonCfg::instance()->GetItemInt("service_config", "memory_block_size");
     init_memory_pool(mem_size);
 }
 
@@ -39,24 +40,14 @@ DM_UINT DMMemoryPool::init_memory_pool(DM_UINT size)
 
 void DMMemoryPool::init_page()
 {
-	//8 byte -> 32 byte
 	DMMemoryPage* pPage_info;
 
-	pPage_info = new DMMemoryPage;
-	pPage_info->set_block_size(8);
-	_page.push_back(pPage_info);
-
-	pPage_info = new DMMemoryPage;
-	pPage_info->set_block_size(16);
-	_page.push_back(pPage_info);
-
-	pPage_info = new DMMemoryPage;
-	pPage_info->set_block_size(24);
-	_page.push_back(pPage_info);
-
-	pPage_info = new DMMemoryPage;
-	pPage_info->set_block_size(32);
-	_page.push_back(pPage_info);
+    for (DM_UINT i = sizeof(DM_CHAR); i <= _max_block_size; i += sizeof(DM_CHAR))
+    {
+	    pPage_info = new DMMemoryPage;
+	    pPage_info->set_block_size(i);
+	    _page.push_back(pPage_info);
+    }
 }
 
 DM_CHAR** DMMemoryPool::alloc_memory(DM_UINT size)

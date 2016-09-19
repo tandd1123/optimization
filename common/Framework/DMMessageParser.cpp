@@ -29,7 +29,8 @@ DM_BOOL DMMessageParser::parse(DMMessage& out, const AMQP::Message &in)
 	DMGetBitData(msg,&msg_head.reserved,96,128);
     
 	const DM_CHAR *body = msg + HEAD_CHAR_LEN;
-	out.body = new DM_CHAR[in.bodySize() - HEAD_CHAR_LEN];
+    //注意内存大小保护
+	DM_NEW(out.body, in.bodySize() - HEAD_CHAR_LEN);
 	memcpy(out.body,body,(in.bodySize() - HEAD_CHAR_LEN));
 
     out.head = msg_head;

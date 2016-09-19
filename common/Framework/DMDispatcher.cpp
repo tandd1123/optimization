@@ -51,7 +51,7 @@ DM_INT DMDispatcher::handle_input(const AMQP::Message &message)
     
     DMTask::instance()->putq(msg);
     
-    return 0;
+    return -1;
 }
 
 DM_INT DMDispatcher::open(void *acceptor_or_connector)

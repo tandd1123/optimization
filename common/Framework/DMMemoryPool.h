@@ -52,6 +52,8 @@ public:
     template<typename T>
 	void release(T** block, DM_UINT size);
 
+    DM_UINT get_max_block(){return _max_block_size;};
+
 private:
 	void init_page();
 
@@ -62,6 +64,7 @@ private:
 	DM_UINT _unused;
 	DM_CHAR** _head;
 	DM_CHAR** _free;
+    DM_UINT _max_block_size;
 	vector<DMMemoryPage*> _page;
 	static DMMemoryPool* _instance;
 	static ACE_Thread_Mutex _lock;
@@ -109,4 +112,5 @@ private:
 
 #define DM_NEW(SRC,LENGTH)  DMMemoryPool::instance()->require(&SRC,LENGTH)
 #define DM_DELETE(SRC,LENGTH) DMMemoryPool::instance()->release(&SRC,LENGTH)
-
+#define DM_MAX_MEMORY_BLOCK DMMemoryPool::instance()->get_max_block()
+ 

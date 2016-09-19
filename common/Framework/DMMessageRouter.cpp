@@ -29,7 +29,7 @@ DM_BOOL DMMessageRouter::receive(ACE_HANDLE fd, DMMessage& message)
     //some message maybe have no message body
     do
     {
-    	if ( head_info.length <= 0 )
+    	if ( head_info.length <= 0 || head_info.length > DM_MAX_MEMORY_BLOCK)
     	{
     		break;
     	}
