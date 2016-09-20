@@ -1,33 +1,33 @@
 {
     "service_id": 
         {
-            "appclient":    20,
-            "gateservice":  21,
-            "proxyservice": 22,
-            "loginservice": 23,
-            "infoservice":  24,
-            "chatservice":  25,
-            "webservice":   26
+            "AppClient":    20,
+            "GateService":  21,
+            "ProxyService": 22,
+            "LoginService": 23,
+            "InfoService":  24,
+            "ChatService":  25,
+            "WebService":   26
         },
         
     "rabbit_queue":
         {
-            "gateservice":  ["100"],
-            "proxyservice": ["200"],
-            "loginservice": ["300","301"],
-            "infoservice":  ["400"],
-            "chatservice":  ["500","501","502"],
-            "webservice":   ["600"]
+            "GateService":  ["100"],
+            "ProxyService": ["200"],
+            "LoginService": ["300","301"],
+            "InfoService":  ["400"],
+            "ChatService":  ["500","501","502"],
+            "WebService":   ["600"]
         },
         
     "message_route": 
         {
-            "system_reserve":[1001,2000],
-            "gateservice":   [2001,3000],
-            "proxyservice":  [3001,4000],
-            "loginservice":  [4001,5000],
-            "infoservice":   [5001,6000],
-            "chatservice":   [6001,7000],
-            "webservice":    [7001,8000]
+            "SystemReserve":[1000,2000],
+            "GateService":   [2000,3000],
+            "ProxyService":  [3000,4000],
+            "LoginService":  [4000,5000],
+            "InfoService":   [5000,6000],
+            "ChatService":   [6000,7000],
+            "WebService":    [7000,8000]
         }
 }

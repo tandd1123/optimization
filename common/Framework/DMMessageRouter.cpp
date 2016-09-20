@@ -68,7 +68,7 @@ void DMMessageRouter::route(DMMessage& message, string exchange)
     for (; it != message_map.end(); ++it)
     {
         MsgRange range = it->second;
-        if (message.head.msg_cmd > range.msg_start &&
+        if (message.head.msg_cmd >= range.msg_start &&
                 message.head.msg_cmd < range.msg_end)
         {       
             svr_id = it->first;

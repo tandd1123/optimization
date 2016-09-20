@@ -2,9 +2,8 @@
 
 void message_test(DMMessage& message)
 {
-    DMMessage msg = message;
     DM_TRACE("message test!data=%s,addr=%d",message.body,&message.body);
-    GateSrv::instance()->send_message(msg.head.msg_uid,msg,DM_APP);
+    GateSrv::instance()->send_message(message.head.msg_uid,message,DM_MQ);
 }
 
 void GateService::init_cmd()
