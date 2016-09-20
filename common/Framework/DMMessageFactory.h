@@ -23,8 +23,14 @@
 class DMMessageFactory
 {
 public:
+    
+    virtual void init_cmd()=0;
   
-private:
+    void register_cmd(DM_INT message_cmd, MESSAGE_CALLBACK_HANDLE func);
 
+    MESSAGE_CALLBACK_HANDLE find_callback_handle(DM_INT cmd);
+    
+private:
+    map<DM_INT, MESSAGE_CALLBACK_HANDLE> _cmd_map;
 };
 

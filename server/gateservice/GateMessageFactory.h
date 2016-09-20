@@ -18,8 +18,16 @@
 
 #include "DMaker.h"
 #include "DMMessageFactory.h"
+#include "DMProtoMessage.h"
+
+enum GateMessage
+{
+    GET_PROXY_MSG = 2001,
+};
+
 //protoc message process
 class GateMessageFactory : public DMMessageFactory
 {
-    
+public:
+    void init_cmd();
 };

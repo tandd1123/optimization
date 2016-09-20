@@ -1,12 +1,8 @@
 #include "GateService.h"
+#include "GateMessageFactory.h"
 
-void message_test(DMMessage& message)
+void get_proxy_message(DMMessage& message)
 {
     DM_TRACE("message test!data=%s,addr=%d",message.body,&message.body);
-    GateSrv::instance()->send_message(message.head.msg_uid,message,DM_MQ);
-}
-
-void GateService::init_cmd()
-{
-    register_cmd(MSG_TEST, message_test);
+    GateSrv::instance()->send_message(message.head.msg_uid,message,DM_APP);
 }

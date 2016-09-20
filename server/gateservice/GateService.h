@@ -19,17 +19,12 @@
 #include "DMaker.h"
 #include "DMService.h"
 
-enum GateMessage
-{
-    MSG_TEST = 2001,
-};
-
-void message_test(DMMessage& message);
+void get_proxy_message(DMMessage& message);
 
 class GateService : public DMService
 {
 public:
-    void init_cmd();
+
 };
 
 typedef ACE_Singleton<GateService, ACE_Thread_Mutex> GateSrv; 

@@ -22,7 +22,7 @@ FILELIST = Glob('*.cpp')
 
 HEADFILEPATH = Split('../../3rd ../../3rd/amqpcpp')
 
-LIB = Split('ACE pthread jsoncpp amqpcpp')
+LIB = Split('ACE protobuf pthread jsoncpp amqpcpp')
 
 FLAGS = Split('-std=c++11 -Wall')
 

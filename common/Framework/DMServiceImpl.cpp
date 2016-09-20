@@ -4,23 +4,19 @@
 #include "DMMessageParser.h"
 #include "DMMessageRouter.h"
 
-map<DM_INT, MESSAGE_CALLBACK_HANDLE>  DMServiceImpl::_cmd_map;
+DMMessageFactory* DMServiceImpl::_factory = nullptr;
 
 void DMServiceImpl::init()
 {
     DMTask::instance()->init();
     DMTask::instance()->register_message_callback(message_task_callback);
-    init_cmd();
+
+    _factory->init_cmd();
 }
     
 void DMServiceImpl::register_message_factory(DMMessageFactory* msg_factory)
 {
     _factory = msg_factory;   
-}
-
-void DMServiceImpl::register_cmd(DM_INT message_cmd, MESSAGE_CALLBACK_HANDLE func)
-{
-    _cmd_map[message_cmd] = func;
 }
 
 void DMServiceImpl::send_message(DM_INT uid, DMMessage& msg, DM_INT dest)
@@ -59,10 +55,10 @@ void DMServiceImpl::publish_message(vector<DM_INT> uid, DMMessage& msg, DM_INT d
 
 void DMServiceImpl::message_task_callback(DMMessage& msg)
 {
-    map<DM_INT, MESSAGE_CALLBACK_HANDLE>::iterator it = _cmd_map.find(msg.head.msg_cmd);
-    if (it != _cmd_map.end())
+    MESSAGE_CALLBACK_HANDLE func_handle = _factory->find_callback_handle(msg.head.msg_cmd);
+    if (nullptr != func_handle)
     {
-        (it->second)(msg);
+        func_handle(msg);
     }
 }
 
