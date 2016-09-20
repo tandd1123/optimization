@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+message GET_PROXY_MSG_REQUEST
+{ 
+    string uid = 1;  // ID 
+    string proxy = 2;   //proxy
+}
