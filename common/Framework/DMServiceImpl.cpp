@@ -1,5 +1,8 @@
 #include "DMServiceImpl.h"
 #include "DMMultiTask.h"
+#include "DMSessionManager.h"
+#include "DMMessageParser.h"
+#include "DMMessageRouter.h"
 
 map<DM_INT, MESSAGE_CALLBACK_HANDLE>  DMServiceImpl::_cmd_map;
 
@@ -23,11 +26,30 @@ void DMServiceImpl::send_message(DM_INT uid, DMMessage& msg, DM_INT dest)
 {
     if (DM_APP == dest)//session
     {
-    
+        ACE_HANDLE fd = DMSessionMgr::instance()->find_fd(uid);
+        send_app_message(fd, msg);      
     }
     else if (DM_MQ == dest)//route
     {
-    
+        send_mq_message(msg);
+    }
+}
+
+void DMServiceImpl::publish_message(vector<DM_INT> uid, DMMessage& msg, DM_INT dest)
+{
+    if (DM_APP == dest)//session
+    {
+        vector<DM_INT>::iterator it = uid.begin();
+        for (; it != uid.end(); ++it)
+        {
+            ACE_HANDLE fd = DMSessionMgr::instance()->find_fd((*it));
+            send_app_message(fd, msg);   
+        }
+    }
+    else if (DM_MQ == dest)//route
+    {
+        DMMessageRouter router;
+        router.publish(msg);
     }
 }
 
@@ -39,5 +61,24 @@ void DMServiceImpl::message_task_callback(DMMessage& msg)
     {
         (it->second)(msg);
     }
+}
+
+void DMServiceImpl::send_app_message(ACE_HANDLE fd, DMMessage& msg)
+{
+    ACE_SOCK_Stream stream(fd);
+    DM_CHAR* buf;
+    DM_NEW(buf,sizeof(DMMessageHead) + msg.head.length);
+    DMMessageParser parser;
+    
+    parser.pack(msg, buf);
+    stream.send(sizeof(DMMessageHead) + msg.head.length, buf);
+    
+    DM_DELETE(buf,sizeof(DMMessageHead) + msg.head.length);
+}
+
+void DMServiceImpl::send_mq_message(DMMessage& msg)
+{
+    DMMessageRouter router;
+    router.send(msg);
 }
 

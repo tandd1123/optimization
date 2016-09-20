@@ -38,7 +38,14 @@ public:
 
     void send_message(DM_INT uid, DMMessage& msg, DM_INT dest);
 
+    void publish_message(vector<DM_INT> uid, DMMessage& msg, DM_INT dest);
+
     static void message_task_callback(DMMessage& msg);
+    
+private:
+    void send_app_message(ACE_HANDLE fd, DMMessage& msg);
+    
+    void send_mq_message(DMMessage& msg);
     
 private:
     DMMessageFactory* _factory;

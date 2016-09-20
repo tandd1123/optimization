@@ -90,14 +90,14 @@ void DMMessageParser::DMGetBitData(const DM_CHAR *src, T *dsc, DM_UINT8 bit_s, D
 	*dsc =  *dsc | bit_info;
 }
 
-DM_BOOL DMMessageParser::pack(DMMessage & mesg, DM_CHAR * buf)
+DM_BOOL DMMessageParser::pack(DMMessage& mesg, DM_CHAR* buf)
 {
 	DMMessageHead head;
 
     head = mesg.head;
 
-	memcpy(buf,&head,sizeof(head));
-	memcpy(buf + sizeof(head),mesg.body,head.length);
+	memcpy(buf, &head,sizeof(head));
+	memcpy(buf + sizeof(head), mesg.body, head.length);
 
 	return TRUE;
 }
