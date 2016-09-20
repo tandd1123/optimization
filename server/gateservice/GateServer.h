@@ -21,5 +21,6 @@
 
 class GateServer : public DMServer
 {
-    
+public:
+    GateServer(DMService* service, DMMessageFactory* factory):DMServer(service,factory){};
 };
