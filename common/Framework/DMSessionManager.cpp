@@ -2,7 +2,9 @@
 #include <ace/Log_Msg.h>
 
 int DMSessionManager::add_session(ACE_HANDLE handle, short uid, DMSession* pSession)
-{
+{    
+    del_session(uid);
+        
 	_mutex_lock.acquire();
     
     pSession->uid = uid;

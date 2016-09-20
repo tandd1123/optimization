@@ -10,6 +10,7 @@ void DMServiceImpl::init()
 {
     DMTask::instance()->init();
     DMTask::instance()->register_message_callback(message_task_callback);
+    init_cmd();
 }
     
 void DMServiceImpl::register_message_factory(DMMessageFactory* msg_factory)
@@ -27,7 +28,10 @@ void DMServiceImpl::send_message(DM_INT uid, DMMessage& msg, DM_INT dest)
     if (DM_APP == dest)//session
     {
         ACE_HANDLE fd = DMSessionMgr::instance()->find_fd(uid);
-        send_app_message(fd, msg);      
+        if (-1 != fd)
+        {
+            send_app_message(fd, msg);  
+        }
     }
     else if (DM_MQ == dest)//route
     {
@@ -70,7 +74,8 @@ void DMServiceImpl::send_app_message(ACE_HANDLE fd, DMMessage& msg)
     DMMessageParser parser;
     
     parser.pack(msg, buf);
-    stream.send(sizeof(DMMessageHead) + msg.head.length, buf);
+    DM_TRACE("data=%s",msg.body);
+    stream.send_n(buf, sizeof(DMMessageHead) + msg.head.length);
     
     DM_DELETE(buf,sizeof(DMMessageHead) + msg.head.length);
 }

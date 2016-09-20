@@ -4,9 +4,9 @@
 
 int DM_MAIN(int argc, ACE_TCHAR *argv[])
 {
-    GateService service;
+    GateService* service = GateSrv::instance();
     GateMessageFactory factory;
-    GateServer server(&service, &factory);
+    GateServer server(service, &factory);
     
     server.init("GateServer.json",argc,argv);
     server.run();

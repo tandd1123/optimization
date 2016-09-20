@@ -41,6 +41,8 @@ public:
     void publish_message(vector<DM_INT> uid, DMMessage& msg, DM_INT dest);
 
     static void message_task_callback(DMMessage& msg);
+
+    virtual void init_cmd()=0;
     
 private:
     void send_app_message(ACE_HANDLE fd, DMMessage& msg);

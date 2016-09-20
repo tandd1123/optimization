@@ -95,7 +95,8 @@ public:
     DMMessage& operator=(DMMessage other)
     {
         this->head = other.head;
-        this->body = other.body;
+        require_body_size(other._body_size);
+        memcpy(this->body,other.body,other._body_size);
         this->_body_size = other._body_size;
         return *this;
     }
