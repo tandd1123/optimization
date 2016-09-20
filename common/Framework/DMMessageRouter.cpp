@@ -68,6 +68,7 @@ void DMMessageRouter::route(DMMessage& message, string exchange)
     for (; it != message_map.end(); ++it)
     {
         MsgRange range = it->second;
+        //start =
         if (message.head.msg_cmd >= range.msg_start &&
                 message.head.msg_cmd < range.msg_end)
         {       
