@@ -1,6 +1,6 @@
 //=============================================================================
 /* 
-*  File: GateService.h
+*  File: GateServer.h
 *
 *  Author: bing
 *
@@ -17,9 +17,9 @@
 #pragma once
 
 #include "DMaker.h"
-#include "DMService.h"
+#include "DMServer.h"
 
-class GateService : public DMService
+class GateServer : public DMServer
 {
     
 };

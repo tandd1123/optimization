@@ -1,6 +1,5 @@
 ﻿#include "ProxyMapManager.h"
 #include <fstream>
-#include <ace/Log_Msg.h>
 #include "json/json.h"
 
 ProxyMapManager* ProxyMapManager::_instance = nullptr;

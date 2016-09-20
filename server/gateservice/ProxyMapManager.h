@@ -1,5 +1,20 @@
+//=============================================================================
+/* 
+*  File: ProxyMapManager.h
+*
+*  Author: bing
+*
+*  Date: 2016-09-20
+*
+*  Version: v2.0
+*
+*  Github/Mail: https://github.com/binchen-china    <563853086@qq.com>
+*
+*  Note:
+*/
+//=============================================================================
+
 #pragma once
-//#include "ace/RW_Mutex.h"
 #include <map>
 
 //匹配规则为accountid的最后一位(数字或者字符)对应一个proxy.

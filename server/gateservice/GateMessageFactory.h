@@ -1,6 +1,6 @@
 //=============================================================================
 /* 
-*  File: GateService.h
+*  File: GateMessageFactory.h
 *
 *  Author: bing
 *
@@ -17,9 +17,9 @@
 #pragma once
 
 #include "DMaker.h"
-#include "DMService.h"
-
-class GateService : public DMService
+#include "DMMessageFactory.h"
+//protoc message process
+class GateMessageFactory : public DMMessageFactory
 {
     
 };

@@ -20,13 +20,13 @@ TARGETNAME = 'DMFramework'
 
 FILELIST = Glob('*.cpp')
 
-HEADFILEPATH = Split('../../3rd ../../3rd/amqpcpp ../../3rd/mysqlpp/lib ../../3rd/mysql-connector-c/include ../RabbitMQ ../Redis ../MySQL')
+HEADFILEPATH = Split('../../3rd ../../3rd/amqpcpp')
 
 LIB = Split('ACE pthread jsoncpp amqpcpp')
 
 FLAGS = Split('-std=c++11 -Wall')
 
-TARGETFILE = Program(target = TARGETNAME,source = FILELIST,CPPPATH = HEADFILEPATH,LIBS = LIB,CCFLAGS = FLAGS)
+TARGETFILE = StaticLibrary(target = TARGETNAME,source = FILELIST,CPPPATH = HEADFILEPATH,LIBS = LIB,CCFLAGS = FLAGS)
 
 #install
 INSTALL = env.Install('../Lib', TARGETFILE)
