@@ -17,41 +17,29 @@ void DMDispatcher::init()
 //完成头解析和连接管理
 DM_INT DMDispatcher::handle_input(ACE_HANDLE fd)
 {
-    DM_TRACE("recive app message");
-    DMMessage client_message;
-    if (_router.receive(fd, client_message))
+    DMMessage* client_message = new DMMessage;
+
+    if (!_router.receive(fd, *client_message))
     {
-        //return -1;
+        return -1;
     }
-    
-    ACE_Data_Block *Data_Block = new ACE_Data_Block; //线程做释放
 
-    DM_CHAR *p = reinterpret_cast <DM_CHAR*>(&client_message);
-    Data_Block->base(p,sizeof(DMMessage));
-    ACE_Message_Block* msg = new ACE_Message_Block(Data_Block); 
-
-    DMTask::instance()->putq(msg);
-    
+    DMTask::instance()->put_msg(client_message);
+    //内存释放?
+    //delete client_message;
     return _tcp_state;
 }
 
 DM_INT DMDispatcher::handle_input(const AMQP::Message &message)
 {
-    DM_TRACE("recive mq message");
-    DMMessage server_message;
+    DMMessage* server_message = new DMMessage;;
     
-    if (_router.receive(server_message, message))
+    if (!_router.receive(*server_message, message))
     {
-        //return -1;
+        return -1;
     }
-    
-    ACE_Data_Block *Data_Block = new ACE_Data_Block; //线程做释放
 
-    DM_CHAR *p = reinterpret_cast <DM_CHAR*>(&server_message);
-    Data_Block->base(p,sizeof(DMMessage));
-    ACE_Message_Block* msg = new ACE_Message_Block(Data_Block); 
-    
-    DMTask::instance()->putq(msg);
+    DMTask::instance()->put_msg(server_message);
     
     return 0;
 }

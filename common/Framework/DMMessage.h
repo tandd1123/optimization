@@ -48,17 +48,17 @@ enum DataSize
 class DMMessageHead
 {
 public:
-	DMMessageHead():msg_uid(0),length(0),msg_cmd(0),reserved(0){};
+	DMMessageHead():msg_uid(0),msg_cmd(0),length(0),reserved(0){};
 	DM_UINT32 msg_uid;
-	DM_UINT32 length;
 	DM_UINT32 msg_cmd;
+	DM_UINT32 length;
 	DM_UINT32 reserved;
     
     DMMessageHead& operator=(DMMessageHead other)
     {
         this->msg_uid = other.msg_uid;
-        this->length = other.length;
         this->msg_cmd = other.msg_cmd;
+        this->length = other.length;
         this->reserved = other.reserved;
         
         return *this;

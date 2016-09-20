@@ -17,6 +17,7 @@ DM_BOOL DMMessageRouter::receive(ACE_HANDLE fd, DMMessage& message)
     ACE_SOCK_Stream stream(fd);
 	if (stream.recv(head,HEAD_CHAR_LEN) < 1)
     {
+        DM_LOG(DM_INFO,"revice head error!");
         user_disconnect(fd);
         return false;
     }   
@@ -25,7 +26,7 @@ DM_BOOL DMMessageRouter::receive(ACE_HANDLE fd, DMMessage& message)
 	DMMessageHead head_info;
 	//parse head
 	head_info = parser.parse(head);
-    
+
 	user_connect(fd, head_info.msg_uid);
 
     //some message maybe have no message body

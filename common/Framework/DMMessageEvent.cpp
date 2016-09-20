@@ -2,7 +2,7 @@
 
 void DMMessageEvent::onConnected(AMQP::TcpConnection *connection)
 {
-    DM_LOG(DM_INFO,"Connected MQ success!");
+    DM_LOG(DM_DEBUG,"Connected MQ success!");
 }
 
 void DMMessageEvent::onError(AMQP::TcpConnection *connection, const DM_CHAR *message)

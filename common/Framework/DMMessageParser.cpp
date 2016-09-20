@@ -5,8 +5,8 @@ DMMessageHead DMMessageParser::parse(DM_CHAR * begin)
 	DMMessageHead msg_head;
 
 	DMGetBitData(begin,&msg_head.msg_uid,0,32);
-	DMGetBitData(begin,&msg_head.length,32,64);
-	DMGetBitData(begin,&msg_head.msg_cmd,64,96);
+	DMGetBitData(begin,&msg_head.msg_cmd,32,64);
+	DMGetBitData(begin,&msg_head.length,64,96);
 	DMGetBitData(begin,&msg_head.reserved,96,128);
 
 	return msg_head;
@@ -24,8 +24,8 @@ DM_BOOL DMMessageParser::parse(DMMessage& out, const AMQP::Message &in)
 	const DM_CHAR* msg = in.body();
 
 	DMGetBitData(msg,&msg_head.msg_uid,0,32);
-	DMGetBitData(msg,&msg_head.length,32,64);
-	DMGetBitData(msg,&msg_head.msg_cmd,64,96);
+	DMGetBitData(msg,&msg_head.msg_cmd,32,64);
+	DMGetBitData(msg,&msg_head.length,64,96);
 	DMGetBitData(msg,&msg_head.reserved,96,128);
     
 	const DM_CHAR *body = msg + HEAD_CHAR_LEN;

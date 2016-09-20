@@ -55,7 +55,6 @@ void DMServiceImpl::publish_message(vector<DM_INT> uid, DMMessage& msg, DM_INT d
 
 void DMServiceImpl::message_task_callback(DMMessage& msg)
 {
-    DM_TRACE("service recivie message!");
     map<DM_INT, MESSAGE_CALLBACK_HANDLE>::iterator it = _cmd_map.find(msg.head.msg_cmd);
     if (it != _cmd_map.end())
     {

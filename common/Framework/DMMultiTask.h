@@ -23,6 +23,8 @@ class DMMultiTask : public ACE_Task<ACE_MT_SYNCH>
 public:
     
     void init();
+
+    void put_msg(DMMessage* msg);
     
     virtual DM_INT svc(void);
 

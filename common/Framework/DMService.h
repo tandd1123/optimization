@@ -28,6 +28,5 @@ enum message_cmd
 class DMService : public DMServiceImpl
 {
 	//注册系统消息
-
 };
 
