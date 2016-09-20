@@ -32,7 +32,8 @@ DM_BOOL DMMessageRouter::receive(ACE_HANDLE fd, DMMessage& message)
     //some message maybe have no message body
     do
     {
-    	if ( head_info.length <= 0 || head_info.length > DM_MAX_MEMORY_BLOCK)
+        DM_UINT32 max_size = DMJsonCfg::instance()->GetItemInt("service_config", "message_max_size");
+    	if ( head_info.length <= 0 || head_info.length > max_size)
     	{
     		break;
     	}

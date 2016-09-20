@@ -70,14 +70,14 @@ void DMServiceImpl::send_app_message(ACE_HANDLE fd, DMMessage& msg)
 {
     ACE_SOCK_Stream stream(fd);
     DM_CHAR* buf;
-    DM_NEW(buf,sizeof(DMMessageHead) + msg.head.length);
-    DMMessageParser parser;
+    buf = new DM_CHAR[sizeof(DMMessageHead) + msg.head.length];
     
+    DMMessageParser parser;
     parser.pack(msg, buf);
-    DM_TRACE("data=%s",msg.body);
+    
     stream.send_n(buf, sizeof(DMMessageHead) + msg.head.length);
     
-    DM_DELETE(buf,sizeof(DMMessageHead) + msg.head.length);
+    delete[] buf;
 }
 
 void DMServiceImpl::send_mq_message(DMMessage& msg)

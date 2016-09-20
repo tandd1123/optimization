@@ -30,7 +30,7 @@ DM_BOOL DMMessageParser::parse(DMMessage& out, const AMQP::Message &in)
     
 	const DM_CHAR *body = msg + HEAD_CHAR_LEN;
     //注意内存大小保护
-	DM_NEW(out.body, in.bodySize() - HEAD_CHAR_LEN);
+	out.body = new DM_CHAR[in.bodySize() - HEAD_CHAR_LEN];
 	memcpy(out.body,body,(in.bodySize() - HEAD_CHAR_LEN));
 
     out.head = msg_head;
@@ -93,12 +93,11 @@ void DMMessageParser::DMGetBitData(const DM_CHAR *src, T *dsc, DM_UINT8 bit_s, D
 DM_BOOL DMMessageParser::pack(DMMessage& mesg, DM_CHAR* buf)
 {
 	DMMessageHead head;
-
     head = mesg.head;
 
 	memcpy(buf, &head,sizeof(head));
 	memcpy(buf + sizeof(head), mesg.body, head.length);
-
+    
 	return TRUE;
 }
 

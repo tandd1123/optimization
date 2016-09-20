@@ -11,7 +11,7 @@
     { 
         "log_level" : "DEBUG",
         "memory_pool_size" : 4096,
-        "memory_block_size" : 32,
+        "message_max_size" : 64,
         "process_num" : 4,
         "task_num" : 10,
         "FD_NUM" : 2048

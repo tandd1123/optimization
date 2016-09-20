@@ -16,7 +16,6 @@
 
 #pragma once
 #include "DMaker.h"
-#include "DMMemoryPool.h"
 
 /*-------------------------------------------------------------------------------
             msg head:
@@ -81,14 +80,14 @@ public:
     void require_body_size(DM_UINT16 size)
     {
         _body_size = size;
-        DM_NEW(body,size);
+        body = new char[size];
     }
     
     void release_body_size()
     {
         if (nullptr != body)
         {
-            DM_DELETE(body,_body_size);
+            delete[] body; 
         }
     }
     
