@@ -20,7 +20,7 @@
 #include "DMMessageFactory.h"
 #include "DMProtoMessage.h"
 
-enum GateMessage
+enum GateServiceMessage
 {
     GET_PROXY_MSG = 2001,
 };

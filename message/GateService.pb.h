@@ -29,6 +29,8 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
+namespace GateMessage {
+
 // Internal implementation detail -- do not call these.
 void protobuf_AddDesc_GateService_2eproto();
 void protobuf_AssignDesc_GateService_2eproto();
@@ -116,7 +118,7 @@ class GET_PROXY_MSG_REQUEST : public ::google::protobuf::Message {
   ::std::string* release_proxy();
   void set_allocated_proxy(::std::string* proxy);
 
-  // @@protoc_insertion_point(class_scope:GET_PROXY_MSG_REQUEST)
+  // @@protoc_insertion_point(class_scope:GateMessage.GET_PROXY_MSG_REQUEST)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -144,32 +146,32 @@ inline void GET_PROXY_MSG_REQUEST::clear_uid() {
   uid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& GET_PROXY_MSG_REQUEST::uid() const {
-  // @@protoc_insertion_point(field_get:GET_PROXY_MSG_REQUEST.uid)
+  // @@protoc_insertion_point(field_get:GateMessage.GET_PROXY_MSG_REQUEST.uid)
   return uid_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void GET_PROXY_MSG_REQUEST::set_uid(const ::std::string& value) {
   
   uid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:GET_PROXY_MSG_REQUEST.uid)
+  // @@protoc_insertion_point(field_set:GateMessage.GET_PROXY_MSG_REQUEST.uid)
 }
 inline void GET_PROXY_MSG_REQUEST::set_uid(const char* value) {
   
   uid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:GET_PROXY_MSG_REQUEST.uid)
+  // @@protoc_insertion_point(field_set_char:GateMessage.GET_PROXY_MSG_REQUEST.uid)
 }
 inline void GET_PROXY_MSG_REQUEST::set_uid(const char* value, size_t size) {
   
   uid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:GET_PROXY_MSG_REQUEST.uid)
+  // @@protoc_insertion_point(field_set_pointer:GateMessage.GET_PROXY_MSG_REQUEST.uid)
 }
 inline ::std::string* GET_PROXY_MSG_REQUEST::mutable_uid() {
   
-  // @@protoc_insertion_point(field_mutable:GET_PROXY_MSG_REQUEST.uid)
+  // @@protoc_insertion_point(field_mutable:GateMessage.GET_PROXY_MSG_REQUEST.uid)
   return uid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* GET_PROXY_MSG_REQUEST::release_uid() {
-  // @@protoc_insertion_point(field_release:GET_PROXY_MSG_REQUEST.uid)
+  // @@protoc_insertion_point(field_release:GateMessage.GET_PROXY_MSG_REQUEST.uid)
   
   return uid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -180,7 +182,7 @@ inline void GET_PROXY_MSG_REQUEST::set_allocated_uid(::std::string* uid) {
     
   }
   uid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), uid);
-  // @@protoc_insertion_point(field_set_allocated:GET_PROXY_MSG_REQUEST.uid)
+  // @@protoc_insertion_point(field_set_allocated:GateMessage.GET_PROXY_MSG_REQUEST.uid)
 }
 
 // optional string proxy = 2;
@@ -188,32 +190,32 @@ inline void GET_PROXY_MSG_REQUEST::clear_proxy() {
   proxy_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline const ::std::string& GET_PROXY_MSG_REQUEST::proxy() const {
-  // @@protoc_insertion_point(field_get:GET_PROXY_MSG_REQUEST.proxy)
+  // @@protoc_insertion_point(field_get:GateMessage.GET_PROXY_MSG_REQUEST.proxy)
   return proxy_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void GET_PROXY_MSG_REQUEST::set_proxy(const ::std::string& value) {
   
   proxy_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:GET_PROXY_MSG_REQUEST.proxy)
+  // @@protoc_insertion_point(field_set:GateMessage.GET_PROXY_MSG_REQUEST.proxy)
 }
 inline void GET_PROXY_MSG_REQUEST::set_proxy(const char* value) {
   
   proxy_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:GET_PROXY_MSG_REQUEST.proxy)
+  // @@protoc_insertion_point(field_set_char:GateMessage.GET_PROXY_MSG_REQUEST.proxy)
 }
 inline void GET_PROXY_MSG_REQUEST::set_proxy(const char* value, size_t size) {
   
   proxy_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:GET_PROXY_MSG_REQUEST.proxy)
+  // @@protoc_insertion_point(field_set_pointer:GateMessage.GET_PROXY_MSG_REQUEST.proxy)
 }
 inline ::std::string* GET_PROXY_MSG_REQUEST::mutable_proxy() {
   
-  // @@protoc_insertion_point(field_mutable:GET_PROXY_MSG_REQUEST.proxy)
+  // @@protoc_insertion_point(field_mutable:GateMessage.GET_PROXY_MSG_REQUEST.proxy)
   return proxy_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* GET_PROXY_MSG_REQUEST::release_proxy() {
-  // @@protoc_insertion_point(field_release:GET_PROXY_MSG_REQUEST.proxy)
+  // @@protoc_insertion_point(field_release:GateMessage.GET_PROXY_MSG_REQUEST.proxy)
   
   return proxy_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -224,12 +226,14 @@ inline void GET_PROXY_MSG_REQUEST::set_allocated_proxy(::std::string* proxy) {
     
   }
   proxy_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), proxy);
-  // @@protoc_insertion_point(field_set_allocated:GET_PROXY_MSG_REQUEST.proxy)
+  // @@protoc_insertion_point(field_set_allocated:GateMessage.GET_PROXY_MSG_REQUEST.proxy)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace GateMessage
 
 // @@protoc_insertion_point(global_scope)
 

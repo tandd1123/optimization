@@ -4,7 +4,7 @@
 
 ProxyMapManager* ProxyMapManager::_instance = nullptr;
 
-ProxyMapManager * ProxyMapManager::getInstance()
+ProxyMapManager * ProxyMapManager::instance()
 {
 	if (_instance == nullptr)
 	{
@@ -13,12 +13,17 @@ ProxyMapManager * ProxyMapManager::getInstance()
 	return _instance;
 }
 
-std::string ProxyMapManager::hash(char accountid)
+ProxyMapManager::ProxyMapManager()
 {
-	int key = static_cast<int>(accountid) % _map.size();
+    load();
+}
+
+std::string ProxyMapManager::hash(int uid)
+{
+	int key = uid % _map.size();
 	std::map<char, std::string>::iterator it = _map.begin();
 	for (int i = 0; i < key ; ++i, ++it);
-	std::string host =  it->second;
+    std::string host =  it->second;
 	return host;
 }
 
@@ -67,8 +72,4 @@ void ProxyMapManager::load()
 	}
 	
 	cfg_file.close();
-}
-
-ProxyMapManager::ProxyMapManager()
-{
 }

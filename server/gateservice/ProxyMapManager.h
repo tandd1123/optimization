@@ -15,15 +15,16 @@
 //=============================================================================
 
 #pragma once
-#include <map>
+#include "DMaker.h"
 
 //匹配规则为accountid的最后一位(数字或者字符)对应一个proxy.
 
 class ProxyMapManager
 {
 public:
-	static ProxyMapManager* getInstance();
-	std::string hash(char accountid);
+	static ProxyMapManager* instance();
+    
+	std::string hash(int uid);
 
 	//更新配置
 	void update(char key, std::string proxy);

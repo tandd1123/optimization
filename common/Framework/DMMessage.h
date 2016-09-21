@@ -79,7 +79,6 @@ public:
     
     void require_body_size(DM_UINT16 size)
     {
-        _body_size = size;
         body = new char[size];
     }
     
@@ -94,16 +93,12 @@ public:
     DMMessage& operator=(DMMessage other)
     {
         this->head = other.head;
-        require_body_size(other._body_size);
-        memcpy(this->body,other.body,other._body_size);
-        this->_body_size = other._body_size;
+        this->body = other.body;
         return *this;
     }
     
 	DMMessageHead head;
 	DM_CHAR* body;
-private:
-    DM_UINT16 _body_size;
 }; 
 
 typedef void (*MESSAGE_CALLBACK_HANDLE)(DMMessage&);

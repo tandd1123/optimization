@@ -24,7 +24,7 @@ void get_proxy_message(DMMessage& message);
 class GateService : public DMService
 {
 public:
-
+    void get_proxy_info(int seed, string& proxy);
 };
 
 typedef ACE_Singleton<GateService, ACE_Thread_Mutex> GateSrv; 
