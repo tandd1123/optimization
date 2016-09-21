@@ -18,11 +18,6 @@ os.system("scons -Q")
 os.chdir("../common/Framework")
 os.system("scons -Q install")
 
-#print "cd ../common/RabbitMQ\n"
-#print "start build common lib...\n"
-os.chdir("../RabbitMQ")
-os.system("scons -Q install")
-
 #print "cd ../common/Redis\n"
 #print "start build common lib...\n"
 os.chdir("../Redis")
@@ -40,5 +35,5 @@ os.system("scons -Q install")
 
 #print "cd ../proxyservice\n"
 #print "start build ProxyService...\n"
-os.chdir("../proxyservice")
-os.system("scons -Q install")
+#os.chdir("../proxyservice")
+#os.system("scons -Q install")
