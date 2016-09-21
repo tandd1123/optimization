@@ -19,6 +19,7 @@
 #include "DMaker.h"
 #include "DMMessageFactory.h"
 #include "DMMessage.h"
+#include "DMMessageRouter.h"
 
 //底层封装消息接收和消息发送
 enum send_dest
@@ -52,5 +53,7 @@ private:
 private:
     
     static DMMessageFactory* _factory;
+
+    DMMessageRouter _router;
 };
 

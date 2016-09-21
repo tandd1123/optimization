@@ -1,14 +1,8 @@
 #include "DMMessageRouter.h"
 
-void DMMessageRouter::send(DMMessage& message, string exchange)
-{
-    //有路由表数据需要维护该用户路由表信息,需要维护redis内存数据和mysql数据
-    route(message, exchange);
-}
-
 void DMMessageRouter::publish(DMMessage& message)
 {
-    route(message, FANOUT);
+    send(message, FANOUT);
 }
 
 DM_BOOL DMMessageRouter::receive(ACE_HANDLE fd, DMMessage& message)
@@ -59,7 +53,7 @@ DM_BOOL DMMessageRouter::receive(DMMessage& message, const AMQP::Message& mq_mes
     return true;
 }
 
-void DMMessageRouter::route(DMMessage& message, string exchange)
+void DMMessageRouter::send(DMMessage& message, string exchange)
 {
     map<DM_INT32, MsgRange> message_map = DMServiceMap::instance()->message_map;
     map<DM_INT32, MsgRange>::iterator it = message_map.begin();
@@ -82,6 +76,20 @@ void DMMessageRouter::route(DMMessage& message, string exchange)
         //将message推送到rabbitmq-server，选择消息最少的队列
         route_distribute(message, svr_id, exchange);
     }
+}
+
+void DMMessageRouter::send(ACE_HANDLE fd, DMMessage& msg)
+{
+    ACE_SOCK_Stream stream(fd);
+    DM_CHAR* buf;
+    buf = new DM_CHAR[sizeof(DMMessageHead) + msg.head.length];
+    
+    DMMessageParser parser;
+    parser.pack(msg, buf);
+    
+    stream.send_n(buf, sizeof(DMMessageHead) + msg.head.length);
+    
+    delete[] buf;
 }
 
 void DMMessageRouter::route_distribute(DMMessage& message, DM_INT32 service_id, string exchange)

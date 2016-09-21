@@ -29,17 +29,16 @@
 class DMMessageRouter
 {
 public:
-    virtual void send(DMMessage& message, string exchange = "direct");
 
-    virtual void publish(DMMessage& message);
+    void publish(DMMessage& message);
     
-    virtual DM_BOOL receive(ACE_HANDLE fd, DMMessage& message);
+    DM_BOOL receive(ACE_HANDLE fd, DMMessage& message);
 
-    virtual DM_BOOL receive(DMMessage& message, const AMQP::Message& mq_message);
-   
-protected:
+    DM_BOOL receive(DMMessage& message, const AMQP::Message& mq_message);
     
-	virtual void route(DMMessage& message, string exchange);
+	void send(DMMessage& message, string exchange = "direct");
+    
+    void send(ACE_HANDLE fd, DMMessage& msg);
     
 private:
 

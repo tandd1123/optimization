@@ -2,7 +2,6 @@
 #include "DMMultiTask.h"
 #include "DMSessionManager.h"
 #include "DMMessageParser.h"
-#include "DMMessageRouter.h"
 
 DMMessageFactory* DMService::_factory = nullptr;
 
@@ -64,21 +63,11 @@ void DMService::message_task_callback(DMMessage& msg)
 
 void DMService::send_app_message(ACE_HANDLE fd, DMMessage& msg)
 {
-    ACE_SOCK_Stream stream(fd);
-    DM_CHAR* buf;
-    buf = new DM_CHAR[sizeof(DMMessageHead) + msg.head.length];
-    
-    DMMessageParser parser;
-    parser.pack(msg, buf);
-    
-    stream.send_n(buf, sizeof(DMMessageHead) + msg.head.length);
-    
-    delete[] buf;
+    _router.send(fd, msg);
 }
 
 void DMService::send_mq_message(DMMessage& msg)
-{
-    DMMessageRouter router;
-    router.send(msg);
+{   
+    _router.send(msg);
 }
 
