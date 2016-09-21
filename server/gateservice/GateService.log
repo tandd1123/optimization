@@ -41,3 +41,7 @@
 [DM_INFO][DMMessageRouter.cpp][receive][20]:revice head error!
 [DM_INFO][DMMessageRouter.cpp][receive][20]:revice head error!
 [DM_INFO][DMMessageRouter.cpp][receive][20]:revice head error!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!

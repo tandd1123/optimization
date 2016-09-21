@@ -17,16 +17,40 @@
 #pragma once
 
 #include "DMaker.h"
-#include "DMServiceImpl.h"
-//底层封装消息接收和消息发送
+#include "DMMessageFactory.h"
+#include "DMMessage.h"
 
-enum message_cmd
+//底层封装消息接收和消息发送
+enum send_dest
 {
-    //系统消息   
+    DM_APP,
+    DM_MQ
 };
 
-class DMService : public DMServiceImpl
+class DMService
 {
-	//注册系统消息
+public:  
+    
+    void init();
+    
+    void register_message_factory(DMMessageFactory* msg_factory);
+
+    void register_cmd_callback();
+
+    void send_message(DM_INT uid, DMMessage& msg, DM_INT dest);
+
+    void publish_message(vector<DM_INT> uid, DMMessage& msg, DM_INT dest);
+
+    static void message_task_callback(DMMessage& msg);
+    
+private:
+    
+    void send_app_message(ACE_HANDLE fd, DMMessage& msg);
+    
+    void send_mq_message(DMMessage& msg);
+    
+private:
+    
+    static DMMessageFactory* _factory;
 };
 
