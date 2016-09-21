@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package GateMessage;
+
 message GET_PROXY_MSG_REQUEST
 { 
     string uid = 1;  // ID 
