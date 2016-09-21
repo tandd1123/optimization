@@ -36,8 +36,6 @@ public:
     
     void register_message_factory(DMMessageFactory* msg_factory);
 
-    void register_cmd_callback();
-
     void send_message(DM_INT uid, DMMessage& msg, DM_INT dest);
 
     void publish_message(vector<DM_INT> uid, DMMessage& msg, DM_INT dest);
