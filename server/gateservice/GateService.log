@@ -365,3 +365,185 @@
 [DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
 [DM_INFO][DMMessageRouter.cpp][receive][15]:revice head error!
 [DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_DEBUG][DMMessageEvent.cpp][onConnected][5]:Connected MQ success!
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false
+[DM_INFO][DMMessageRouter.cpp][receive][15]:user disconnect!
+[DM_INFO][DMDispatcher.cpp][handle_input][24]:receive false

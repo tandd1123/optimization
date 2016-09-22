@@ -36,18 +36,19 @@ public:
 
 	ACE_HANDLE find_fd(DM_INT uid);
 
-	int del_session(DM_INT uid);
+	int del_session(ACE_HANDLE fd);
 
 protected:
     
 private:
+    
     DMService* _service;
 
     DMMessageFactory* _factory;
     
 	ACE_Thread_Mutex _mutex_lock;
     
-	std::map<DM_INT, DMSession*> _sessions;   //fd session
+	map<DM_INT, DMSession*> _sessions;   //fd session
 };
 
 typedef ACE_Singleton<DMSessionManager, ACE_Thread_Mutex> DMSessionMgr; 

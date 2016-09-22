@@ -83,20 +83,25 @@ ACE_HANDLE DMSessionManager::find_fd(DM_INT uid)
 	return -1;
 }
 
-int DMSessionManager::del_session(DM_INT uid)
+int DMSessionManager::del_session(ACE_HANDLE fd)
 {
 	_mutex_lock.acquire();
     
 	int ret = -1;
-    
-	if (nullptr != find_session(uid))
-	{
-	    delete _sessions[uid]->_service;
-        delete _sessions[uid]->_msg_factory;
-	    delete _sessions[uid];
-		_sessions.erase(uid);
-		ret = 0;
-	}
+
+    map<DM_INT, DMSession*>::iterator it = _sessions.begin();
+    for (; it != _sessions.end(); ++it)
+    {
+        if (it->second->_fd == fd)
+        {
+            delete it->second->_service;
+            delete it->second->_msg_factory;
+            delete it->second;
+            it->second = nullptr;
+            _sessions.erase(it);
+		    ret = 0;
+        }
+    }
     
 	_mutex_lock.release();
     

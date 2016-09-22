@@ -49,3 +49,9 @@ using namespace std;
 
 #define DM_MAIN ACE_TMAIN
 
+#define DM_CLONE(T) virtual T* clone()\
+{\
+    return new T(*this);\
+}
+
+

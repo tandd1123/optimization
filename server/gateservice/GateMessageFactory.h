@@ -29,7 +29,8 @@ enum GateServiceMessage
 class GateMessageFactory : public DMMessageFactory
 {
 public:
-    void init_cmd();
+    DM_CLONE(GateMessageFactory);
     
-    virtual DMMessageFactory* clone();
+    void init_cmd();
+
 };
