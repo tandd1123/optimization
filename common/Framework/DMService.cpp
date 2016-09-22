@@ -64,9 +64,3 @@ void DMService::send_mq_message(DMMessage& msg)
     _router.send(msg);
 }
 
-DMService* DMService::clone()
-{
-    //调用拷贝构造函数
-    return new DMService(*this);
-}
-

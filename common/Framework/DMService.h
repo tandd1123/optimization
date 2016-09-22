@@ -42,7 +42,7 @@ public:
 
     static void message_task_callback(DMMessage& msg);
     
-    virtual DMService* clone();
+    DM_CLONE(DMService);
     
 private:
     

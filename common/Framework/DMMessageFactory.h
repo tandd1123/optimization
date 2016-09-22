@@ -40,7 +40,7 @@ public:
     template<class PROTO_NAME>
     DM_BOOL pack_proto_message(DM_CHAR* msg, PROTO_NAME& proto_msg, DM_INT msg_length);
 
-    virtual DMMessageFactory* clone();
+    DM_CLONE(DMMessageFactory);
 
 private:
     map<DM_INT, MESSAGE_CALLBACK_HANDLE> _cmd_map;
