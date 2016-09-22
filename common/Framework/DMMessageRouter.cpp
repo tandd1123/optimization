@@ -12,7 +12,7 @@ DM_BOOL DMMessageRouter::receive(ACE_HANDLE fd, DMMessage& message)
     ACE_SOCK_Stream stream(fd);
 	if (stream.recv(head,HEAD_CHAR_LEN) < 1)
     {
-        DM_LOG(DM_INFO,"revice head error!");
+        DM_LOG(DM_INFO,"user disconnect!");
         user_disconnect(fd);
         return false;
     }   
