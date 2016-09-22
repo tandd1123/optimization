@@ -16,15 +16,23 @@
 
 #pragma once
 #include "DMaker.h"
+#include "DMServer.h"
+#include "DMMessageFactory.h"
 
 class DMSession
 {
 public:
-	DMSession(){};
+	DMSession(ACE_HANDLE fd, DM_BOOL enable = False);
 
-	short uid;   //uid
+    ~DMSession();
+    
+	ACE_HANDLE _fd;   //fd
 
-    bool enable;
+    DMService* _service;  //service
+
+    DMMessageFactory* _msg_factory;    
+
+    DM_BOOL _enable;
 
 protected:
 private:

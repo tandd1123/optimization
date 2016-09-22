@@ -21,7 +21,7 @@ DM_BOOL DMMessageFactory::paser_proto_message(DM_CHAR* msg, PROTO_NAME& proto_ms
 	string msg_data(msg,msg_length);
 	if (!proto_msg.ParseFromString(msg_data))
 	{
-		DM_LOG(DM_ERROR,"ParseFromString error!\n");
+		//DM_LOG(DM_ERROR,"ParseFromString error!\n");
 		return False;
 	}
     return True;
@@ -33,7 +33,7 @@ DM_BOOL pack_proto_message(DM_CHAR* msg, PROTO_NAME& proto_msg)
     std::string msg_data;
     if (!proto_msg.SerializeToString(msg_data))
 	{
-        DM_LOG(DM_ERROR,"SerializeToString error!\n");
+        //DM_LOG(DM_ERROR,"SerializeToString error!\n");
 		return False;
 	}
     memcpy(msg,msg_data.c_str(),msg_data.length());

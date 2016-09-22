@@ -1,12 +1,8 @@
 #include "DMServer.h"
+#include "DMSessionManager.h"
 
-DMServer::DMServer(DMService* service,DMMessageFactory* factory)
-{
-    _service = service;
-    _service->register_message_factory(factory);
-}
-
-DM_BOOL DMServer::init(const string& config_path, DM_INT argc, DM_CHAR *argv[])
+template<class SERVICE, class MESSAGE_FACTORY>
+DM_BOOL DMServer<SERVICE, MESSAGE_FACTORY>::init(const string& config_path, DM_INT argc, DM_CHAR *argv[])
 {
     //load config file
     DMJsonCfg::instance()->load_config_file(config_path); 
@@ -21,13 +17,17 @@ DM_BOOL DMServer::init(const string& config_path, DM_INT argc, DM_CHAR *argv[])
     //init dispatcher
     _dispatcher.init();
 
-    //init service
-    _service->init();
-    
+    SERVICE* service = new SERVICE;
+    MESSAGE_FACTORY* factory = new MESSAGE_FACTORY;
+    DMSessionMgr::instance()->init(service, factory);
+
+    DMTask::instance()->init();
+
     return true;
 }
 
-void DMServer::run()
+template<class SERVICE, class MESSAGE_FACTORY>
+void DMServer<SERVICE, MESSAGE_FACTORY>::run()
 {        
     run_event_loop();
 }

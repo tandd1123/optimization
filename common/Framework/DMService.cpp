@@ -5,17 +5,11 @@
 
 DMMessageFactory* DMService::_factory = nullptr;
 
-void DMService::init()
+void DMService::init(DMMessageFactory* msg_factory)
 {
-    DMTask::instance()->init();
     DMTask::instance()->register_message_callback(message_task_callback);
-
-    _factory->init_cmd();
-}
-    
-void DMService::register_message_factory(DMMessageFactory* msg_factory)
-{
     _factory = msg_factory;   
+    _factory->init_cmd();
 }
 
 void DMService::send_message(DM_INT uid, DMMessage& msg, DM_INT dest)
@@ -69,5 +63,11 @@ void DMService::send_app_message(ACE_HANDLE fd, DMMessage& msg)
 void DMService::send_mq_message(DMMessage& msg)
 {   
     _router.send(msg);
+}
+
+DMService* DMService::Clone()
+{
+    //调用拷贝构造函数
+    return new DMService(*this);
 }
 

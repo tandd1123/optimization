@@ -21,11 +21,11 @@
 #include "DMDispatcher.h"
 #include "DMService.h"
 
+template<class SERVICE, class MESSAGE_FACTORY>
 class DMServer : private DMServerImpl
 {
 public:
-    DMServer(DMService* service, DMMessageFactory* factory);
-
+    
 	DM_BOOL init(const std::string& config_path, int argc, char *argv[]);
     
 	void run();
@@ -35,7 +35,5 @@ private:
     DMAcceptor* _acceptor;
     
 	DMDispatcher _dispatcher;
-    
-	DMService* _service;
 };
 

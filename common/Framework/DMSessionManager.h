@@ -17,34 +17,36 @@
 #pragma once
 #include "DMaker.h"
 #include "DMSession.h"
+#include "DMService.h"
+#include "DMMessageFactory.h"
 
 class DMSessionManager
 {
 public:
-	int add_session(ACE_HANDLE handle, short uid, DMSession* pSession);
+    void init(DMService* service, DMMessageFactory* factory);
     
-	int activate_session(ACE_HANDLE fd);
-
-    int deactivate_session(ACE_HANDLE fd);
-
-    int activate_session(short uid);
-
-    int deactivate_session(short uid);
+	int add_session(DM_INT uid, ACE_HANDLE handle);
     
-	DMSession* find_session(short uid);
+	int activate_session(DM_INT uid);
 
-	DMSession* find_session(ACE_HANDLE fd);
+    int deactivate_session(DM_INT uid);
 
-	ACE_HANDLE find_fd(short uid);
+	DMSession* find_session(DM_INT uid);
 
-	int del_session(short uid);
+	ACE_HANDLE find_fd(DM_INT uid);
 
-    int del_session(ACE_HANDLE fd);
+	int del_session(DM_INT uid);
 
 protected:
+    
 private:
+    DMService* _service;
+
+    DMMessageFactory* _factory;
+    
 	ACE_Thread_Mutex _mutex_lock;
-	std::map<ACE_HANDLE, DMSession*> _sessions;   //fd session
+    
+	std::map<DM_INT, DMSession*> _sessions;   //fd session
 };
 
 typedef ACE_Singleton<DMSessionManager, ACE_Thread_Mutex> DMSessionMgr; 

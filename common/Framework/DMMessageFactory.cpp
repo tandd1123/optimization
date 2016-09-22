@@ -16,3 +16,9 @@ MESSAGE_CALLBACK_HANDLE DMMessageFactory::find_callback_handle(DM_INT cmd)
     return nullptr;
 }
 
+DMMessageFactory* DMMessageFactory::Clone()
+{
+    //调用拷贝构造函数
+    return new DMMessageFactory(*this);
+}
+
