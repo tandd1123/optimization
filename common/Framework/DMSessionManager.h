@@ -16,9 +16,10 @@
 
 #pragma once
 #include "DMaker.h"
-#include "DMSession.h"
-#include "DMService.h"
-#include "DMMessageFactory.h"
+
+class DMService;
+class DMMessageFactory;
+class DMSession;
 
 class DMSessionManager
 {

@@ -1,4 +1,5 @@
 #include "DMMultiTask.h"
+#include "DMSession.h"
 
 void DMMultiTask::init()
 {
@@ -23,14 +24,17 @@ int DMMultiTask::svc(void)
     {
         getq(msg_block);            //¿ÕÏÐÏß³Ì×èÈû
         ACE_Data_Block *Data_Block = msg_block->data_block();
-        DMMessage *pData = reinterpret_cast <DMMessage*>(Data_Block->base());
-        _func_callback(*pData);
+        DMMessage* pData = reinterpret_cast <DMMessage*>(Data_Block->base());
+
+        DMSession* pSession = DMSessionMgr::instance()->find_session(pData->head.msg_uid);
+
+        if (nullptr != pSession)
+        {
+            _func_callback = pSession->get_service_callback();
+            _func_callback(*pData);
+        }
+        
         msg_block->release();        //release
     }
-}
-
-void DMMultiTask::register_message_callback(MESSAGE_CALLBACK_HANDLE func)
-{
-    _func_callback = func;
 }
 

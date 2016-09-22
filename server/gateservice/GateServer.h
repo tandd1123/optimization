@@ -18,9 +18,11 @@
 
 #include "DMaker.h"
 #include "DMServer.h"
+#include "GateService.h"
+#include "GateMessageFactory.h"
 
-class GateServer : public DMServer
+class GateServer : public DMServer <GateService, GateMessageFactory>
 {
 public:
-    GateServer(DMService* service, DMMessageFactory* factory):DMServer(service,factory){};
+    
 };

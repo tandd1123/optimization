@@ -37,3 +37,5 @@ private:
 	DMDispatcher _dispatcher;
 };
 
+#include "DMServer.inl"
+

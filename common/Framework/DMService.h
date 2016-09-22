@@ -31,6 +31,8 @@ enum send_dest
 class DMService
 {
 public:  
+    DMService(){};
+    virtual ~DMService(){};
     
     void init(DMMessageFactory* msg_factory);
     
@@ -40,7 +42,7 @@ public:
 
     static void message_task_callback(DMMessage& msg);
     
-    DMService* Clone();
+    virtual DMService* clone();
     
 private:
     

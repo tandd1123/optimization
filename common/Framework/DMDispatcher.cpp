@@ -18,9 +18,10 @@ void DMDispatcher::init()
 DM_INT DMDispatcher::handle_input(ACE_HANDLE fd)
 {
     DMMessage* client_message = new DMMessage;
-
+ 
     if (!_router.receive(fd, *client_message))
     {
+        DM_LOG(DM_INFO,"receive false");
         return -1;
     }
 

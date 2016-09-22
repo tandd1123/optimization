@@ -25,6 +25,10 @@ public:
 	DMSession(ACE_HANDLE fd, DM_BOOL enable = False);
 
     ~DMSession();
+
+    void init();
+
+    MESSAGE_CALLBACK_HANDLE get_service_callback();
     
 	ACE_HANDLE _fd;   //fd
 

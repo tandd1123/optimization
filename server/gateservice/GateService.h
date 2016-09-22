@@ -24,6 +24,7 @@ void get_proxy_message(DMMessage& message);
 class GateService : public DMService
 {
 public:
+    virtual DMService* clone();
     void get_proxy_info(DMMessage& message);
 };
 

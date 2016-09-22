@@ -28,8 +28,6 @@ public:
     
     virtual DM_INT svc(void);
 
-    void register_message_callback(MESSAGE_CALLBACK_HANDLE func);
-
 private:
     
     DM_INT _task_num;   

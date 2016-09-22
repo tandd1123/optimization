@@ -22,24 +22,20 @@ DM_BOOL DMMessageRouter::receive(ACE_HANDLE fd, DMMessage& message)
 	//parse head
 	head_info = parser.parse(head);
 
+    DM_UINT32 max_size = DMJsonCfg::instance()->GetItemInt("service_config", "message_max_size");
+	if ( head_info.length <= 0 || head_info.length > max_size)
+	{
+	    DM_LOG(DM_INFO,"parse head error!");
+		return false;;
+	}
+    
 	user_connect(fd, head_info.msg_uid);
 
-    //some message maybe have no message body
-    do
-    {
-        DM_UINT32 max_size = DMJsonCfg::instance()->GetItemInt("service_config", "message_max_size");
-    	if ( head_info.length <= 0 || head_info.length > max_size)
-    	{
-    		break;
-    	}
-
-    	//recive body
-    	message.require_body_size(head_info.length);
-    	memset(message.body,0,head_info.length);
-    	stream.recv(message.body,head_info.length);
+	//recive body
+	message.require_body_size(head_info.length);
+	memset(message.body,0,head_info.length);
+	stream.recv(message.body,head_info.length);
         
-    }while(false);
-
 	message.head = head_info;
 
 	return true;

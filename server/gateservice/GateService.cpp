@@ -4,6 +4,7 @@
 
 void get_proxy_message(DMMessage& message)
 {
+    DM_TRACE("get_proxy_message");
     GateSrv::instance()->get_proxy_info(message);
 }
 
@@ -17,4 +18,10 @@ void GateService::get_proxy_info(DMMessage& message)
    
     memcpy(resp.body, proxy.c_str(), proxy.length());
     send_message(resp.head.msg_uid,resp,DM_APP);
+}
+
+DMService* GateService::clone()
+{
+    //调用拷贝构造函数
+    return new GateService(*this);
 }

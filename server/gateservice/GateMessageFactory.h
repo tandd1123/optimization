@@ -30,4 +30,6 @@ class GateMessageFactory : public DMMessageFactory
 {
 public:
     void init_cmd();
+    
+    virtual DMMessageFactory* clone();
 };
