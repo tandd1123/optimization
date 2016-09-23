@@ -21,10 +21,10 @@ ENV_CPP = Environment(CC = 'g++')
 
 #compile info
 TARGETNAME = 'gateservice'
-LIB = Split('DMFramework DMMessage ACE pthread jsoncpp protobuf amqpcpp hiredis mysqlpp')
+LIB = Split('DMFramework DMMessage ACE pthread jsoncpp protobuf amqpcpp hiredis mysqlpp lua')
 FILELIST = Glob('*.cpp')
 FILELIST = FILELIST
-HEADFILEPATH = Split('../../3rd ../../common/Framework ../../message ../../3rd/amqpcpp')
+HEADFILEPATH = Split('../../3rd ../../common/Framework ../../message ../../3rd/amqpcpp ../../3rd/lua-5.3.3/src')
 LIB_DIR = Split('../../common/Lib ../../message')
 FLAGS = Split('-std=c++11 -Wall -g -D _DEBUG')
 

@@ -1,0 +1,27 @@
+{
+    "service_info":
+    {
+        "service_name" : "ProxyService",
+        "service_ip" : "127.0.0.1",
+        "service_port" : 7778,
+        "service_tcp" : 0
+    },
+    
+    "service_config":
+    { 
+        "log_level" : "DEBUG",
+        "memory_pool_size" : 4096,
+        "message_max_size" : 64,
+        "process_num" : 4,
+        "task_num" : 10,
+        "FD_NUM" : 2048
+    },
+    
+    "message_queue":
+    {
+        "queue_ip" : "127.0.0.1",
+        "queue_port" : 5672,
+        "queue_user": "bing",
+        "queue_passwd": "bing"
+    }
+}
